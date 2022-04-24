@@ -11,7 +11,7 @@ class MyAccountPage extends StatelessWidget {
         leading: customBackButton(),
         title: KText(
           text: 'Customer Profile',
-          fontSize: 18,
+          fontSize: 16,
         ),
       ),
       body: ListView(

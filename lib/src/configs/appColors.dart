@@ -11,7 +11,11 @@ final scaffoldColor = HexColor('#f9f9f9');
 final black = Colors.black;
 final black54 = Colors.black54;
 final white = Colors.white;
+final green = Colors.green;
 final grey = Colors.grey;
 final red = Colors.red;
+final blue = Colors.blue;
+final yellow = Colors.yellow;
 
-final darkBlue = HexColor('#4267b2');
+final darkBlue = HexColor('#295498');
+// final darkBlue = HexColor('#4267b2');

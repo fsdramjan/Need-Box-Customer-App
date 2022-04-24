@@ -30,8 +30,15 @@ dependencies:
   ionicons:
   google_fonts:
   cached_network_image: 
-  convex_bottom_bar: 
-  cupertino_icons: ^1.0.2
+  cupertino_icons:  
+  flutter_snake_navigationbar:  
+  url_launcher:
+  dio:
+  carousel_slider: 
+  flutter_html:
+  http:
+  lottie :
+
 
 dev_dependencies:
   flutter_test:
@@ -46,6 +53,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/animations/
   #   - images/a_dot_ham.jpeg
 
  
@@ -61,5 +69,4 @@ flutter:
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
+ 

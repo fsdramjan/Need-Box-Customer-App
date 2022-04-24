@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 final allProductAndCategoryList = [
   AllProductAndCategory(
     productName: 'Japani Silk Sharee - Deep Jam',
@@ -14,6 +16,16 @@ Perfect wear for formal occasions''',
     categoryName: 'Electronic Accessories',
     categoryImage:
         'https://needboxbd.xyz/public/uploads/category/1598525995-eaccessories.png',
+    colorName: [
+      'Red',
+      'Blue',
+      'Yellow',
+    ],
+    productColor: [
+      Colors.red,
+      Colors.blue,
+      Colors.yellow,
+    ],
   ),
   AllProductAndCategory(
     productName: 'Jhum Tower Sarees For Women Blue Tanjin Tisha',
@@ -34,6 +46,16 @@ Colour Garanty''',
     categoryName: 'TV & Home Appliances',
     categoryImage:
         'https://needboxbd.xyz/public/uploads/category/1598526026-eappliances.png',
+    colorName: [
+      'Red',
+      'Blue',
+      'Yellow',
+    ],
+    productColor: [
+      Colors.red,
+      Colors.blue,
+      Colors.yellow,
+    ],
   ),
   AllProductAndCategory(
     productName:
@@ -53,6 +75,161 @@ Material : Cotton''',
     categoryName: 'Health & Beauty',
     categoryImage:
         'https://needboxbd.xyz/public/uploads/category/1598527450-health.png',
+    colorName: [
+      'Red',
+      'Blue',
+      'Yellow',
+    ],
+    productColor: [
+      Colors.red,
+      Colors.blue,
+      Colors.yellow,
+    ],
+  ),
+  AllProductAndCategory(
+    productName:
+        'Multicolor Cotton Tangail Tat Chumki Saree For Women Without Blouse Piece',
+    productImage:
+        'https://needboxbd.xyz/public/uploads/product/3-1613995426-saree1.jpg',
+    productDes: '''Length : 13.5ft
+Made From : Tangail Tant
+Made By : Handloom
+Perfect wear for formal occasions
+Colour : Multicoloured
+Saree without Matching Blouse Piece
+Material : Cotton''',
+    productPrice: '1200',
+    productDisPrice: '899',
+    productDiscount: '25',
+    categoryName: 'Health & Beauty',
+    categoryImage:
+        'https://needboxbd.xyz/public/uploads/category/1598527450-health.png',
+    colorName: [
+      'Red',
+      'Blue',
+      'Yellow',
+    ],
+    productColor: [
+      Colors.red,
+      Colors.blue,
+      Colors.yellow,
+    ],
+  ),
+  AllProductAndCategory(
+    productName:
+        'Multicolor Cotton Tangail Tat Chumki Saree For Women Without Blouse Piece',
+    productImage:
+        'https://needboxbd.xyz/public/uploads/product/3-1613995426-saree1.jpg',
+    productDes: '''Length : 13.5ft
+Made From : Tangail Tant
+Made By : Handloom
+Perfect wear for formal occasions
+Colour : Multicoloured
+Saree without Matching Blouse Piece
+Material : Cotton''',
+    productPrice: '1200',
+    productDisPrice: '899',
+    productDiscount: '25',
+    categoryName: 'Health & Beauty',
+    categoryImage:
+        'https://needboxbd.xyz/public/uploads/category/1598527450-health.png',
+    colorName: [
+      'Red',
+      'Blue',
+      'Yellow',
+    ],
+    productColor: [
+      Colors.red,
+      Colors.blue,
+      Colors.yellow,
+    ],
+  ),
+  AllProductAndCategory(
+    productName:
+        'Multicolor Cotton Tangail Tat Chumki Saree For Women Without Blouse Piece',
+    productImage:
+        'https://needboxbd.xyz/public/uploads/product/3-1613995426-saree1.jpg',
+    productDes: '''Length : 13.5ft
+Made From : Tangail Tant
+Made By : Handloom
+Perfect wear for formal occasions
+Colour : Multicoloured
+Saree without Matching Blouse Piece
+Material : Cotton''',
+    productPrice: '1200',
+    productDisPrice: '899',
+    productDiscount: '25',
+    categoryName: 'Health & Beauty',
+    categoryImage:
+        'https://needboxbd.xyz/public/uploads/category/1598527450-health.png',
+    colorName: [
+      'Red',
+      'Blue',
+      'Yellow',
+    ],
+    productColor: [
+      Colors.red,
+      Colors.blue,
+      Colors.yellow,
+    ],
+  ),
+  AllProductAndCategory(
+    productName:
+        'Multicolor Cotton Tangail Tat Chumki Saree For Women Without Blouse Piece',
+    productImage:
+        'https://needboxbd.xyz/public/uploads/product/3-1613995426-saree1.jpg',
+    productDes: '''Length : 13.5ft
+Made From : Tangail Tant
+Made By : Handloom
+Perfect wear for formal occasions
+Colour : Multicoloured
+Saree without Matching Blouse Piece
+Material : Cotton''',
+    productPrice: '1200',
+    productDisPrice: '899',
+    productDiscount: '25',
+    categoryName: 'Health & Beauty',
+    categoryImage:
+        'https://needboxbd.xyz/public/uploads/category/1598527450-health.png',
+    colorName: [
+      'Red',
+      'Blue',
+      'Yellow',
+    ],
+    productColor: [
+      Colors.red,
+      Colors.blue,
+      Colors.yellow,
+    ],
+  ),
+  AllProductAndCategory(
+    productName:
+        'Multicolor Cotton Tangail Tat Chumki Saree For Women Without Blouse Piece',
+    productImage:
+        'https://needboxbd.xyz/public/uploads/product/3-1613995426-saree1.jpg',
+    productDes: '''Length : 13.5ft
+Made From : Tangail Tant
+Made By : Handloom
+Perfect wear for formal occasions
+Colour : Multicoloured
+Saree without Matching Blouse Piece
+Material : Cotton''',
+    productPrice: '1200',
+    productDisPrice: '899',
+    productDiscount: '25',
+    categoryName: 'Health & Beauty',
+    categoryImage:
+        'https://needboxbd.xyz/public/uploads/category/1598527450-health.png',
+    colorName: [
+      'Red',
+      'Blue',
+      'Yellow',
+    ],
+    productColor: [
+      Colors.red,
+      Colors.blue,
+      Colors.yellow,
+    ],
   ),
 ];
 
@@ -63,6 +240,8 @@ class AllProductAndCategory {
   final String productPrice;
   final String productDisPrice;
   final String productDiscount;
+  final List<Color> productColor;
+  final List<String> colorName;
   final String categoryName;
   final String categoryImage;
 
@@ -73,6 +252,8 @@ class AllProductAndCategory {
     required this.productPrice,
     required this.productDisPrice,
     required this.productDiscount,
+    required this.productColor,
+    required this.colorName,
     required this.categoryName,
     required this.categoryImage,
   });

@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:needbox_customer/src/configs/appUtils.dart';
 import 'package:needbox_customer/src/widgets/button/customBackButton.dart';
 
 import '../../Widgets/cardWidget/customCardWidget.dart';
@@ -14,7 +15,7 @@ import '../../widgets/searchFormField/searchFormField.dart';
 class CampaignProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size / 100;
+    // Size size = MediaQuery.of(context).size / 100;
 
     return Scaffold(
       appBar: PreferredSize(
@@ -24,7 +25,7 @@ class CampaignProductPage extends StatelessWidget {
         child: Container(
           color: white,
           child: Padding(
-            padding: EdgeInsets.only(top: 25),
+            padding: EdgeInsets.only(top: 40),
             child: Row(
               children: [
                 customBackButton(),
@@ -36,39 +37,41 @@ class CampaignProductPage extends StatelessWidget {
           ),
         ),
       ),
-      body: ListView(
-        physics: BouncingScrollPhysics(),
-        children: [
-          GridView.builder(
-            shrinkWrap: true,
-            primary: false,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              // mainAxisSpacing: 5,
-              // crossAxisSpacing: 5,
-              childAspectRatio: 0.60,
-            ),
-            itemCount: allProductAndCategoryList.length,
-            itemBuilder: (context, index) {
-              final item = allProductAndCategoryList[index];
+      body: Padding(
+        padding: paddingH10,
+        child: ListView(
+          physics: BouncingScrollPhysics(),
+          children: [
+            sizeH10,
+            GridView.builder(
+              shrinkWrap: true,
+              primary: false,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                // mainAxisSpacing: 5,
+                // crossAxisSpacing: 5,
+                childAspectRatio: 0.55,
+              ),
+              itemCount: allProductAndCategoryList.length,
+              itemBuilder: (context, index) {
+                final item = allProductAndCategoryList[index];
 
-              return allProductCard(
-                size,
-                item.productImage,
-                item.productName,
-                item.productDisPrice,
-                item.productPrice,
-                item.productDiscount,
-              );
-            },
-          ),
-        ],
+                return allProductCard(
+                  item.productImage,
+                  item.productName,
+                  item.productDisPrice,
+                  item.productPrice,
+                  item.productDiscount,
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
 
   Widget allProductCard(
-    var size,
     String? url,
     String productname,
     String price,
@@ -80,14 +83,14 @@ class CampaignProductPage extends StatelessWidget {
       child: CustomCardWidget(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
+          children: [
             Stack(
               children: [
                 Container(
                   // padding: const EdgeInsets.all(3),
                   color: Colors.white,
                   width: Get.width,
-                  height: size.height * 26,
+
                   child: ClipRRect(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),

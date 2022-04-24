@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../Widgets/button/customBackButton.dart';
+import '../../components/appLogo/appLogoComponent.dart';
 import '../../configs/appColors.dart';
 import '../../widgets/customFormField/customFormField.dart';
 import '../../widgets/textWidget/kText.dart';
@@ -27,18 +28,8 @@ class ForgetPasswordPage extends StatelessWidget {
           child: ListView(
             children: [
               // SizedBox(height: 30),
-              Container(
-                height: 200,
-                width: Get.width,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 90),
-                  child: Image.asset(
-                    'assets/images/banner.png',
-                    fit: BoxFit.cover,
-                    // scale: 3,
-                  ),
-                ),
-              ),
+              AppLogoComponent(),
+
               KText(
                 text: 'Phone Number',
                 color: black,

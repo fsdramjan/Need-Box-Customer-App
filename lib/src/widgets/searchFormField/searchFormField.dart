@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 
 import '../../configs/appColors.dart';
+import '../textWidget/kText.dart';
 
-searchFormField() => Padding(
+searchFormField({
+  bool? isFormEnable,
+  void Function()? onTap,
+}) =>
+    Padding(
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: SizedBox(
         height: 40,
         child: TextFormField(
+          onTap: onTap,
+          readOnly: isFormEnable == true ? false : true,
           decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
@@ -35,12 +42,11 @@ searchFormField() => Padding(
                     bottomRight: Radius.circular(20),
                   )),
               alignment: Alignment.center,
-              child: Text(
-                'Search',
-                style: TextStyle(
-                  color: white,
-                  fontWeight: FontWeight.w700,
-                ),
+              child: KText(
+                text: 'Search',
+                fontSize: 14,
+                color: white,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ),

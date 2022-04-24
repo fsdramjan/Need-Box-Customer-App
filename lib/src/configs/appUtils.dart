@@ -35,3 +35,7 @@ final borderRadiusC10 = BorderRadius.circular(10);
 final borderRadiusC15 = BorderRadius.circular(15);
 final borderRadiusC20 = BorderRadius.circular(20);
 final borderRadiusC30 = BorderRadius.circular(30);
+
+//physics
+
+final bounchephysics = BouncingScrollPhysics();

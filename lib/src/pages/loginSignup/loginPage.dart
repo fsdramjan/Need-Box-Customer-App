@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:needbox_customer/src/components/appLogo/appLogoComponent.dart';
 import 'package:needbox_customer/src/pages/loginSignup/registerPage.dart';
 
 import '../../configs/appColors.dart';
@@ -28,18 +29,7 @@ class _LoginPageState extends State<LoginPage> {
           child: ListView(
             children: [
               // SizedBox(height: 30),
-              Container(
-                height: 200,
-                width: Get.width,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 90),
-                  child: Image.asset(
-                    'assets/images/banner.png',
-                    fit: BoxFit.cover,
-                    // scale: 3,
-                  ),
-                ),
-              ),
+              AppLogoComponent(),
               // SizedBox(height: 10),
               customFormField(
                 height: 55,

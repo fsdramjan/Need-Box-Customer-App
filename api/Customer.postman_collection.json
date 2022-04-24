@@ -1,0 +1,587 @@
+{
+	"info": {
+		"_postman_id": "4eaeaff3-3436-4bae-8263-f09d89725ca3",
+		"name": "Customer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "fullName",
+							"value": "Rasel Islam (Zadu)",
+							"type": "text"
+						},
+						{
+							"key": "phoneNumber",
+							"value": "01742892725",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "zadumia442@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/customer/register",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Account Verify",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "phoneNumber",
+							"value": "01742892725",
+							"type": "text"
+						},
+						{
+							"key": "verifyPin",
+							"value": "949849",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/customer/verify",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"verify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "phoneNumber",
+							"value": "01742892725",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/customer/login",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "My Account",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvY3VzdG9tZXJcL2xvZ2luIiwiaWF0IjoxNjUwMzYxNzg3LCJleHAiOjE3MjkyMDE3ODcsIm5iZiI6MTY1MDM2MTc4NywianRpIjoiMXlQeThaZm1YclZ0WmZ4WiIsInN1YiI6MzUsInBydiI6IjhiNDIyZTZmNjU3OTMyYjhhZWJjYjFiZjFlMzU2ZGQ3NmEzNjViZjIifQ.BKOjSpyMOExMGY6VymQPTwkz3zHYAbwV-nkmdQxDHKM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/customer/account",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"account"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Profile Update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvY3VzdG9tZXJcL2xvZ2luIiwiaWF0IjoxNjUwMzYxNzg3LCJleHAiOjE3MjkyMDE3ODcsIm5iZiI6MTY1MDM2MTc4NywianRpIjoiMXlQeThaZm1YclZ0WmZ4WiIsInN1YiI6MzUsInBydiI6IjhiNDIyZTZmNjU3OTMyYjhhZWJjYjFiZjFlMzU2ZGQ3NmEzNjViZjIifQ.BKOjSpyMOExMGY6VymQPTwkz3zHYAbwV-nkmdQxDHKM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "fullName",
+							"value": "Md. Rasel Islam",
+							"type": "text"
+						},
+						{
+							"key": "phoneNumber",
+							"value": "01742892725",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "Mirpur Dhaka",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/zadum/Downloads/product/15130-1-500x500.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/customer/profile/update",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"profile",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "My Orders",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvY3VzdG9tZXJcL2xvZ2luIiwiaWF0IjoxNjUwMzYxNzg3LCJleHAiOjE3MjkyMDE3ODcsIm5iZiI6MTY1MDM2MTc4NywianRpIjoiMXlQeThaZm1YclZ0WmZ4WiIsInN1YiI6MzUsInBydiI6IjhiNDIyZTZmNjU3OTMyYjhhZWJjYjFiZjFlMzU2ZGQ3NmEzNjViZjIifQ.BKOjSpyMOExMGY6VymQPTwkz3zHYAbwV-nkmdQxDHKM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/customer/order",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invoice",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvY3VzdG9tZXJcL2xvZ2luIiwiaWF0IjoxNjUwMzYxNzg3LCJleHAiOjE3MjkyMDE3ODcsIm5iZiI6MTY1MDM2MTc4NywianRpIjoiMXlQeThaZm1YclZ0WmZ4WiIsInN1YiI6MzUsInBydiI6IjhiNDIyZTZmNjU3OTMyYjhhZWJjYjFiZjFlMzU2ZGQ3NmEzNjViZjIifQ.BKOjSpyMOExMGY6VymQPTwkz3zHYAbwV-nkmdQxDHKM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/customer/order/invoice/1",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"order",
+						"invoice",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Forget Password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "phoneNumber",
+							"value": "01742892725",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/customer/forget/password",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"forget",
+						"password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Forget Password Reset",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "customer_id",
+						"value": "35",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "verifycode",
+							"value": "523134",
+							"type": "text"
+						},
+						{
+							"key": "newpassword",
+							"value": "1234567",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/customer/forget-reset/password",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"forget-reset",
+						"password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logut",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvY3VzdG9tZXJcL2xvZ2luIiwiaWF0IjoxNjUwMzYxNzg3LCJleHAiOjE3MjkyMDE3ODcsIm5iZiI6MTY1MDM2MTc4NywianRpIjoiMXlQeThaZm1YclZ0WmZ4WiIsInN1YiI6MzUsInBydiI6IjhiNDIyZTZmNjU3OTMyYjhhZWJjYjFiZjFlMzU2ZGQ3NmEzNjViZjIifQ.BKOjSpyMOExMGY6VymQPTwkz3zHYAbwV-nkmdQxDHKM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/customer/logout",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Service Post Save",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvY3VzdG9tZXJcL2xvZ2luIiwiaWF0IjoxNjUwNTMzOTgzLCJleHAiOjE3MjkzNzM5ODMsIm5iZiI6MTY1MDUzMzk4MywianRpIjoiaFZ6MlR3cXhkSTl0dnJPcCIsInN1YiI6MzUsInBydiI6IjhiNDIyZTZmNjU3OTMyYjhhZWJjYjFiZjFlMzU2ZGQ3NmEzNjViZjIifQ.mEKrqTYSxE1PQuSggI_NaPXc9DMwxsae-q9pk_kqpAc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "I Need some indian salware kamiz collection2",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/zadum/OneDrive/Desktop/products/0236937_tangail-tant-minakari-silk-unstitched-3-piece-dress-set-ba-tms21.jpeg"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/customer/post/save",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"post",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Service Post Manage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvY3VzdG9tZXJcL2xvZ2luIiwiaWF0IjoxNjUwNTMzOTgzLCJleHAiOjE3MjkzNzM5ODMsIm5iZiI6MTY1MDUzMzk4MywianRpIjoiaFZ6MlR3cXhkSTl0dnJPcCIsInN1YiI6MzUsInBydiI6IjhiNDIyZTZmNjU3OTMyYjhhZWJjYjFiZjFlMzU2ZGQ3NmEzNjViZjIifQ.mEKrqTYSxE1PQuSggI_NaPXc9DMwxsae-q9pk_kqpAc",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/customer/post/manage",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"post",
+						"manage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Service Post Update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvY3VzdG9tZXJcL2xvZ2luIiwiaWF0IjoxNjUwNTMzOTgzLCJleHAiOjE3MjkzNzM5ODMsIm5iZiI6MTY1MDUzMzk4MywianRpIjoiaFZ6MlR3cXhkSTl0dnJPcCIsInN1YiI6MzUsInBydiI6IjhiNDIyZTZmNjU3OTMyYjhhZWJjYjFiZjFlMzU2ZGQ3NmEzNjViZjIifQ.mEKrqTYSxE1PQuSggI_NaPXc9DMwxsae-q9pk_kqpAc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "post_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "title",
+							"value": "I Need some indian salware kamiz collection2",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/zadum/OneDrive/Desktop/products/0236944_tangail-tant-minakari-silk-unstitched-3-piece-dress-set-ba-tms27.jpeg"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/customer/post/update",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"post",
+						"update"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

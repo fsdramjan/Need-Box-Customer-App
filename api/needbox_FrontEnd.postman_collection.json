@@ -1,0 +1,461 @@
+{
+	"info": {
+		"_postman_id": "4cb632b6-c936-4cf6-b789-132f88e393f9",
+		"name": "FrontEnd",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Logo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						""
+					]
+				},
+				"description": "Logo collection"
+			},
+			"response": []
+		},
+		{
+			"name": "Slider",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/slider",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"slider"
+					]
+				},
+				"description": "Slider Data Collection"
+			},
+			"response": []
+		},
+		{
+			"name": "Categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/category",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"category"
+					]
+				},
+				"description": "Category, Sub-category and Child-category Data Collection"
+			},
+			"response": []
+		},
+		{
+			"name": "Brands",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/brands",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"brands"
+					]
+				},
+				"description": "Brands Data Collection"
+			},
+			"response": []
+		},
+		{
+			"name": "Colors",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/colors",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"colors"
+					]
+				},
+				"description": "Colors Data Collection"
+			},
+			"response": []
+		},
+		{
+			"name": "Sizes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/sizes",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"sizes"
+					]
+				},
+				"description": "Sizes Data Collection"
+			},
+			"response": []
+		},
+		{
+			"name": "Campaigns",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/campaigns",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"campaigns"
+					]
+				},
+				"description": "Campaign All Data Collection"
+			},
+			"response": []
+		},
+		{
+			"name": "Home Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/home-products",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"home-products"
+					]
+				},
+				"description": "Home Products Data Collection"
+			},
+			"response": []
+		},
+		{
+			"name": "Category Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/category-products/3",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"category-products",
+						"3"
+					]
+				},
+				"description": "Category Product Data Collection\n\nParameter: id (ex: 1, 2, 3)"
+			},
+			"response": []
+		},
+		{
+			"name": "Sub Category Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/subcategory-products/1",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"subcategory-products",
+						"1"
+					]
+				},
+				"description": "Sub Category Product Data Collection\n\nParameter: id (ex: 1, 2, 3)"
+			},
+			"response": []
+		},
+		{
+			"name": "Child Category Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/childcategory-products/1",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"childcategory-products",
+						"1"
+					]
+				},
+				"description": "Child Category Product Data Collection\n\nParameter: id (ex: 1, 2, 3)"
+			},
+			"response": []
+		},
+		{
+			"name": "Product Details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/product-details/1",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"product-details",
+						"1"
+					]
+				},
+				"description": "Product Details Data Collection\n\nParameter: id (ex: 1, 2, 3)"
+			},
+			"response": []
+		},
+		{
+			"name": "All Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/all-product",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"all-product"
+					]
+				},
+				"description": "All Products Data Collection"
+			},
+			"response": []
+		},
+		{
+			"name": "Brand Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/brand-products/6",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"brand-products",
+						"6"
+					]
+				},
+				"description": "Brand Products Data Collection"
+			},
+			"response": []
+		},
+		{
+			"name": "Shops",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/shops",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"shops"
+					]
+				},
+				"description": "Shops Data Collection"
+			},
+			"response": []
+		},
+		{
+			"name": "Vandor Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/vandorshop/1",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"vandorshop",
+						"1"
+					]
+				},
+				"description": "Vandor Products Data Collection."
+			},
+			"response": []
+		},
+		{
+			"name": "Special Offers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/special-offer",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"special-offer"
+					]
+				},
+				"description": "Special Offers Data Collection"
+			},
+			"response": []
+		},
+		{
+			"name": "Search Data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "category",
+							"value": "8",
+							"type": "text"
+						},
+						{
+							"key": "keyword",
+							"value": "jhum",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/search/product/",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"search",
+						"product",
+						""
+					]
+				},
+				"description": "Search Data Collection\n\nParameters: category, keyword"
+			},
+			"response": []
+		},
+		{
+			"name": "Order Track",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "trackId",
+							"value": "3896004",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/order/track",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"order",
+						"track"
+					]
+				},
+				"description": "Order Track Data Collection"
+			},
+			"response": []
+		}
+	]
+}
