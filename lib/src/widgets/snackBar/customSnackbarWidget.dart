@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hexcolor/hexcolor.dart';
-
 import '../../configs/appColors.dart';
 
 snackBarWidget({
@@ -36,7 +34,7 @@ snackBarWidget({
           : Get.snackbar(
               title.toString(),
               message.toString(),
-              backgroundColor: HexColor('#bd362f'),
+              backgroundColor: orangeO50,
               colorText: white,
               mainButton: TextButton(
                   onPressed: () {

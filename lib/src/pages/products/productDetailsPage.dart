@@ -15,16 +15,17 @@ import '../../Widgets/cardWidget/customCardWidget.dart';
 import '../../models/products/ProductDetailsModel.dart';
 import '../../widgets/button/customBackButton.dart';
 import '../../widgets/cachedNetworkImage/cachedNetworkImageWidget.dart';
-import '../../widgets/snackBar/customSnackbarWidget.dart';
 import '../../widgets/textWidget/kText.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   final int? id;
   final String? proName;
+  final String? image;
 
   ProductDetailsPage({
     required this.id,
     required this.proName,
+    required this.image,
   });
 
   @override
@@ -231,7 +232,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>
                                       fontWeight: FontWeight.w600,
                                     ),
                                     sizeW10,
-                                    counter == 40
+                                    counter == products.productquantity
                                         ? Container()
                                         : GestureDetector(
                                             onTap: () {
@@ -282,31 +283,35 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>
                                             child: Column(
                                               children: [
                                                 CircleAvatar(
-                                                  radius: 15,
-                                                  // height: 30,
-                                                  // width: 30,
-                                                  // decoration: BoxDecoration(
-                                                  // color: HexColor(
-                                                  //     color.color.toString()),
-                                                  //   border: Border.all(
-                                                  //     color: grey.shade300,
-                                                  //   ),
-                                                  //   borderRadius:
-                                                  //       borderRadiusC10,
-                                                  // ),
-                                                  backgroundColor: HexColor(
-                                                      color.color.toString()),
-                                                  child: selectedColor ==
-                                                          color.color
-                                                      ? Icon(
-                                                          Icons.check,
-                                                          color:
-                                                              color.colorName ==
-                                                                      'white'
-                                                                  ? black
-                                                                  : white,
-                                                        )
-                                                      : Container(),
+                                                  radius: 15.2,
+                                                  backgroundColor: orangeO50,
+                                                  child: CircleAvatar(
+                                                    radius: 15,
+                                                    // height: 30,
+                                                    // width: 30,
+                                                    // decoration: BoxDecoration(
+                                                    // color: HexColor(
+                                                    //     color.color.toString()),
+                                                    //   border: Border.all(
+                                                    //     color: grey.shade300,
+                                                    //   ),
+                                                    //   borderRadius:
+                                                    //       borderRadiusC10,
+                                                    // ),
+                                                    backgroundColor: HexColor(
+                                                        color.color.toString()),
+                                                    child: selectedColor ==
+                                                            color.color
+                                                        ? Icon(
+                                                            Icons.check,
+                                                            color:
+                                                                color.colorName ==
+                                                                        'white'
+                                                                    ? black
+                                                                    : white,
+                                                          )
+                                                        : Container(),
+                                                  ),
                                                 ),
                                                 KText(
                                                   text: color.colorName
@@ -341,7 +346,6 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          Divider(),
                         ],
                       ),
                     ),
@@ -431,6 +435,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>
                                       builder: ((context) => ProductDetailsPage(
                                             id: item.id,
                                             proName: item.productname,
+                                            image:
+                                                item.proImage!.image.toString(),
                                           )),
                                     ),
                                   ),
@@ -478,28 +484,56 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>
                 ),
               ),
               sizeW10,
-              GestureDetector(
-                onTap: (() => snackBarWidget(
-                      title: 'Success!',
-                      message: 'Product added to wishlist',
-                      isRed: false,
-                    )),
-                child: Container(
-                  height: 50,
-                  width: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: borderRadiusC10,
-                    color: red,
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.favorite_outline,
-                      color: white,
-                    ),
-                  ),
-                ),
-              ),
+              FutureBuilder<ProductDetailsModel>(
+                  future: productDetailsC.getProductDetails(widget.id),
+                  builder: ((context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return Container(
+                        height: 50,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: borderRadiusC10,
+                          color: red,
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Icon(
+                            Icons.favorite_outline,
+                            color: white,
+                          ),
+                        ),
+                      );
+                    }
+
+                    final item = snapshot.data!.productdetails;
+
+                    return GestureDetector(
+                      onTap: () => favoriteProductC.manageFavorite(
+                        id: widget.id,
+                        productName: widget.proName,
+                        image: widget.image,
+                        proDisPrice: item!.productnewprice,
+                        productColor: item.colors!.first.colorName,
+                        proPrice: item.productoldprice,
+                        discount: item.productdiscount,
+                      ),
+                      child: Container(
+                        height: 50,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: borderRadiusC10,
+                          color: red,
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Icon(
+                            Icons.favorite_outline,
+                            color: white,
+                          ),
+                        ),
+                      ),
+                    );
+                  })),
               sizeW10,
               Expanded(
                 child: GestureDetector(

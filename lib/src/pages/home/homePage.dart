@@ -6,7 +6,7 @@ import 'package:needbox_customer/src/animations/loadingAnimation.dart';
 import 'package:needbox_customer/src/configs/appUtils.dart';
 import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
 import 'package:needbox_customer/src/pages/search/productSearchPage.dart';
-import 'package:needbox_customer/src/widgets/searchFormField/searchFormField.dart';
+import 'package:needbox_customer/src/widgets/formField/searchFormField.dart';
 import '../../components/category/categoryComponent.dart';
 import '../../components/category/serviceCategoryComponent.dart';
 import '../../components/product/homeProductComponent.dart';
@@ -18,32 +18,8 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
-  // create the animation controller
-  late AnimationController _animationController;
+class _HomePageState extends State<HomePage> with BaseController {
   var scaffoldKey = GlobalKey<ScaffoldState>();
-  @override
-  void initState() {
-    super.initState();
-
-    _animationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 1));
-  }
-
-  // method for when user taps icon
-  bool videoPlaying = false;
-  void _iconTapped() {
-    if (videoPlaying == false) {
-      _animationController.forward();
-
-      videoPlaying = true;
-    } else {
-      _animationController.reverse();
-      videoPlaying = false;
-    }
-  }
-  //
 
   Future<void> _refresh() {
     _resetList();
@@ -56,8 +32,9 @@ class _HomePageState extends State<HomePage>
   }
 
   Future _getList() {
-    BaseController().allProductListC.getAllProduct();
     BaseController().allCategoryC.getAllCategory();
+    BaseController().allProductListC.getAllProduct();
+
     return BaseController().appLogoC.getAppLogo();
   }
 
@@ -90,22 +67,17 @@ class _HomePageState extends State<HomePage>
                   //     ),
                   //   ),
                   // ),
-                  // IconButton(
-                  //   onPressed: () {
-                  // scaffoldKey.currentState!.openDrawer();
-                  //   },
-                  //   icon: Icon(
-                  //     Icons.menu,
-                  //     color: black54,
-                  //     size: 30,
-                  //   ),
-                  // ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 6),
+                    child: Image.asset(
+                      'assets/images/applogo.png',
+                    ),
+                  ),
                   Expanded(
                     child: searchFormField(onTap: () {
                       Get.to(ProductSearchPage());
                     }),
                   ),
-     
                 ],
               ),
             ),

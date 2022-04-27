@@ -61,7 +61,7 @@ class HomeProductComponent extends StatelessWidget with BaseController {
                       onTap: () => Get.to(
                         ProductDetailsPage(
                           id: item.id,
-                          proName: item.productname,
+                          proName: item.productname, image: item.proImage!.image.toString(),
                         ),
                       ),
                       productname: item.productname.toString(),

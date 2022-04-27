@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:needbox_customer/src/controllers/shop/shopProductController.dart';
 import 'package:needbox_customer/src/models/shop/shopDetailsModel.dart';
 import '../../configs/appConfigs.dart';
 
@@ -12,8 +13,7 @@ class ShopDetailsController extends GetxController {
 
   Future<ShopDetailsModel>? getShopDetails(shopId) async {
     var _shoplist = await DetailsApiService().fetchApi(shopId);
-    print(shop);
-
+    ShopProductController().getAllShopProduct(shopId: shopId);
     return shop.value = _shoplist;
   }
 }
@@ -27,9 +27,9 @@ class DetailsApiService {
     if (response.statusCode == 200) {
       var dataResponse = jsonDecode(response.body);
 
-      var singleProduct = ShopDetailsModel.fromJson(dataResponse);
+      var shop = ShopDetailsModel.fromJson(dataResponse);
 
-      return singleProduct;
+      return shop;
     } else {
       throw Exception('Failed Get API');
     }

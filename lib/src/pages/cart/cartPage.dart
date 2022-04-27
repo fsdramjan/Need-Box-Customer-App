@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:needbox_customer/src/configs/appColors.dart';
 import 'package:needbox_customer/src/configs/appUtils.dart';
 import 'package:needbox_customer/src/widgets/button/customPrimaryButton.dart';
@@ -92,11 +93,6 @@ class _CartPageState extends State<CartPage> {
                     child: Row(
                       children: [
                         KText(
-                          text: 'price: ',
-                          color: black54,
-                          fontSize: 12,
-                        ),
-                        KText(
                           text: '৳${item.productPrice}',
                           fontWeight: FontWeight.bold,
                           fontSize: 14,
@@ -117,24 +113,19 @@ class _CartPageState extends State<CartPage> {
                     ),
                   ),
                   Positioned(
-                    left: 110,
+                    right: 10,
                     top: 85,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: borderRadiusC5,
-                        color: grey.shade100,
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(2),
-                        child: Icon(
-                          Icons.delete,
-                          color: orangeO50.withOpacity(.5),
-                        ),
+                    child: Padding(
+                      padding: EdgeInsets.all(2),
+                      child: Icon(
+                        Ionicons.trash_outline,
+                        size: 20,
+                        color: orangeO50.withOpacity(.5),
                       ),
                     ),
                   ),
                   Positioned(
-                    right: 10,
+                    left: 110,
                     top: 85,
                     child: Row(
                       children: [
@@ -215,7 +206,6 @@ class _CartPageState extends State<CartPage> {
                 child: KText(
                   text: 'Cart Summary',
                   color: white,
-                  fontWeight: FontWeight.w700,
                   fontSize: 16,
                 ),
               ),

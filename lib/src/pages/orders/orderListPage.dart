@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:needbox_customer/src/configs/appColors.dart';
 import 'package:needbox_customer/src/configs/appUtils.dart';
-import 'package:needbox_customer/src/widgets/button/backButtonWithText.dart';
+import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
 import 'package:needbox_customer/src/widgets/textWidget/kText.dart';
 
+import '../../Widgets/button/customBackButton.dart';
 import '../../Widgets/cardWidget/customCardWidget.dart';
-import '../../components/drawer/sidebarComponent.dart';
-import '../../widgets/appBar/customTitleAppBar.dart';
 
 class OrderListPage extends StatefulWidget {
   final bool? isBackEnable;
@@ -17,24 +16,19 @@ class OrderListPage extends StatefulWidget {
   State<OrderListPage> createState() => _OrderListPageState();
 }
 
-class _OrderListPageState extends State<OrderListPage> {
+class _OrderListPageState extends State<OrderListPage> with BaseController {
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKey,
-      drawer: SidebarComponent(),
-      appBar: widget.isBackEnable == true
-          ? AppBar(
-              automaticallyImplyLeading: false,
-              title: customBackButtonWithText(title: 'Orders'),
-            )
-          : customTitleAppBar(
-              title: 'Orders',
-              onTap: () {
-                scaffoldKey.currentState!.openDrawer();
-              }),
+      appBar: AppBar(
+        leading: customBackButton(),
+        title: KText(
+          text: 'All Orders',
+          fontSize: 16,
+        ),
+      ),
       body: Padding(
         padding: paddingH10,
         child: ListView(
@@ -44,9 +38,9 @@ class _OrderListPageState extends State<OrderListPage> {
             ListView.builder(
               shrinkWrap: true,
               primary: false,
-              itemCount: 3,
+              itemCount: allOrderListC.orderList.length,
               itemBuilder: ((context, index) {
-                // final item = allProductAndCategoryList[index];
+                final item = allOrderListC.orderList[index];
                 return Padding(
                   padding: EdgeInsets.only(bottom: 5),
                   child: CustomCardWidget(
@@ -105,17 +99,17 @@ class _OrderListPageState extends State<OrderListPage> {
                           child: Row(
                             children: [
                               _expandedText(
-                                title: '473304$index',
+                                title: item.ordertrack.toString(),
                                 textSize: 16,
                                 colorText: black,
                               ),
                               _expandedText(
-                                title: '1059',
+                                title: item.orderTotal.toString(),
                                 textSize: 16,
                                 colorText: black,
                               ),
                               _expandedText(
-                                title: 'Pending',
+                                title: item.orderStatus.toString(),
                                 textSize: 16,
                                 colorText: black,
                               ),

@@ -64,6 +64,7 @@ class SpecialOfferProductPage extends StatelessWidget with BaseController {
                                     ProductDetailsPage(
                                       id: item.id,
                                       proName: item.productname,
+                                      image: 'public/uploads/category/1598528183-womenfashion.png',
                                     ),
                                   )),
                               imageUrl:

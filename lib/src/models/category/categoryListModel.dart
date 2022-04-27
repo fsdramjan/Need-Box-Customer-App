@@ -79,7 +79,7 @@ class Subcategories {
       this.status,
       this.createdAt,
       this.updatedAt,
-      this.childcategories});
+      this.childcategories,});
 
   Subcategories.fromJson(Map<String, dynamic> json) {
     id = json['id'];

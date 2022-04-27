@@ -246,13 +246,13 @@ class AllProductAndCategory {
   final String categoryImage;
 
   AllProductAndCategory({
-    required this.productName,
-    required this.productImage,
+    required this.productName,//
+    required this.productImage,//
     required this.productDes,
-    required this.productPrice,
-    required this.productDisPrice,
+    required this.productPrice,//
+    required this.productDisPrice,//
     required this.productDiscount,
-    required this.productColor,
+    required this.productColor,//
     required this.colorName,
     required this.categoryName,
     required this.categoryImage,

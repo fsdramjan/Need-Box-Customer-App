@@ -8,13 +8,12 @@ customPrimaryButton({
   String? title,
   required Color color,
   Color? titleColor,
-    double? fontSize,
+  double? fontSize,
   required double height,
   required Widget child,
   bool? isChildEnable,
   FontWeight? fontWeight,
   void Function()? onTap,
-  
 }) =>
     GestureDetector(
       onTap: onTap,
@@ -23,7 +22,7 @@ customPrimaryButton({
           color: color,
           borderRadius: BorderRadius.circular(5),
         ),
-        height: height,
+        height: 40,
         width: Get.width,
         alignment: Alignment.center,
         child: isChildEnable == true

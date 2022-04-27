@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:needbox_customer/src/animations/emptyAnimation.dart';
 import 'package:needbox_customer/src/animations/loadingAnimation.dart';
+import 'package:needbox_customer/src/configs/appColors.dart';
 import 'package:needbox_customer/src/configs/appUtils.dart';
 import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
 import 'package:needbox_customer/src/pages/products/productDetailsPage.dart';
@@ -54,6 +55,8 @@ class CategoryProductPage extends StatelessWidget with BaseController {
                     padding: paddingH10V20,
                     child: RefreshIndicator(
                       onRefresh: _refresh,
+                      triggerMode: RefreshIndicatorTriggerMode.anywhere,
+                      color: orangeO50,
                       child: GridView.builder(
                           physics: bounchephysics,
                           shrinkWrap: true,
@@ -74,6 +77,7 @@ class CategoryProductPage extends StatelessWidget with BaseController {
                                     ProductDetailsPage(
                                       id: item.id,
                                       proName: item.productname,
+                                       image: item.proImage!.image.toString(),
                                     ),
                                   )),
                               imageUrl: item.proImage!.image,

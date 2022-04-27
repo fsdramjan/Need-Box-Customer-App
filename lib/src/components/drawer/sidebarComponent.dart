@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:needbox_customer/src/configs/appColors.dart';
+import 'package:needbox_customer/src/configs/appConfigs.dart';
 import 'package:needbox_customer/src/configs/appUtils.dart';
+import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
 import 'package:needbox_customer/src/pages/brands/brandListPage.dart';
 import 'package:needbox_customer/src/pages/campaign/campaignListPage.dart';
 import 'package:needbox_customer/src/pages/category/allCategoryPage.dart';
 import 'package:needbox_customer/src/pages/home/bottomAppBar.dart';
-import 'package:needbox_customer/src/pages/loginSignup/loginPage.dart';
 import 'package:needbox_customer/src/pages/products/specialOfferProductPage.dart';
 import 'package:needbox_customer/src/pages/shop/shopListPage.dart';
 import 'package:needbox_customer/src/pages/userAccount/myAccountPage.dart';
@@ -16,7 +17,10 @@ import 'package:needbox_customer/src/widgets/cardWidget/customCardWidget.dart';
 import 'package:needbox_customer/src/widgets/textWidget/kText.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class SidebarComponent extends StatelessWidget {
+import '../../animations/loadingAnimation.dart';
+import '../../models/userAccount/userProfileDetailsModel.dart';
+
+class SidebarComponent extends StatelessWidget with BaseController {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -30,43 +34,70 @@ class SidebarComponent extends StatelessWidget {
                   padding: paddingH10,
                   child: Column(
                     children: [
-                      CustomCardWidget(
-                        child: Padding(
-                          padding: paddingH10V10,
-                          child: Row(
-                            children: [
-                              CircleAvatar(
-                                radius: 20,
-                                backgroundImage:
-                                    AssetImage('assets/images/avatar.png'),
-                              ),
-                              sizeW10,
-                              GestureDetector(
-                                onTap: () => Get.to(MyAccountPage()),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    KText(
-                                      text: 'QuickTech Ramjan',
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
+                      FutureBuilder<UserProfileDetailsModel>(
+                          future: userProfileDetailsC.getProfileDetails(),
+                          builder: (context, snapshot) {
+                            switch (snapshot.connectionState) {
+                              case ConnectionState.none:
+                                break;
+                              case ConnectionState.waiting:
+                                return Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: LoadingAnimation(
+                                    height: 50,
+                                  ),
+                                );
+                              case ConnectionState.active:
+                                break;
+                              case ConnectionState.done:
+                                final item = snapshot.data!;
+                                return CustomCardWidget(
+                                  child: Padding(
+                                    padding: paddingH10V10,
+                                    child: Row(
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 20,
+                                          backgroundColor: white,
+                                          backgroundImage: NetworkImage(
+                                            imageBaseUrl +
+                                                item.image.toString(),
+                                                
+                                          ),
+                                        ),
+                                        sizeW10,
+                                        GestureDetector(
+                                          onTap: () => Get.to(MyAccountPage()),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              KText(
+                                                text: item.fullName.toString(),
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                              KText(
+                                                text: 'View Profile',
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w600,
+                                                color: black54,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Spacer(),
+                                        customBackButton(iconData: Icons.close),
+                                      ],
                                     ),
-                                    KText(
-                                      text: 'View Profile',
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600,
-                                      color: black54,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Spacer(),
-                              customBackButton(iconData: Icons.close),
-                            ],
-                          ),
-                        ),
-                      ),
+                                  ),
+                                );
+                            }
+                            return Container();
+                          }),
+
                       // sizeH20,
                       Container(
                         height: Get.height / 1.4,
@@ -124,7 +155,7 @@ class SidebarComponent extends StatelessWidget {
                             Divider(),
                             sizeH10,
                             _buttonWithOutArrow(
-                              onTap: (() => Get.offAll(LoginPage())),
+                              onTap: () => userLoginC.userSignOut(),
                               icons: Ionicons.log_out_outline,
                               title: 'Logout',
                             ),

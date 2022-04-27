@@ -1,10 +1,12 @@
+import 'package:get/get.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
- 
+import 'package:needbox_customer/src/controllers/hive/hiveController.dart';
 
 import 'src/app.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
@@ -13,6 +15,14 @@ void main() {
   ));
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
- 
+
+  await initAppConfig();
+
   runApp(App());
+}
+
+Future<void> initAppConfig() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Get.put(HiveController(), permanent: true).initDatabase();
 }

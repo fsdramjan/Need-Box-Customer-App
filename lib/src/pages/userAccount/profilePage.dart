@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:needbox_customer/src/animations/loadingAnimation.dart';
+import 'package:needbox_customer/src/configs/appConfigs.dart';
 import 'package:needbox_customer/src/configs/appUtils.dart';
-import 'package:needbox_customer/src/pages/loginSignup/loginPage.dart';
-import 'package:needbox_customer/src/pages/orders/orderList.dart';
+import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
+import 'package:needbox_customer/src/models/userAccount/userProfileDetailsModel.dart';
+import 'package:needbox_customer/src/pages/orders/orderListPage.dart';
 import 'package:needbox_customer/src/pages/userAccount/editProflePage.dart';
 import 'package:needbox_customer/src/pages/userAccount/myAccountPage.dart';
 import 'package:needbox_customer/src/widgets/textWidget/kText.dart';
@@ -15,7 +18,7 @@ class ProfilePage extends StatefulWidget {
   _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProfilePageState extends State<ProfilePage> with BaseController {
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -29,47 +32,92 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                color: white,
-                width: Get.width,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 10,
-                  ),
-                  child: Center(
-                    child: Column(
-                      children: [
-                        CircleAvatar(
-                          radius: size.height * 6,
-                          backgroundImage:
-                              AssetImage('assets/images/avatar.png'),
-                        ),
-                        Text(
-                          "QuickTech Ramjan",
-                          style: GoogleFonts.openSans(
-                              textStyle: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: size.height * 2.4,
-                          )),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              sizeH40,
+              FutureBuilder<UserProfileDetailsModel>(
+                  future: userProfileDetailsC.getProfileDetails(),
+                  builder: (context, snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.none:
+                        break;
+                      case ConnectionState.waiting:
+                        return LoadingAnimation();
+                      case ConnectionState.active:
+                        break;
+                      case ConnectionState.done:
+                        final item = snapshot.data!;
+                        return Container(
+                          color: white,
+                          width: Get.width,
+                          child: Padding(
+                            padding: paddingH10V10,
+                            child: Center(
+                              child: Column(
+                                children: [
+                                  CircleAvatar(
+                                    backgroundColor: white,
+                                    radius: size.height * 6,
+                                    backgroundImage: NetworkImage(
+                                      imageBaseUrl + item.image.toString(),
+                                    ),
+                                  ),
+                                  sizeH10,
+                                  Text(
+                                    item.fullName.toString(),
+                                    style: GoogleFonts.openSans(
+                                        textStyle: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: size.height * 2.4,
+                                    )),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                    }
+                    return Container();
+                  }),
+              sizeH30,
               profilebuttons(
                 size,
                 Ionicons.person_outline,
                 "My Account",
                 () => Get.to(MyAccountPage()),
               ),
-              profilebuttons(
-                size,
-                Ionicons.create_outline,
-                "Edit Profile",
-                () => Get.to(EditProfilePage()),
+              FutureBuilder<UserProfileDetailsModel>(
+                future: userProfileDetailsC.getProfileDetails(),
+                builder: ((context, snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.none:
+                      break;
+                    case ConnectionState.waiting:
+                      return profilebuttons(
+                        size,
+                        Ionicons.create_outline,
+                        "Edit Profile",
+                        () {},
+                      );
+                    case ConnectionState.active:
+                      break;
+                    case ConnectionState.done:
+                      final item = snapshot.data!;
+                      return profilebuttons(
+                        size,
+                        Ionicons.create_outline,
+                        "Edit Profile",
+                        () => Get.to(EditProfilePage(
+                          userInfo: item,
+                        )),
+                      );
+                  }
+                  return Container();
+
+                  //  return      profilebuttons(
+                  //       size,
+                  //       Ionicons.create_outline,
+                  //       "Edit Profile",
+                  //       () => Get.to(EditProfilePage(userInfo: ,)),
+                  //     );
+                }),
               ),
               profilebuttons(
                 size,
@@ -106,7 +154,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 size,
                 Ionicons.log_out_outline,
                 "Logout",
-                () => Get.to(LoginPage()),
+                () => userLoginC.userSignOut(),
                 isDivider: false,
               ),
               SizedBox(height: 70),

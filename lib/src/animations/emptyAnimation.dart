@@ -4,6 +4,15 @@ import 'package:needbox_customer/src/configs/appColors.dart';
 import 'package:needbox_customer/src/widgets/textWidget/kText.dart';
 
 class EmptyAnimation extends StatelessWidget {
+  final double? height;
+  final double? width;
+  final String? title;
+
+  EmptyAnimation({
+    this.height,
+    this.width,
+    this.title,
+  });
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -13,10 +22,11 @@ class EmptyAnimation extends StatelessWidget {
         children: [
           Lottie.asset(
             'assets/animations/empty.json',
-            height: 300,
+            height: height != null ? height : 300,
+            width: width,
           ),
           KText(
-            text: 'There is no product!',
+            text: title != null ? title.toString() : 'There is no product!',
             color: black54,
           ),
         ],

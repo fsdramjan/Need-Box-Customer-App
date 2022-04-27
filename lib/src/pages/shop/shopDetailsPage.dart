@@ -30,72 +30,75 @@ class ShopDetailsPage extends StatelessWidget with BaseController {
           fontSize: 16,
         ),
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: paddingH10,
-          child: ListView(
-            children: [
-              FutureBuilder<ShopDetailsModel>(
-                future: shopDetailsC.getShopDetails(id),
-                builder: ((context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return Center(
-                      child: EmptyAnimation(),
-                    );
-                  }
-
-                  final item = snapshot.data!;
-
-                  return Column(
-                    children: [
-                      Container(
-                        height: 200,
-                        width: Get.width,
-                        child: CachedNetworkImageWidget(
-                          imageUrl: item.shopbanner.toString(),
-                        ),
-                      )
-                    ],
+      body: Padding(
+        padding: paddingH10,
+        child: ListView(
+          children: [
+            FutureBuilder<ShopDetailsModel>(
+              future: shopDetailsC.getShopDetails(id),
+              builder: ((context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: EmptyAnimation(),
                   );
-                }),
-              ),
-              // Obx(
-              //   () => brandProductListC.isLoading.value == true
-              //       ? Center(child: LoadingAnimation())
-              //       : brandProductListC.brandProductList.isEmpty
-              //           ? EmptyAnimation()
-              //           : GridView.builder(
-              //               shrinkWrap: true,
-              //               primary: false,
-              //               gridDelegate:
-              //                   SliverGridDelegateWithFixedCrossAxisCount(
-              //                 crossAxisCount: 2,
-              //                 childAspectRatio: 0.65,
-              //               ),
-              //               itemCount:
-              //                   brandProductListC.brandProductList.length,
-              //               itemBuilder: (context, index) {
-              //                 final item =
-              //                     brandProductListC.brandProductList[index];
+                }
 
-              //                 return CustomGridCardWidget(
-              //                   discount: item.productdiscount,
-              //                   disprice: item.productnewprice,
-              //                   oldprice: item.productoldprice,
-              //                   onTap: () => Get.to(
-              //                     ProductDetailsPage(
-              //                       id: item.id,
-              //                       proName: item.productname,
-              //                     ),
-              //                   ),
-              //                   productname: item.productname.toString(),
-              //                   imageUrl: item.proImage!.image.toString(),
-              //                 );
-              //               },
-              //             ),
-              // ),
-            ],
-          ),
+                final item = snapshot.data!;
+
+                return Container(
+                  height: 200,
+                  width: Get.width,
+                  child: CachedNetworkImageWidget(
+                    imageUrl: item.shopbanner.toString(),
+                  ),
+                );
+              }),
+            ),
+            sizeH10,
+            Divider(),
+            sizeH10,
+            KText(
+              text: 'Shop Products',
+              fontWeight: FontWeight.w600,
+              fontSize: 16,
+            ),
+          
+            sizeH10,
+            Obx(
+              () => shopProductC.isLoading.value == true
+                  ? Center(child: LoadingAnimation())
+                  : shopProductC.shopProduct.isEmpty
+                      ? EmptyAnimation()
+                      : GridView.builder(
+                          shrinkWrap: true,
+                          primary: false,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 0.65,
+                          ),
+                          itemCount: shopProductC.shopProduct.length,
+                          itemBuilder: (context, index) {
+                            final item = shopProductC.shopProduct[index];
+
+                            return CustomGridCardWidget(
+                              discount: item.productdiscount,
+                              disprice: item.productnewprice,
+                              oldprice: item.productoldprice,
+                              onTap: () => Get.to(
+                                ProductDetailsPage(
+                                  id: item.id,
+                                  proName: item.productname,
+                                   image: item.proImage!.image.toString(),
+                                ),
+                              ),
+                              productname: item.productname.toString(),
+                              imageUrl: item.proImage!.image.toString(),
+                            );
+                          },
+                        ),
+            ),
+          ],
         ),
       ),
     );

@@ -6,7 +6,7 @@ class ShopListController extends GetxController {
   final shopList = RxList<ShopListModel>();
   final isLoading = RxBool(false);
 
-  getAllShopList( ) async {
+  getAllShopList() async {
     try {
       isLoading.value = true;
       final res = await dio.get(baseUrl + 'shops');
@@ -16,15 +16,12 @@ class ShopListController extends GetxController {
           .toList()
           .cast<ShopListModel>();
 
- if (res.statusCode==200) {
-        shopList.clear();
-  
-        print(res.data);
+      if (res.statusCode == 200) {
         shopList.clear();
 
         shopList.addAll(data);
         isLoading.value = false;
- }
+      }
     } on Exception catch (e) {
       print(e);
     }

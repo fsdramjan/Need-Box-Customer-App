@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../../Widgets/button/customBackButton.dart';
 import '../../components/appLogo/appLogoComponent.dart';
 import '../../configs/appColors.dart';
-import '../../widgets/customFormField/customFormField.dart';
+import '../../widgets/formField/customFormField.dart';
 import '../../widgets/textWidget/kText.dart';
 
 class ForgetPasswordPage extends StatelessWidget {
@@ -30,19 +30,13 @@ class ForgetPasswordPage extends StatelessWidget {
               // SizedBox(height: 30),
               AppLogoComponent(),
 
-              KText(
-                text: 'Phone Number',
-                color: black,
-                fontSize: 15,
-                fontWeight: FontWeight.w700,
-              ),
-              SizedBox(height: 10),
-//
               customFormField(
                 keyboardType: TextInputType.number,
                 height: 55,
                 hintText: 'Phone',
-                controller: phoneOrEmailTextC,
+                titleText: 'Phone',
+                 controller: phoneOrEmailTextC,
+              
               ),
 
               SizedBox(height: 30),
@@ -52,7 +46,7 @@ class ForgetPasswordPage extends StatelessWidget {
                   color: orangeO50,
                   borderRadius: BorderRadius.circular(5),
                 ),
-                height: 50,
+                height: 40,
                 width: Get.width,
                 alignment: Alignment.center,
                 child: KText(

@@ -10,7 +10,7 @@ import 'package:needbox_customer/src/widgets/button/customBackButton.dart';
 import '../../Widgets/cardWidget/customCardWidget.dart';
 import '../../configs/appColors.dart';
 import '../../dummyData/allProductAndCategory.dart';
-import '../../widgets/searchFormField/searchFormField.dart';
+import '../../widgets/formField/searchFormField.dart';
 
 class ProductSearchPage extends StatelessWidget {
   @override

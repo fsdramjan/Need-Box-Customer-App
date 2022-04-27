@@ -18,13 +18,15 @@ searchFormField({
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
               borderSide: BorderSide(
-                color: grey.shade300,
+                color: orangeO50,
+                width: .5,
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
               borderSide: BorderSide(
-                color: grey.shade300,
+                color: orangeO50,
+                width: .5,
               ),
             ),
             contentPadding: EdgeInsets.symmetric(horizontal: 20),

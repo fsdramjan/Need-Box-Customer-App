@@ -9,9 +9,8 @@ class ProductDetailsController extends GetxController {
   final dio = Dio();
 
   var product = ProductDetailsModel().obs;
-  var sellerInfo = Sellerinfo().obs;
-  //for fetch single data
-
+ 
+ 
   Future<ProductDetailsModel>? getProductDetails(productId) async {
     var _productlist = await DetailsApiService().fetchApi(productId);
     print(product);

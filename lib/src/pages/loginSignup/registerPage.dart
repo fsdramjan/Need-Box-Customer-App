@@ -2,26 +2,32 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
 import 'package:needbox_customer/src/pages/loginSignup/loginPage.dart';
- 
+import 'package:needbox_customer/src/widgets/formField/passwordFormField.dart';
+import 'package:needbox_customer/src/widgets/snackBar/customSnackbarWidget.dart';
 
 import '../../Widgets/button/customBackButton.dart';
 import '../../components/appLogo/appLogoComponent.dart';
 import '../../configs/appColors.dart';
-import '../../widgets/customFormField/customFormField.dart';
+import '../../widgets/formField/customFormField.dart';
 import '../../widgets/textWidget/kText.dart';
-import '../home/bottomAppBar.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
   _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _RegisterPageState extends State<RegisterPage> with BaseController {
+  final fullNameTextC = TextEditingController();
   final phoneOrEmailTextC = TextEditingController();
+  final emailTextC = TextEditingController();
+  final passwordTextC = TextEditingController();
+
+  var isFormEmpty = false;
+
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size / 100;
     return Scaffold(
       backgroundColor: white,
       appBar: AppBar(
@@ -34,80 +40,123 @@ class _RegisterPageState extends State<RegisterPage> {
       body: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10),
-          child: ListView(
-            children: [
-              // SizedBox(height: 30),
-                  AppLogoComponent(),
-
-              // SizedBox(height: 10),
-              customFormField(
-                height: 55,
-                hintText: 'Phone or Email',
-                controller: phoneOrEmailTextC,
-              ),
-              SizedBox(height: 10),
-              customFormField(
-                height: 55,
-                hintText: 'Your Email Address',
-                controller: phoneOrEmailTextC,
-              ),
-              SizedBox(height: 10),
-              customFormField(
-                height: 55,
-                hintText: 'Mobile Number (For order status update)',
-                keyboardType: TextInputType.number,
-                controller: phoneOrEmailTextC,
-              ),
-              SizedBox(height: 10),
-              customFormField(
-                height: 55,
-                hintText: 'Your Password',
-                controller: phoneOrEmailTextC,
-              ),
-
-              SizedBox(height: 30),
-
-              GestureDetector(
-                onTap: () => Get.to(CustomBottomAppBar()),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: orangeO50,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  height: 50,
-                  width: Get.width,
-                  alignment: Alignment.center,
-                  child: KText(
-                    text: 'REGISTER',
-                    color: white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-
-              SizedBox(height: 20),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  KText(
-                    text: '''Don't have an account?''',
-                    fontWeight: FontWeight.bold,
-                  ),
-                  GestureDetector(
-                    onTap: () => Get.to(LoginPage()),
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: KText(
-                        text: 'Login',
-                        color: darkBlue,
-                        fontWeight: FontWeight.bold,
+          child: Obx(
+            () => userRegisterC.isLoading.value != false
+                ? Container()
+                : ListView(
+                    children: [
+                      AppLogoComponent(),
+                      customFormField(
+                        height: 55,
+                        hintText: 'Full Name',
+                        controller: fullNameTextC,
+                        onChanged: userRegisterC.registerFullName,
+                        errorBorderColor: isFormEmpty == true
+                            ? userRegisterC.registerFullName.value.isEmpty
+                                ? red
+                                : null
+                            : null,
+                        titleText: 'Full Name',
                       ),
-                    ),
+                      SizedBox(height: 10),
+                      customFormField(
+                        height: 55,
+                        hintText: 'Mobile Number (For order status update)',
+                        keyboardType: TextInputType.number,
+                        onChanged: userRegisterC.registerMobileNumber,
+                        titleText: 'Mobile Number',
+                        errorBorderColor: isFormEmpty == true
+                            ? userRegisterC.registerMobileNumber.value.isEmpty
+                                ? red
+                                : null
+                            : null,
+                        controller: phoneOrEmailTextC,
+                      ),
+                      SizedBox(height: 10),
+                      customFormField(
+                        height: 55,
+                        hintText: 'Your Email Address',
+                        controller: emailTextC,
+                        onChanged: userRegisterC.registerEmail,
+                        errorBorderColor: isFormEmpty == true
+                            ? userRegisterC.registerEmail.value.isEmpty
+                                ? red
+                                : null
+                            : null,
+                        titleText: 'Email',
+                      ),
+                      SizedBox(height: 10),
+                      PassWordFormField(
+                        height: 55,
+                        hintText: 'Your Password',
+                        onChanged: userRegisterC.registerPassword,
+                        controller: passwordTextC,
+                        errorBorderColor: isFormEmpty == true
+                            ? userRegisterC.registerPassword.value.isEmpty
+                                ? red
+                                : null
+                            : null,
+                        titleText: 'Password',
+                      ),
+                      SizedBox(height: 30),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            isFormEmpty = true;
+                          });
+                          if (passwordTextC.text.isEmpty ||
+                              fullNameTextC.text.isEmpty ||
+                              emailTextC.text.isEmpty ||
+                              phoneOrEmailTextC.text.isEmpty) {
+                            snackBarWidget(
+                              title: 'Opps!',
+                              message: 'Field Empty',
+                              isRed: true,
+                            );
+                          } else {
+                            userRegisterC.userRegistration();
+                          }
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: orangeO50,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          height: 40,
+                          width: Get.width,
+                          alignment: Alignment.center,
+                          child: KText(
+                            text: 'REGISTER',
+                            color: white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          KText(
+                            text: '''Don't have an account?''',
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          GestureDetector(
+                            onTap: () => Get.to(LoginPage()),
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: KText(
+                                text: 'Login',
+                                color: darkBlue,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ],
           ),
         ),
       ),

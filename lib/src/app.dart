@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'package:needbox_customer/src/splash/splashPage.dart';
 import 'configs/appTheme.dart';
 import 'controllers/MainController/baseController.dart';
+import 'pages/splash/splashPage.dart';
 
 class App extends StatelessWidget with BaseController {
   @override
@@ -16,6 +15,8 @@ class App extends StatelessWidget with BaseController {
     campaignListC.getAllCampaignList();
     brandListC.getAllBrandList();
     shopListC.getAllShopList();
+    userProfileDetailsC.getProfileDetails();
+    allOrderListC.getAllOrders();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       smartManagement: SmartManagement.onlyBuilder,

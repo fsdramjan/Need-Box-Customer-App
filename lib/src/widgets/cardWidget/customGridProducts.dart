@@ -16,6 +16,9 @@ class CustomGridCardWidget extends StatelessWidget {
   final int? discount;
   final void Function()? onTap;
 
+  final bool? isFavoritePage;
+  final Widget? favoriteIcon;
+
   CustomGridCardWidget({
     required this.onTap,
     required this.imageUrl,
@@ -23,6 +26,8 @@ class CustomGridCardWidget extends StatelessWidget {
     required this.discount,
     required this.disprice,
     required this.oldprice,
+    this.isFavoritePage,
+    this.favoriteIcon,
   });
   @override
   Widget build(BuildContext context) {
@@ -74,6 +79,13 @@ class CustomGridCardWidget extends StatelessWidget {
                         ),
                       ))
                     : Container(),
+                isFavoritePage == true
+                    ? Positioned(
+                        right: 5,
+                        top: 5,
+                        child: favoriteIcon as Widget,
+                      )
+                    : Container(),
               ],
             ),
             sizeH10,
@@ -90,43 +102,42 @@ class CustomGridCardWidget extends StatelessWidget {
                 maxLines: 2,
               ),
             ),
-            sizeH5,
-            Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: KText(
-                    text: disprice == null ? '' : "৳$disprice",
-                    fontSize: 14,
-                    color: orangeO50,
-                    fontWeight: FontWeight.w700,
+               sizeH5,
+             Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: KText(
+                          text: disprice == null ? '' : "৳$disprice",
+                          fontSize: 14,
+                          color: orangeO50,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      sizeW10,
+                      KText(
+                        text: oldprice == null ? '' : '৳$oldprice',
+                        decoration: TextDecoration.lineThrough,
+                        fontSize: 11,
+                        color: Colors.grey.shade700,
+                      ),
+                  Spacer(),
+                       IconButton(
+                              onPressed: () {
+                                snackBarWidget(
+                                  title: 'Success!',
+                                  message: 'Cart added to bag',
+                                  isRed: false,
+                                );
+                              },
+                              icon: Icon(
+                                Icons.shopping_cart,
+                                color: orangeO50,
+                                size: 20,
+                              ),
+                            ),
+                    ],
                   ),
-                ),
-                sizeW10,
-                KText(
-                  text: oldprice == null ? '' : '৳$oldprice',
-                  decoration: TextDecoration.lineThrough,
-                  fontSize: 11,
-                  color: Colors.grey.shade700,
-                ),
-                Spacer(),
-                IconButton(
-                  onPressed: () {
-                    snackBarWidget(
-                      title: 'Success!',
-                      message: 'Cart added to bag',
-                      isRed: false,
-                    );
-                  },
-                  icon: Icon(
-                    Icons.shopping_cart,
-                    color: orangeO50,
-                    size: 20,
-                  ),
-                ),
-              
-              ],
-            ),
             sizeH10,
           ],
         ),
