@@ -165,7 +165,7 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
     final Size size = MediaQuery.of(context).size;
 
     return Positioned(
-      bottom: 0,
+      bottom: -10,
       child: SizedBox(
         width: size.width,
         height: 80,
