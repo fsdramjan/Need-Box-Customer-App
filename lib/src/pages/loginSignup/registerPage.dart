@@ -22,6 +22,7 @@ class _RegisterPageState extends State<RegisterPage> with BaseController {
   final fullNameTextC = TextEditingController();
   final phoneOrEmailTextC = TextEditingController();
   final emailTextC = TextEditingController();
+  final referralIdTextC = TextEditingController();
   final passwordTextC = TextEditingController();
 
   var isFormEmpty = false;
@@ -84,6 +85,19 @@ class _RegisterPageState extends State<RegisterPage> with BaseController {
                                 : null
                             : null,
                         titleText: 'Email',
+                      ),
+                      SizedBox(height: 10),
+                      customFormField(
+                        height: 55,
+                        hintText: 'Referral ID',
+                        controller: referralIdTextC,
+                        onChanged: userRegisterC.referralId,
+                        errorBorderColor: isFormEmpty == true
+                            ? userRegisterC.referralId.value.isEmpty
+                                ? red
+                                : null
+                            : null,
+                        titleText: 'Enter Referral ID (optional)',
                       ),
                       SizedBox(height: 10),
                       PassWordFormField(

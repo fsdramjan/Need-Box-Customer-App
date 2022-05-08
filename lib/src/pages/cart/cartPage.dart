@@ -3,13 +3,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:needbox_customer/src/animations/emptyAnimation.dart';
 import 'package:needbox_customer/src/configs/appColors.dart';
 import 'package:needbox_customer/src/configs/appUtils.dart';
+import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
+import 'package:needbox_customer/src/pages/products/productDetailsPage.dart';
 import 'package:needbox_customer/src/widgets/button/customPrimaryButton.dart';
+import 'package:needbox_customer/src/widgets/cachedNetworkImage/cachedNetworkImageWidget.dart';
 import 'package:needbox_customer/src/widgets/cardWidget/customCardWidget.dart';
 import 'package:needbox_customer/src/widgets/textWidget/kText.dart';
-
-import '../../dummyData/allProductAndCategory.dart';
+import '../../models/cart/cartModels.dart';
 
 class CartPage extends StatefulWidget {
   final bool? isBackEnable;
@@ -21,36 +24,42 @@ class CartPage extends StatefulWidget {
   State<CartPage> createState() => _CartPageState();
 }
 
-class _CartPageState extends State<CartPage> {
-  var counter = 1;
+class _CartPageState extends State<CartPage> with BaseController {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: ListView(
-          children: [
-            sizeH10,
-            Padding(
-              padding: paddingH10,
-              child: ListView.builder(
-                shrinkWrap: true,
-                primary: false,
-                itemCount: 2,
-                itemBuilder: ((context, index) {
-                  final item = allProductAndCategoryList[index];
-                  return _productCard(item: item);
-                }),
-              ),
-            ),
-            Divider(),
-            _cardSummary(),
-          ],
+        child: Obx(
+          () => cartC.cartItem.length == 0
+              ? EmptyAnimation(
+                  title: 'There is no cart product',
+                )
+              : ListView(
+                  children: [
+                    sizeH10,
+                    Padding(
+                      padding: paddingH10,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        primary: false,
+                        itemCount: cartC.cartItem.length,
+                        itemBuilder: ((context, index) {
+                          final item = cartC.cartItem[index];
+                          return _productCard(item: item);
+                        }),
+                      ),
+                    ),
+                    Divider(),
+                    _cardSummary(),
+                  ],
+                ),
         ),
       ),
     );
   }
 
-  _productCard({required AllProductAndCategory item}) => Padding(
+//
+  _productCard({required CartModels item}) => Padding(
         padding: EdgeInsets.only(bottom: 5),
         child: CustomCardWidget(
           child: Column(
@@ -62,14 +71,23 @@ class _CartPageState extends State<CartPage> {
                     width: Get.width,
                   ),
                   Positioned(
-                    child: Container(
-                      height: 120,
-                      width: 100,
-                      child: ClipRRect(
-                        borderRadius: borderRadiusC10,
-                        child: Image.network(
-                          item.productImage,
-                          fit: BoxFit.cover,
+                    child: GestureDetector(
+                      onTap: () => Get.to(
+                        ProductDetailsPage(
+                          id: item.id,
+                          proName: item.productname,
+                          image: item.image,
+                        ),
+                      ),
+                      child: Container(
+                        height: 120,
+                        width: 100,
+                        child: ClipRRect(
+                          borderRadius: borderRadiusC10,
+                          child: CachedNetworkImageWidget(
+                            imageUrl: item.image.toString(),
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
@@ -79,7 +97,7 @@ class _CartPageState extends State<CartPage> {
                     right: 10,
                     top: 8,
                     child: KText(
-                      text: item.productName,
+                      text: item.productname.toString(),
                       fontWeight: FontWeight.w600,
                       maxLines: 2,
                       fontSize: 14,
@@ -93,91 +111,97 @@ class _CartPageState extends State<CartPage> {
                     child: Row(
                       children: [
                         KText(
-                          text: '৳${item.productPrice}',
+                          text: '৳${item.proNewprice}',
                           fontWeight: FontWeight.bold,
                           fontSize: 14,
                           color: orangeO50,
                         ),
                         sizeW30,
-                        KText(
-                          text: 'color: ',
-                          color: black54,
-                          fontSize: 12,
-                        ),
-                        KText(
-                          text: 'Green',
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                        ),
+                        item.productColor == null
+                            ? Container()
+                            : KText(
+                                text: 'color: ',
+                                color: black54,
+                                fontSize: 12,
+                              ),
+                        item.productColor == null
+                            ? Container()
+                            : KText(
+                                text: item.productColor.toString(),
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                              ),
                       ],
                     ),
                   ),
                   Positioned(
                     right: 10,
                     top: 85,
-                    child: Padding(
-                      padding: EdgeInsets.all(2),
-                      child: Icon(
-                        Ionicons.trash_outline,
-                        size: 20,
-                        color: orangeO50.withOpacity(.5),
+                    child: GestureDetector(
+                      onTap: () {
+                        cartC.removeCartItem(
+                          id: item.id,
+                          cartProducts: item,
+                        );
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.all(2),
+                        child: Icon(
+                          Ionicons.trash_outline,
+                          size: 20,
+                          color: orangeO50.withOpacity(.5),
+                        ),
                       ),
                     ),
                   ),
                   Positioned(
                     left: 110,
                     top: 85,
-                    child: Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            counter == 1
-                                ? null
-                                : setState(() {
-                                    counter--;
-                                  });
-                          },
-                          child: Container(
-                            height: 25,
-                            width: 25,
-                            decoration: BoxDecoration(
-                              color: grey.shade300,
-                              borderRadius: borderRadiusC5,
-                            ),
-                            child: Icon(
-                              Icons.remove,
-                              size: 20,
+                    child: Obx(
+                      () => Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () => cartC.quantityMinus(item),
+                            child: Container(
+                              height: 25,
+                              width: 25,
+                              decoration: BoxDecoration(
+                                color: grey.shade300,
+                                borderRadius: borderRadiusC5,
+                              ),
+                              child: Icon(
+                                Icons.remove,
+                                size: 20,
+                              ),
                             ),
                           ),
-                        ),
-                        sizeW10,
-                        KText(
-                          text: '$counter',
-                          fontWeight: FontWeight.w600,
-                        ),
-                        sizeW10,
-                        counter == 40
-                            ? Container()
-                            : GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    counter++;
-                                  });
-                                },
-                                child: Container(
-                                  height: 25,
-                                  width: 25,
-                                  decoration: BoxDecoration(
-                                    color: grey.shade300,
-                                    borderRadius: borderRadiusC5,
-                                  ),
-                                  child: Icon(
-                                    Icons.add,
-                                    size: 20,
-                                  ),
+                          sizeW10,
+                          KText(
+                            text: item.quantity.toString(),
+                            fontWeight: FontWeight.w600,
+                          ),
+                          sizeW10,
+                          GestureDetector(
+                            onTap: () =>cartC.quantityAdd(item),
+                            child: Obx(
+                              () => item.quantity.value == item.stock
+                                  ? Container()
+                                  : Container(
+                                height: 25,
+                                width: 25,
+                                decoration: BoxDecoration(
+                                  color: grey.shade300,
+                                  borderRadius: borderRadiusC5,
+                                ),
+                                child: Icon(
+                                  Icons.add,
+                                  size: 20,
                                 ),
                               ),
-                      ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -226,7 +250,7 @@ class _CartPageState extends State<CartPage> {
                           fontSize: 12,
                         ),
                         KText(
-                          text: '৳999',
+                          text: cartC.subTotalAmount.toString(),
                           fontWeight: FontWeight.bold,
                           fontSize: 14,
                         ),
@@ -251,7 +275,7 @@ class _CartPageState extends State<CartPage> {
                           fontSize: 12,
                         ),
                         KText(
-                          text: '৳60',
+                          text: cartC.shippingFee.toString(),
                           fontWeight: FontWeight.bold,
                           fontSize: 14,
                         ),
@@ -276,7 +300,7 @@ class _CartPageState extends State<CartPage> {
                           fontSize: 12,
                         ),
                         KText(
-                          text: '৳1059',
+                          text: cartC.totalsAmount.toString(),
                           fontWeight: FontWeight.bold,
                           fontSize: 14,
                         ),

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:needbox_customer/src/animations/loadingAnimation.dart';
 import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
 import 'package:needbox_customer/src/widgets/cachedNetworkImage/cachedNetworkImageWidget.dart';
 
 import '../../configs/appColors.dart';
 import '../../configs/appUtils.dart';
+import '../../pages/category/serviceSubCategoryPage.dart';
 import '../../widgets/textWidget/kText.dart';
 
 class ServiceComponent extends StatelessWidget with BaseController {
@@ -20,35 +23,43 @@ class ServiceComponent extends StatelessWidget with BaseController {
             child: ListView.builder(
               shrinkWrap: true,
               primary: false,
-              itemCount: serviceList.length,
+              itemCount: serviceCategoryC.serviceCategoryList.length,
               scrollDirection: Axis.horizontal,
-              // padding: paddingH10,
               itemBuilder: ((context, index) {
-                final item = serviceList[index];
-                return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 5),
-                  child: Column(
-                    children: [
-                      CircleAvatar(
-                        radius: 11,
-                        backgroundColor: white,
-                        foregroundColor: grey,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(50),
-                          child: CachedNetworkImageWidget(
-                            imageUrl: '${item['img']}',
+                final item = serviceCategoryC.serviceCategoryList[index];
+                return serviceCategoryC.isLoading.value == true
+                    ? LoadingAnimation()
+                    : GestureDetector(
+                        onTap: () => Get.to(
+                          ServiceSubCategoryPage(
+                            categorySlug: item.slug,
                           ),
                         ),
-                      ),
-                      sizeH5,
-                      KText(
-                        text: '${item['title']}',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 5,
-                      ),
-                    ],
-                  ),
-                );
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 5),
+                          child: Column(
+                            children: [
+                              CircleAvatar(
+                                radius: 11,
+                                backgroundColor: white,
+                                foregroundColor: grey,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(50),
+                                  child: CachedNetworkImageWidget(
+                                    imageUrl: item.image.toString(),
+                                  ),
+                                ),
+                              ),
+                              sizeH5,
+                              KText(
+                                text: item.scatename.toString(),
+                                fontWeight: FontWeight.w600,
+                                fontSize: 5,
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
               }),
             ),
           ),

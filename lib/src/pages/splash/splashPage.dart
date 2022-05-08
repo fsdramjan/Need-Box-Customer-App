@@ -22,7 +22,7 @@ class _SplashPageState extends State<SplashPage> {
     getValidationData().whenComplete(() async {
       Timer(
         Duration(seconds: 3),
-        () => Get.to(
+        () => Get.offAll(
           widget.finalToken == null || widget.finalToken!.isEmpty
               ? LoginPage()
               : CustomBottomAppBar(),

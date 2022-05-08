@@ -7,11 +7,13 @@ class EmptyAnimation extends StatelessWidget {
   final double? height;
   final double? width;
   final String? title;
+  final String? twoTitle;
 
   EmptyAnimation({
     this.height,
     this.width,
     this.title,
+    this.twoTitle,
   });
   @override
   Widget build(BuildContext context) {
@@ -25,9 +27,19 @@ class EmptyAnimation extends StatelessWidget {
             height: height != null ? height : 300,
             width: width,
           ),
-          KText(
-            text: title != null ? title.toString() : 'There is no product!',
-            color: black54,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              KText(
+                text: title != null ? title.toString() : 'There is no product!',
+                color: black54,
+              ),
+              KText(
+                text: twoTitle != null ? twoTitle.toString() : '',
+                color: black,
+              ),
+            ],
           ),
         ],
       ),

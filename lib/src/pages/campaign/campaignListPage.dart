@@ -57,15 +57,15 @@ class CampaignListPage extends StatelessWidget with BaseController {
                               return GestureDetector(
                                 // onTap: (() => Get.to(CampaignProductPage())),
                                 child: Padding(
-                                  padding: EdgeInsets.only(bottom: 10),
+                                  padding: EdgeInsets.symmetric(vertical: 5),
                                   child: Container(
-                                    height: 130,
+                                    height: 350,
                                     width: Get.width,
                                     child: ClipRRect(
                                       borderRadius: borderRadiusC10,
                                       child: CachedNetworkImageWidget(
                                         imageUrl: item.image.toString(),
-                                        fit: BoxFit.cover,
+                                        fit: BoxFit.fill,
                                       ),
                                     ),
                                   ),

@@ -8,6 +8,7 @@ import 'package:needbox_customer/src/configs/appUtils.dart';
 import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
 import 'package:needbox_customer/src/models/userAccount/userProfileDetailsModel.dart';
 import 'package:needbox_customer/src/pages/orders/orderListPage.dart';
+import 'package:needbox_customer/src/pages/orders/orderTrackPage.dart';
 import 'package:needbox_customer/src/pages/userAccount/editProflePage.dart';
 import 'package:needbox_customer/src/pages/userAccount/myAccountPage.dart';
 import 'package:needbox_customer/src/widgets/textWidget/kText.dart';
@@ -139,7 +140,7 @@ class _ProfilePageState extends State<ProfilePage> with BaseController {
                 size,
                 Ionicons.search,
                 "Track Order",
-                () {},
+                () => Get.to(OrderTrackPage()),
                 iconSize: 20,
               ),
               profilebuttons(

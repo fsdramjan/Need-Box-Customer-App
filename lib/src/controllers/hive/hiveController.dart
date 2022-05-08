@@ -8,7 +8,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 
 class HiveController extends GetxController {
- 
   Future<void> initDatabase() async {
     Directory? appDocDir = await getApplicationDocumentsDirectory();
 
@@ -19,8 +18,7 @@ class HiveController extends GetxController {
   Future<void> registerBoxesAndAdapters() async {
     Hive.registerAdapter(FavoriteProductModelAdapter());
     await Hive.openBox<FavoriteProductModel>('favBox');
+
     print('Favorite C Work');
   }
-
- 
 }

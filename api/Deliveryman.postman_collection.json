@@ -1,0 +1,313 @@
+{
+	"info": {
+		"_postman_id": "ff39c170-34c1-42d5-8bae-0102473f73a4",
+		"name": "Deliveryman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "raselsz2017@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/deliveryman/login",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"deliveryman",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dashboard",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvZGVsaXZlcnltYW5cL2xvZ2luIiwiaWF0IjoxNjUwNTE3MzI3LCJleHAiOjE3MjkzNTczMjcsIm5iZiI6MTY1MDUxNzMyNywianRpIjoiUE1FcEZUTkI2T1ZrbXlrTSIsInN1YiI6MSwicHJ2IjoiZTAyNGVkZWQ1MzllNDliY2I4MTNlN2Y3NDAzNDc1ZGE0MmFjZjA2ZiJ9.2BWy3yDta7lUSE6oR36T_r3sb5JpvmHE9grl-DACyW8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/deliveryman/dashboard",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"deliveryman",
+						"dashboard"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Parcels",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvZGVsaXZlcnltYW5cL2xvZ2luIiwiaWF0IjoxNjUwNTE3MzI3LCJleHAiOjE3MjkzNTczMjcsIm5iZiI6MTY1MDUxNzMyNywianRpIjoiUE1FcEZUTkI2T1ZrbXlrTSIsInN1YiI6MSwicHJ2IjoiZTAyNGVkZWQ1MzllNDliY2I4MTNlN2Y3NDAzNDc1ZGE0MmFjZjA2ZiJ9.2BWy3yDta7lUSE6oR36T_r3sb5JpvmHE9grl-DACyW8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/deliveryman/parcels",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"deliveryman",
+						"parcels"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invoice",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvZGVsaXZlcnltYW5cL2xvZ2luIiwiaWF0IjoxNjUwNTE3MzI3LCJleHAiOjE3MjkzNTczMjcsIm5iZiI6MTY1MDUxNzMyNywianRpIjoiUE1FcEZUTkI2T1ZrbXlrTSIsInN1YiI6MSwicHJ2IjoiZTAyNGVkZWQ1MzllNDliY2I4MTNlN2Y3NDAzNDc1ZGE0MmFjZjA2ZiJ9.2BWy3yDta7lUSE6oR36T_r3sb5JpvmHE9grl-DACyW8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/deliveryman/parcel/invoice/1",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"deliveryman",
+						"parcel",
+						"invoice",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Order Status",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvZGVsaXZlcnltYW5cL2xvZ2luIiwiaWF0IjoxNjUwNTE3MzI3LCJleHAiOjE3MjkzNTczMjcsIm5iZiI6MTY1MDUxNzMyNywianRpIjoiUE1FcEZUTkI2T1ZrbXlrTSIsInN1YiI6MSwicHJ2IjoiZTAyNGVkZWQ1MzllNDliY2I4MTNlN2Y3NDAzNDc1ZGE0MmFjZjA2ZiJ9.2BWy3yDta7lUSE6oR36T_r3sb5JpvmHE9grl-DACyW8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "hidden_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "3",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/deliveryman/parcel/status-update",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"deliveryman",
+						"parcel",
+						"status-update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Profile Update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvZGVsaXZlcnltYW5cL2xvZ2luIiwiaWF0IjoxNjUwNTIwMjM0LCJleHAiOjE3MjkzNjAyMzQsIm5iZiI6MTY1MDUyMDIzNCwianRpIjoiZHVydXVNYjRzUjNhTlVRdSIsInN1YiI6MSwicHJ2IjoiZTAyNGVkZWQ1MzllNDliY2I4MTNlN2Y3NDAzNDc1ZGE0MmFjZjA2ZiJ9.kDZUFrRaeyCXrpQ3fb6uhp9gI2SoEcpWDVGKBglDu4U",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Rasel Islam",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "Dhaka Bangladesh",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/zadum/Downloads/4f8a72700b9416f943a05113a809a367.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/deliveryman/profile/update",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"deliveryman",
+						"profile",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvZGVsaXZlcnltYW5cL2xvZ2luIiwiaWF0IjoxNjUwNTE3MzI3LCJleHAiOjE3MjkzNTczMjcsIm5iZiI6MTY1MDUxNzMyNywianRpIjoiUE1FcEZUTkI2T1ZrbXlrTSIsInN1YiI6MSwicHJ2IjoiZTAyNGVkZWQ1MzllNDliY2I4MTNlN2Y3NDAzNDc1ZGE0MmFjZjA2ZiJ9.2BWy3yDta7lUSE6oR36T_r3sb5JpvmHE9grl-DACyW8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/deliveryman/logout",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"deliveryman",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

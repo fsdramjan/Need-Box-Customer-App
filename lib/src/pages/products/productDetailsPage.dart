@@ -8,9 +8,11 @@ import 'package:needbox_customer/src/animations/loadingAnimation.dart';
 import 'package:needbox_customer/src/configs/appColors.dart';
 import 'package:needbox_customer/src/configs/appUtils.dart';
 import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
+import 'package:needbox_customer/src/models/cart/cartModels.dart';
 import 'package:needbox_customer/src/pages/cart/cartPage.dart';
 import 'package:needbox_customer/src/pages/imageView/imageViewPage.dart';
 import 'package:needbox_customer/src/widgets/cardWidget/customGridProducts.dart';
+import 'package:needbox_customer/src/widgets/snackBar/customSnackbarWidget.dart';
 import '../../Widgets/cardWidget/customCardWidget.dart';
 import '../../models/products/ProductDetailsModel.dart';
 import '../../widgets/button/customBackButton.dart';
@@ -34,13 +36,14 @@ class ProductDetailsPage extends StatefulWidget {
 
 class _ProductDetailsPageState extends State<ProductDetailsPage>
     with BaseController {
-  var counter = 1;
-
   var selectedColor = '';
+  var selectedColorName = '';
   bool? isWishListed;
   @override
   Widget build(BuildContext context) {
     productDetailsC.getProductDetails(widget.id);
+
+    cartC.initQuantity();
     return Scaffold(
       appBar: AppBar(
         leading: customBackButton(),
@@ -80,7 +83,9 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>
                       ),
                       child: CachedNetworkImageWidget(
                         isImgCircular: true,
-                        imageUrl: products!.proImage!.image.toString(),
+                        imageUrl: products!.proImage == null
+                            ? 'public/uploads/logo/1641972847-270257733_895471181169475_2932116256903854071_n.png'
+                            : products.proImage!.image.toString(),
                         height: 300,
                         width: Get.width,
                         fit: BoxFit.cover,
@@ -206,13 +211,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>
                                 Row(
                                   children: [
                                     GestureDetector(
-                                      onTap: () {
-                                        counter == 1
-                                            ? null
-                                            : setState(() {
-                                                counter--;
-                                              });
-                                      },
+                                      onTap: cartC.decrementQnty,
                                       child: Container(
                                         height: 25,
                                         width: 25,
@@ -227,32 +226,33 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>
                                       ),
                                     ),
                                     sizeW10,
-                                    KText(
-                                      text: '$counter',
-                                      fontWeight: FontWeight.w600,
+                                    Obx(
+                                      () => KText(
+                                        text: cartC.quantityItems.toString(),
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                     sizeW10,
-                                    counter == products.productquantity
-                                        ? Container()
-                                        : GestureDetector(
-                                            onTap: () {
-                                              setState(() {
-                                                counter++;
-                                              });
-                                            },
-                                            child: Container(
-                                              height: 25,
-                                              width: 25,
-                                              decoration: BoxDecoration(
-                                                color: grey.shade300,
-                                                borderRadius: borderRadiusC5,
+                                    GestureDetector(
+                                      onTap: cartC.incrementQnty,
+                                      child: Obx(
+                                        () => cartC.quantityItems.value ==
+                                                products.productquantity
+                                            ? Container()
+                                            : Container(
+                                                height: 25,
+                                                width: 25,
+                                                decoration: BoxDecoration(
+                                                  color: grey.shade300,
+                                                  borderRadius: borderRadiusC5,
+                                                ),
+                                                child: Icon(
+                                                  Icons.add,
+                                                  size: 20,
+                                                ),
                                               ),
-                                              child: Icon(
-                                                Icons.add,
-                                                size: 20,
-                                              ),
-                                            ),
-                                          ),
+                                      ),
+                                    ),
                                   ],
                                 ),
                                 sizeH10,
@@ -276,6 +276,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>
                                             setState(() {
                                               selectedColor =
                                                   color.color.toString();
+                                              selectedColorName =
+                                                  color.colorName.toString();
                                             });
                                           }),
                                           child: Padding(
@@ -440,7 +442,9 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>
                                           )),
                                     ),
                                   ),
-                                  imageUrl: item.proImage!.image.toString(),
+                                  imageUrl: item.proImage == null
+                                      ? 'public/uploads/logo/1641972847-270257733_895471181169475_2932116256903854071_n.png'
+                                      : item.proImage!.image.toString(),
                                   productname: item.productname.toString(),
                                   discount: item.productdiscount,
                                   disprice: item.productnewprice,
@@ -469,18 +473,65 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>
           child: Row(
             children: [
               Expanded(
-                child: Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: borderRadiusC10,
-                    color: red,
-                  ),
-                  alignment: Alignment.center,
-                  child: KText(
-                    text: 'Add To Cart',
-                    fontWeight: FontWeight.w600,
-                    color: white,
-                  ),
+                child: FutureBuilder<ProductDetailsModel>(
+                  future: productDetailsC.getProductDetails(widget.id),
+                  builder: (c, s) {
+                    if (!s.hasData) {
+                      return Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: borderRadiusC10,
+                          color: red,
+                        ),
+                        alignment: Alignment.center,
+                        child: KText(
+                          text: 'Add To Cart',
+                          fontWeight: FontWeight.w600,
+                          color: white,
+                        ),
+                      );
+                    }
+
+                    final item = s.data!.productdetails;
+
+                    return GestureDetector(
+                      onTap: () {
+                        selectedColor.isEmpty
+                            ? snackBarWidget(
+                                title: 'Opps!',
+                                message: 'Please select a product color',
+                                isRed: true,
+                              )
+                            : cartC.addItemInCart(
+                                CartModels(
+                                  id: widget.id,
+                                  image: item!.proImage!.image,
+                                  productname: item.productname,
+                                  proNewprice: item.productnewprice,
+                                  proOldprice: item.productoldprice,
+                                  discount: 20,
+                                  shippingfee: cartC.shippingFee.toString(),
+                                  productColor: selectedColorName,
+                                  quantity: cartC.quantityItems.toInt(),
+                                  stock: item.productquantity,
+                                ),
+                              );
+                      },
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: borderRadiusC10,
+                          color: red,
+                        ),
+                        alignment: Alignment.center,
+                        child: KText(
+                          text: 'Add To Cart',
+                          fontWeight: FontWeight.w600,
+                          color: white,
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
               sizeW10,

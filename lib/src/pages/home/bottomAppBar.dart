@@ -162,7 +162,7 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
   }
 
   _bottomNavBar() {
-    final Size size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
 
     return Positioned(
       bottom: -10,
@@ -183,6 +183,7 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
                     _currentScreens = CartPage(
                       isBackEnable: false,
                     );
+                    currentTab = 4;
                   });
                 },
                 backgroundColor: orangeO50,

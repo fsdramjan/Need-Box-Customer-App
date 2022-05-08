@@ -15,8 +15,6 @@ import '../../widgets/formField/searchFormField.dart';
 class ProductSearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Size size = MediaQuery.of(context).size / 100;
-
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(
@@ -48,8 +46,6 @@ class ProductSearchPage extends StatelessWidget {
               primary: false,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                // mainAxisSpacing: 5,
-                // crossAxisSpacing: 5,
                 childAspectRatio: 0.55,
               ),
               itemCount: allProductAndCategoryList.length,
@@ -87,10 +83,8 @@ class ProductSearchPage extends StatelessWidget {
             Stack(
               children: [
                 Container(
-                  // padding: const EdgeInsets.all(3),
                   color: Colors.white,
                   width: Get.width,
-
                   child: ClipRRect(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),
@@ -152,29 +146,31 @@ class ProductSearchPage extends StatelessWidget {
                 maxLines: 2,
               ),
             ),
-            // Text(price),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 8),
               child: RichText(
-                  text: TextSpan(children: <TextSpan>[
-                TextSpan(
-                    text: oldprice,
-                    style: GoogleFonts.openSans(
-                      decoration: TextDecoration.lineThrough,
-                      fontSize: 11,
-                      color: Colors.grey.shade700,
-                    )),
-                TextSpan(text: "   "),
-                TextSpan(
-                    text: "$price ৳",
-                    style: GoogleFonts.openSans(
-                      // fontSize: 10,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w500,
-                    )),
-              ])),
+                text: TextSpan(
+                  children: <TextSpan>[
+                    TextSpan(
+                        text: oldprice,
+                        style: GoogleFonts.openSans(
+                          decoration: TextDecoration.lineThrough,
+                          fontSize: 11,
+                          color: Colors.grey.shade700,
+                        )),
+                    TextSpan(text: "   "),
+                    TextSpan(
+                      text: "$price ৳",
+                      style: GoogleFonts.openSans(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-            SizedBox(height: 5),
+            sizeH5,
           ],
         ),
       ),

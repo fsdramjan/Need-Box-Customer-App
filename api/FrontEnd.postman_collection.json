@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4cb632b6-c936-4cf6-b789-132f88e393f9",
+		"_postman_id": "ecce6131-7e64-4f39-9bdc-00f51836b6bf",
 		"name": "FrontEnd",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -435,7 +435,7 @@
 						{
 							"key": "trackId",
 							"value": "3896004",
-							"type": "text"
+							"type": "text" 
 						}
 					]
 				},
@@ -454,6 +454,145 @@
 					]
 				},
 				"description": "Order Track Data Collection"
+			},
+			"response": []
+		},
+		{
+			"name": "Service Category",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/service/category",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"service",
+						"category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Service Subcategory",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/service/subcategory/ac-servecing",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"service",
+						"subcategory",
+						"ac-servecing"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Service Post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/service/post/ac-washing",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"service",
+						"post",
+						"ac-washing"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Service Details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/service/details/4/ac-basic-servicing---2.5-to-4-ton",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"service",
+						"details",
+						"4",
+						"ac-basic-servicing---2.5-to-4-ton"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customer Post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/customer/post",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customer Post Details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/customer/post/details/2/needbox",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"post",
+						"details",
+						"2",
+						"needbox"
+					]
+				}
 			},
 			"response": []
 		}

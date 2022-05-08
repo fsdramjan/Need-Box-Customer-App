@@ -1,0 +1,1152 @@
+{
+	"info": {
+		"_postman_id": "fa48df37-ebf8-4317-a946-c4ebc378dfbb",
+		"name": "Seller",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "shopname",
+							"value": "Quicktech  Shop",
+							"type": "text"
+						},
+						{
+							"key": "selleremail",
+							"value": "quicktechshop@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "sellerphone",
+							"value": "01766950986",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/seller/register",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"seller",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Account Verify",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "sellerphone",
+							"value": "01766950986",
+							"type": "text"
+						},
+						{
+							"key": "verifyToken",
+							"value": "499931",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/seller/verify",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"seller",
+						"verify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "sellerphone",
+							"value": "01766950986",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/seller/login",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"seller",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Account",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvc2VsbGVyXC9sb2dpbiIsImlhdCI6MTY1MDQ0MjY5OSwiZXhwIjoxNzI5MjgyNjk5LCJuYmYiOjE2NTA0NDI2OTksImp0aSI6InFBMUlCZ3FoMnRYam03Y0YiLCJzdWIiOjQsInBydiI6IjhhMzdjYzYyYmNkYzEyMjk0NmQ2NTA0MWQ4OGQ3MGZjNTY2YzgyMWIifQ.OZXK1YB1Vq_wGbqEfvyZAYEcZ2NYOhXfXWyr9QeCHes",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/seller/account",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"seller",
+						"account"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dashboard Overview",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvc2VsbGVyXC9sb2dpbiIsImlhdCI6MTY1MDQ0MjY5OSwiZXhwIjoxNzI5MjgyNjk5LCJuYmYiOjE2NTA0NDI2OTksImp0aSI6InFBMUlCZ3FoMnRYam03Y0YiLCJzdWIiOjQsInBydiI6IjhhMzdjYzYyYmNkYzEyMjk0NmQ2NTA0MWQ4OGQ3MGZjNTY2YzgyMWIifQ.OZXK1YB1Vq_wGbqEfvyZAYEcZ2NYOhXfXWyr9QeCHes",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/seller/dashboard",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"seller",
+						"dashboard"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Profile Update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvc2VsbGVyXC9sb2dpbiIsImlhdCI6MTY1MDQ0MjY5OSwiZXhwIjoxNzI5MjgyNjk5LCJuYmYiOjE2NTA0NDI2OTksImp0aSI6InFBMUlCZ3FoMnRYam03Y0YiLCJzdWIiOjQsInBydiI6IjhhMzdjYzYyYmNkYzEyMjk0NmQ2NTA0MWQ4OGQ3MGZjNTY2YzgyMWIifQ.OZXK1YB1Vq_wGbqEfvyZAYEcZ2NYOhXfXWyr9QeCHes",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "shopname",
+							"value": "Quicktech Shop",
+							"type": "text"
+						},
+						{
+							"key": "sellerphone",
+							"value": "01766950986",
+							"type": "text"
+						},
+						{
+							"key": "sellerphone2",
+							"value": "01766950985",
+							"type": "text"
+						},
+						{
+							"key": "selleremail",
+							"value": "quicktechshop@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "contperson",
+							"value": "Rasel Islam",
+							"type": "text"
+						},
+						{
+							"key": "selleraddress",
+							"value": "Mirpur 12, Dhaka",
+							"type": "text"
+						},
+						{
+							"key": "sellerwebsite",
+							"value": "website.com",
+							"type": "text"
+						},
+						{
+							"key": "sellerbankaccount",
+							"value": "123456789",
+							"type": "text"
+						},
+						{
+							"key": "sellerbankname",
+							"value": "Bank Asia",
+							"type": "text"
+						},
+						{
+							"key": "sellerbankbranch",
+							"value": "Mirpur 12",
+							"type": "text"
+						},
+						{
+							"key": "sellerroutingno",
+							"value": "123456",
+							"type": "text"
+						},
+						{
+							"key": "sellerbkashaccount",
+							"value": "01766950986",
+							"type": "text"
+						},
+						{
+							"key": "sellerrocketaccount",
+							"value": "01766950986",
+							"type": "text"
+						},
+						{
+							"key": "sellernagodaccount",
+							"value": "01766950986",
+							"type": "text"
+						},
+						{
+							"key": "shoplogo",
+							"type": "file",
+							"src": "/C:/Users/zadum/Downloads/Arjuner-chal.webp"
+						},
+						{
+							"key": "shopbanner",
+							"type": "file",
+							"src": "/C:/Users/zadum/Downloads/sldier1.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/seller/profile/update",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"seller",
+						"profile",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Forget Password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "sellerphone",
+							"value": "01766950986",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/seller/forget/password",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"seller",
+						"forget",
+						"password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Forget Password Reset",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "seller_id",
+						"value": "4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "verifycode",
+							"value": "933962",
+							"type": "text"
+						},
+						{
+							"key": "newpassword",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/seller/reset/password",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"seller",
+						"reset",
+						"password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change Password",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvc2VsbGVyXC9sb2dpbiIsImlhdCI6MTY1MDQ0MjY5OSwiZXhwIjoxNzI5MjgyNjk5LCJuYmYiOjE2NTA0NDI2OTksImp0aSI6InFBMUlCZ3FoMnRYam03Y0YiLCJzdWIiOjQsInBydiI6IjhhMzdjYzYyYmNkYzEyMjk0NmQ2NTA0MWQ4OGQ3MGZjNTY2YzgyMWIifQ.OZXK1YB1Vq_wGbqEfvyZAYEcZ2NYOhXfXWyr9QeCHes",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "selleroldpassword",
+							"value": "123456",
+							"type": "text"
+						},
+						{
+							"key": "sellernewpassword",
+							"value": "1234567",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/seller/change/password",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"seller",
+						"change",
+						"password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product Upload",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvc2VsbGVyXC9sb2dpbiIsImlhdCI6MTY1MDQ0MjY5OSwiZXhwIjoxNzI5MjgyNjk5LCJuYmYiOjE2NTA0NDI2OTksImp0aSI6InFBMUlCZ3FoMnRYam03Y0YiLCJzdWIiOjQsInBydiI6IjhhMzdjYzYyYmNkYzEyMjk0NmQ2NTA0MWQ4OGQ3MGZjNTY2YzgyMWIifQ.OZXK1YB1Vq_wGbqEfvyZAYEcZ2NYOhXfXWyr9QeCHes",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "productcat",
+							"value": "8",
+							"type": "text"
+						},
+						{
+							"key": "productsubcat",
+							"value": "8",
+							"type": "text"
+						},
+						{
+							"key": "productchildcat",
+							"value": "16",
+							"type": "text"
+						},
+						{
+							"key": "productbrand",
+							"value": "6",
+							"type": "text"
+						},
+						{
+							"key": "productname",
+							"value": "Stylish and Fashionable Cotton Panjabi for Men",
+							"type": "text"
+						},
+						{
+							"key": "productoldprice",
+							"value": "600",
+							"type": "text"
+						},
+						{
+							"key": "productnewprice",
+							"value": "280",
+							"type": "text"
+						},
+						{
+							"key": "productstyle",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "productdetails",
+							"value": "About Panjabi This panjabi is perfect for the young and smart person. It is associated with long sleeves. The body to keep you comfortable and perfect long sleeve short panjabi for casual wear. This will definitely make you looks smart and stylish.This panjabi is made by cotton fabrics. It will make a fashion conscious person like you smarter than ever. It is comfortable during your workout and are easy to clean.",
+							"type": "text"
+						},
+						{
+							"key": "productdetails2",
+							"value": "Specifications of Stylish and Fashionable Cotton Panjabi for Men\nBrandNo BrandSKU133044871_BD-1054472840Main MaterialCotton",
+							"type": "text"
+						},
+						{
+							"key": "productquantity",
+							"value": "50",
+							"type": "text"
+						},
+						{
+							"key": "additionalshipping",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/zadum/Downloads/4f8a72700b9416f943a05113a809a367.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/seller/product/upload",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"seller",
+						"product",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product Manage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvc2VsbGVyXC9sb2dpbiIsImlhdCI6MTY1MDQ0MjY5OSwiZXhwIjoxNzI5MjgyNjk5LCJuYmYiOjE2NTA0NDI2OTksImp0aSI6InFBMUlCZ3FoMnRYam03Y0YiLCJzdWIiOjQsInBydiI6IjhhMzdjYzYyYmNkYzEyMjk0NmQ2NTA0MWQ4OGQ3MGZjNTY2YzgyMWIifQ.OZXK1YB1Vq_wGbqEfvyZAYEcZ2NYOhXfXWyr9QeCHes",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/seller/product/manage",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"seller",
+						"product",
+						"manage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product Update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvc2VsbGVyXC9sb2dpbiIsImlhdCI6MTY1MDQ0MjY5OSwiZXhwIjoxNzI5MjgyNjk5LCJuYmYiOjE2NTA0NDI2OTksImp0aSI6InFBMUlCZ3FoMnRYam03Y0YiLCJzdWIiOjQsInBydiI6IjhhMzdjYzYyYmNkYzEyMjk0NmQ2NTA0MWQ4OGQ3MGZjNTY2YzgyMWIifQ.OZXK1YB1Vq_wGbqEfvyZAYEcZ2NYOhXfXWyr9QeCHes",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "hidden_id",
+							"value": "11",
+							"description": "product id",
+							"type": "text"
+						},
+						{
+							"key": "productcat",
+							"value": "8",
+							"type": "text"
+						},
+						{
+							"key": "productsubcat",
+							"value": "8",
+							"type": "text"
+						},
+						{
+							"key": "productchildcat",
+							"value": "16",
+							"type": "text"
+						},
+						{
+							"key": "productbrand",
+							"value": "6",
+							"type": "text"
+						},
+						{
+							"key": "productname",
+							"value": "Stylish and Fashionable Cotton Panjabi for Men",
+							"type": "text"
+						},
+						{
+							"key": "productoldprice",
+							"value": "600",
+							"type": "text"
+						},
+						{
+							"key": "productnewprice",
+							"value": "400",
+							"type": "text"
+						},
+						{
+							"key": "productstyle",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "productdetails",
+							"value": "About Panjabi This panjabi is perfect for the young and smart person. It is associated with long sleeves. The body to keep you comfortable and perfect long sleeve short panjabi for casual wear. This will definitely make you looks smart and stylish.This panjabi is made by cotton fabrics. It will make a fashion conscious person like you smarter than ever. It is comfortable during your workout and are easy to clean.",
+							"type": "text"
+						},
+						{
+							"key": "productdetails2",
+							"value": "Specifications of Stylish and Fashionable Cotton Panjabi for Men\nBrandNo BrandSKU133044871_BD-1054472840Main MaterialCotton",
+							"type": "text"
+						},
+						{
+							"key": "productquantity",
+							"value": "50",
+							"type": "text"
+						},
+						{
+							"key": "additionalshipping",
+							"value": "0",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/seller/product/update",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"seller",
+						"product",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Order Manage",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvc2VsbGVyXC9sb2dpbiIsImlhdCI6MTY1MDQ0MjY5OSwiZXhwIjoxNzI5MjgyNjk5LCJuYmYiOjE2NTA0NDI2OTksImp0aSI6InFBMUlCZ3FoMnRYam03Y0YiLCJzdWIiOjQsInBydiI6IjhhMzdjYzYyYmNkYzEyMjk0NmQ2NTA0MWQ4OGQ3MGZjNTY2YzgyMWIifQ.OZXK1YB1Vq_wGbqEfvyZAYEcZ2NYOhXfXWyr9QeCHes",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/seller/order/manage",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"seller",
+						"order",
+						"manage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Service Post",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvc2VsbGVyXC9sb2dpbiIsImlhdCI6MTY1MTkxNDUyNSwiZXhwIjoxNzMwNzU0NTI1LCJuYmYiOjE2NTE5MTQ1MjUsImp0aSI6IkFSM21vSmJFOXNQZko1Sk4iLCJzdWIiOjQsInBydiI6IjhhMzdjYzYyYmNkYzEyMjk0NmQ2NTA0MWQ4OGQ3MGZjNTY2YzgyMWIifQ.lbplFE_yDl_21iWj8VaxRIEUtaFtxQNagNAp3TmDBiE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Service Title From Api",
+							"type": "text"
+						},
+						{
+							"key": "service_cat",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "service_subcat",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum, recusandae maiores dolores. Eligendi est illo qui numquam doloribus nulla enim incidunt architecto voluptatem esse. Iusto sit voluptas magnam, sequi repudiandae.",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/zadum/Downloads/download.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/seller/service/upload",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"seller",
+						"service",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Service Manage",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvc2VsbGVyXC9sb2dpbiIsImlhdCI6MTY1MTkxNDUyNSwiZXhwIjoxNzMwNzU0NTI1LCJuYmYiOjE2NTE5MTQ1MjUsImp0aSI6IkFSM21vSmJFOXNQZko1Sk4iLCJzdWIiOjQsInBydiI6IjhhMzdjYzYyYmNkYzEyMjk0NmQ2NTA0MWQ4OGQ3MGZjNTY2YzgyMWIifQ.lbplFE_yDl_21iWj8VaxRIEUtaFtxQNagNAp3TmDBiE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/seller/service/manage",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"seller",
+						"service",
+						"manage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Service Update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvc2VsbGVyXC9sb2dpbiIsImlhdCI6MTY1MTkxNDUyNSwiZXhwIjoxNzMwNzU0NTI1LCJuYmYiOjE2NTE5MTQ1MjUsImp0aSI6IkFSM21vSmJFOXNQZko1Sk4iLCJzdWIiOjQsInBydiI6IjhhMzdjYzYyYmNkYzEyMjk0NmQ2NTA0MWQ4OGQ3MGZjNTY2YzgyMWIifQ.lbplFE_yDl_21iWj8VaxRIEUtaFtxQNagNAp3TmDBiE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "service_id",
+							"value": "6",
+							"type": "text"
+						},
+						{
+							"key": "service_cat",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "service_subcat",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "title",
+							"value": "Service Title From Api Update",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": " Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum, recusandae maiores dolores. Eligendi est illo qui numquam doloribus nulla enim incidunt architecto voluptatem esse. Iusto sit voluptas magnam, sequi repudiandae.",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/zadum/Downloads/4f8a72700b9416f943a05113a809a367.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/seller/service/update",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"seller",
+						"service",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Wholesell Product Upload",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvc2VsbGVyXC9sb2dpbiIsImlhdCI6MTY1MTkxNDUyNSwiZXhwIjoxNzMwNzU0NTI1LCJuYmYiOjE2NTE5MTQ1MjUsImp0aSI6IkFSM21vSmJFOXNQZko1Sk4iLCJzdWIiOjQsInBydiI6IjhhMzdjYzYyYmNkYzEyMjk0NmQ2NTA0MWQ4OGQ3MGZjNTY2YzgyMWIifQ.lbplFE_yDl_21iWj8VaxRIEUtaFtxQNagNAp3TmDBiE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "productcat",
+							"value": "8",
+							"type": "text"
+						},
+						{
+							"key": "productsubcat",
+							"value": "8",
+							"type": "text"
+						},
+						{
+							"key": "productchildcat",
+							"value": "16",
+							"type": "text"
+						},
+						{
+							"key": "productbrand",
+							"value": "6",
+							"type": "text"
+						},
+						{
+							"key": "productname",
+							"value": "Stylish and Fashionable Cotton Panjabi for Men",
+							"type": "text"
+						},
+						{
+							"key": "productoldprice",
+							"value": "600",
+							"type": "text"
+						},
+						{
+							"key": "productnewprice",
+							"value": "280",
+							"type": "text"
+						},
+						{
+							"key": "productstyle",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "productdetails",
+							"value": "About Panjabi This panjabi is perfect for the young and smart person. It is associated with long sleeves. The body to keep you comfortable and perfect long sleeve short panjabi for casual wear. This will definitely make you looks smart and stylish.This panjabi is made by cotton fabrics. It will make a fashion conscious person like you smarter than ever. It is comfortable during your workout and are easy to clean.",
+							"type": "text"
+						},
+						{
+							"key": "productdetails2",
+							"value": "Specifications of Stylish and Fashionable Cotton Panjabi for Men\nBrandNo BrandSKU133044871_BD-1054472840Main MaterialCotton",
+							"type": "text"
+						},
+						{
+							"key": "productquantity",
+							"value": "50",
+							"type": "text"
+						},
+						{
+							"key": "additionalshipping",
+							"value": "0",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/seller/wholesale/product/upload",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"seller",
+						"wholesale",
+						"product",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Wholesale product manage",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvc2VsbGVyXC9sb2dpbiIsImlhdCI6MTY1MTkxNDUyNSwiZXhwIjoxNzMwNzU0NTI1LCJuYmYiOjE2NTE5MTQ1MjUsImp0aSI6IkFSM21vSmJFOXNQZko1Sk4iLCJzdWIiOjQsInBydiI6IjhhMzdjYzYyYmNkYzEyMjk0NmQ2NTA0MWQ4OGQ3MGZjNTY2YzgyMWIifQ.lbplFE_yDl_21iWj8VaxRIEUtaFtxQNagNAp3TmDBiE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/seller/wholesale/product/manage",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"seller",
+						"wholesale",
+						"product",
+						"manage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvc2VsbGVyXC9sb2dpbiIsImlhdCI6MTY1MDQ0MjY5OSwiZXhwIjoxNzI5MjgyNjk5LCJuYmYiOjE2NTA0NDI2OTksImp0aSI6InFBMUlCZ3FoMnRYam03Y0YiLCJzdWIiOjQsInBydiI6IjhhMzdjYzYyYmNkYzEyMjk0NmQ2NTA0MWQ4OGQ3MGZjNTY2YzgyMWIifQ.OZXK1YB1Vq_wGbqEfvyZAYEcZ2NYOhXfXWyr9QeCHes",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/seller/logout",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"seller",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

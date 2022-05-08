@@ -39,7 +39,7 @@ class FavoriteProductController extends GetxController {
     }
   }
 
-  removeCart(int index) {
+  removeFav(int index) {
     favBox.getAt(index)!.delete();
   }
 }

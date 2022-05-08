@@ -102,42 +102,42 @@ class CustomGridCardWidget extends StatelessWidget {
                 maxLines: 2,
               ),
             ),
-               sizeH5,
-             Row(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(left: 10),
-                        child: KText(
-                          text: disprice == null ? '' : "৳$disprice",
-                          fontSize: 14,
-                          color: orangeO50,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      sizeW10,
-                      KText(
-                        text: oldprice == null ? '' : '৳$oldprice',
-                        decoration: TextDecoration.lineThrough,
-                        fontSize: 11,
-                        color: Colors.grey.shade700,
-                      ),
-                  Spacer(),
-                       IconButton(
-                              onPressed: () {
-                                snackBarWidget(
-                                  title: 'Success!',
-                                  message: 'Cart added to bag',
-                                  isRed: false,
-                                );
-                              },
-                              icon: Icon(
-                                Icons.shopping_cart,
-                                color: orangeO50,
-                                size: 20,
-                              ),
-                            ),
-                    ],
+            sizeH5,
+            Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: KText(
+                    text: disprice == null ? '' : "৳$disprice",
+                    fontSize: 14,
+                    color: orangeO50,
+                    fontWeight: FontWeight.w700,
                   ),
+                ),
+                sizeW10,
+                KText(
+                  text: oldprice == null ? '' : '৳$oldprice',
+                  decoration: TextDecoration.lineThrough,
+                  fontSize: 11,
+                  color: Colors.grey.shade700,
+                ),
+                Spacer(),
+                IconButton(
+                  onPressed: () {
+                    snackBarWidget(
+                      title: 'Success!',
+                      message: 'Cart added to bag',
+                      isRed: false,
+                    );
+                  },
+                  icon: Icon(
+                    Icons.shopping_cart,
+                    color: orangeO50,
+                    size: 20,
+                  ),
+                ),
+              ],
+            ),
             sizeH10,
           ],
         ),

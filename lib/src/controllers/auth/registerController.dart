@@ -7,6 +7,7 @@ class RegisterController extends GetxController {
   //for registration
   final registerFullName = RxString('');
   final registerEmail = RxString('');
+  final referralId = RxString('');
   final registerMobileNumber = RxString('');
   final registerPassword = RxString('');
 

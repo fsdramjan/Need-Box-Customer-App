@@ -81,6 +81,7 @@ class _LoginPageState extends State<LoginPage> with BaseController {
                           } else {
                             userLoginC.userLogin();
                             userProfileDetailsC.getProfileDetails();
+                            allOrderListC.getAllOrders();
                           }
                         },
                         child: Container(

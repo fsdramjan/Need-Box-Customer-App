@@ -25,7 +25,6 @@ class HomeProductComponent extends StatelessWidget with BaseController {
             ),
             GestureDetector(
               onTap: () {
-                print('object');
               },
               child: Padding(
                 padding: EdgeInsets.all(8),
@@ -61,11 +60,14 @@ class HomeProductComponent extends StatelessWidget with BaseController {
                       onTap: () => Get.to(
                         ProductDetailsPage(
                           id: item.id,
-                          proName: item.productname, image: item.proImage!.image.toString(),
+                          proName: item.productname,
+                          image: item.proImage!.image.toString(),
                         ),
                       ),
                       productname: item.productname.toString(),
-                      imageUrl: item.proImage!.image.toString(),
+                      imageUrl: item.proImage == null
+                          ? 'public/uploads/logo/1641972847-270257733_895471181169475_2932116256903854071_n.png'
+                          : item.proImage!.image.toString(),
                     );
                   },
                 ),
