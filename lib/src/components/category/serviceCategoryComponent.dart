@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:needbox_customer/src/animations/loadingAnimation.dart';
 import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
 import 'package:needbox_customer/src/widgets/cachedNetworkImage/cachedNetworkImageWidget.dart';
 
 import '../../configs/appColors.dart';
 import '../../configs/appUtils.dart';
-import '../../pages/category/serviceSubCategoryPage.dart';
 import '../../widgets/textWidget/kText.dart';
 
 class ServiceComponent extends StatelessWidget with BaseController {
@@ -30,11 +28,10 @@ class ServiceComponent extends StatelessWidget with BaseController {
                 return serviceCategoryC.isLoading.value == true
                     ? LoadingAnimation()
                     : GestureDetector(
-                        onTap: () => Get.to(
-                          ServiceSubCategoryPage(
-                            categorySlug: item.slug,
-                          ),
-                        ),
+                        onTap: () {
+                          serviceCategoryC.serviceSubCategoryList.clear();
+                          serviceCategoryC.getAllServiceSubCategory(item.slug);
+                        },
                         child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 5),
                           child: Column(

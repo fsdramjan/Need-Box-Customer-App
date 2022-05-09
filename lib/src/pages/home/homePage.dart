@@ -44,6 +44,7 @@ class _HomePageState extends State<HomePage> with BaseController {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size / 100;
+    allCategoryC.getAllCategory();
 
     return Scaffold(
       appBar: PreferredSize(

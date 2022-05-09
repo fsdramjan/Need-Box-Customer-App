@@ -435,7 +435,7 @@
 						{
 							"key": "trackId",
 							"value": "3896004",
-							"type": "text" 
+							"type": "text"
 						}
 					]
 				},
@@ -591,6 +591,28 @@
 						"details",
 						"2",
 						"needbox"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Wholesale Product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/wholesale/product",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"wholesale",
+						"product"
 					]
 				}
 			},

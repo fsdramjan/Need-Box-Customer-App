@@ -8,6 +8,7 @@ import 'package:needbox_customer/src/controllers/MainController/baseController.d
 import 'package:needbox_customer/src/pages/brands/brandListPage.dart';
 import 'package:needbox_customer/src/pages/campaign/campaignListPage.dart';
 import 'package:needbox_customer/src/pages/category/allCategoryPage.dart';
+import 'package:needbox_customer/src/pages/category/allServicecategoryPage.dart';
 import 'package:needbox_customer/src/pages/home/bottomAppBar.dart';
 import 'package:needbox_customer/src/pages/products/specialOfferProductPage.dart';
 import 'package:needbox_customer/src/pages/shop/shopListPage.dart';
@@ -62,7 +63,6 @@ class SidebarComponent extends StatelessWidget with BaseController {
                                           backgroundImage: NetworkImage(
                                             imageBaseUrl +
                                                 item.image.toString(),
-                                                
                                           ),
                                         ),
                                         sizeW10,
@@ -127,7 +127,7 @@ class SidebarComponent extends StatelessWidget with BaseController {
                               title: 'All Category',
                             ),
                             _buttonWithOutArrow(
-                              onTap: (() => Get.offAll(CustomBottomAppBar())),
+                              onTap: (() => Get.to(AllServiceCategoryPage())),
                               icons: Ionicons.medkit_outline,
                               title: 'All Services',
                             ),

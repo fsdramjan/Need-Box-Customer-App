@@ -3,6 +3,7 @@ import 'package:needbox_customer/src/configs/appConfigs.dart';
 import 'package:needbox_customer/src/models/category/serviceCategoryModel.dart';
 
 import '../../components/category/serviceSubCategoryModel.dart';
+import '../../pages/category/serviceSubCategoryPage.dart';
 
 class ServiceCategoryController extends GetxController {
   final serviceCategoryList = RxList<ServiceCategoryModel>();
@@ -27,26 +28,29 @@ class ServiceCategoryController extends GetxController {
       print(e);
     }
   }
+
   getAllServiceSubCategory(categorySlug) async {
     try {
-      isLoading.value = true;
+      // isLoading.value = true;
       final res = await dio.get(baseUrl + 'service/subcategory/$categorySlug');
 
-      final List<ServiceSubCategoryModel> data = res.data['servicesubcategories']
+      final List<ServiceSubCategoryModel> data = res
+          .data['servicesubcategories']
           .map((json) => ServiceSubCategoryModel.fromJson(json))
           .toList()
           .cast<ServiceSubCategoryModel>();
       if (res.statusCode == 200) {
         serviceSubCategoryList.clear();
+        // isLoading.value = false;
+
         serviceSubCategoryList.addAll(data);
-        isLoading.value = false;
+
+        Get.to(
+          ServiceSubCategoryPage(categorySlug: categorySlug),
+        );
       }
     } on Exception catch (e) {
       print(e);
     }
   }
-
-
-
-
 }

@@ -9,6 +9,7 @@ import 'package:needbox_customer/src/controllers/cart/cartController.dart';
 import 'package:needbox_customer/src/controllers/category/categoryListController.dart';
 import 'package:needbox_customer/src/controllers/category/categoryProductController.dart';
 import 'package:needbox_customer/src/controllers/category/serviceCategoryController.dart';
+import 'package:needbox_customer/src/controllers/category/serviceCategoryDataController.dart';
 import 'package:needbox_customer/src/controllers/favoirteProduct/favoriteProductController.dart';
 import 'package:needbox_customer/src/controllers/orders/orderListController.dart';
 import 'package:needbox_customer/src/controllers/orders/orderTrackController.dart';
@@ -22,6 +23,8 @@ import 'package:needbox_customer/src/controllers/slider/sliderController.dart';
 import 'package:needbox_customer/src/controllers/userAccount/editProfileController.dart';
 import 'package:needbox_customer/src/controllers/userAccount/userProfileDetailsController.dart';
 
+import '../category/serviceDetailsDataController.dart';
+
 class BaseController {
   final appLogoC = Get.put(AppLogoController());
   final sliderListC = Get.put(SliderController());
@@ -29,6 +32,8 @@ class BaseController {
   final productDetailsC = Get.put(ProductDetailsController());
   final allCategoryC = Get.put(CategoryListController());
   final serviceCategoryC = Get.put(ServiceCategoryController());
+  final serviceCategoryDataC = Get.put(ServiceCategoryDataController());
+  final serviceDetailsDataC = Get.put(ServiceDetailsDataController());
   final categoryProductC = Get.put(CategoryProductsController());
   final specialOfferProductC = Get.put(SpecialOfferProductsController());
   final campaignListC = Get.put(CampaignListController());
