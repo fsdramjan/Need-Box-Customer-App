@@ -12,16 +12,31 @@ customFormField({
   TextInputType? keyboardType,
   required TextEditingController controller,
   void Function(String)? onChanged,
+  bool? isStarEnable,
 }) =>
     Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        KText(
-          text: titleText,
-          color: black,
-          fontSize: 15,
-          fontWeight: FontWeight.w600,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            KText(
+              text: titleText,
+              color: black,
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+            ),
+            isStarEnable == true
+                ? KText(
+                    text: ' *',
+                    color: black,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                  )
+                : Container(),
+          ],
         ),
         sizeH10,
         SizedBox(

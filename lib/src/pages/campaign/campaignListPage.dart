@@ -8,6 +8,7 @@ import 'package:needbox_customer/src/configs/appUtils.dart';
 import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
 import 'package:needbox_customer/src/widgets/cachedNetworkImage/cachedNetworkImageWidget.dart';
 
+import '../../configs/appColors.dart';
 import '../../widgets/button/customBackButton.dart';
 import '../../widgets/textWidget/kText.dart';
 
@@ -47,6 +48,7 @@ class CampaignListPage extends StatelessWidget with BaseController {
                     ? Center(child: EmptyAnimation())
                     : RefreshIndicator(
                         onRefresh: _refresh,
+                        color: orangeO50,
                         child: ListView.builder(
                             physics: BouncingScrollPhysics(),
                             shrinkWrap: true,

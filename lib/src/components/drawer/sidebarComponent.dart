@@ -11,6 +11,7 @@ import 'package:needbox_customer/src/pages/category/allCategoryPage.dart';
 import 'package:needbox_customer/src/pages/category/allServicecategoryPage.dart';
 import 'package:needbox_customer/src/pages/home/bottomAppBar.dart';
 import 'package:needbox_customer/src/pages/products/specialOfferProductPage.dart';
+import 'package:needbox_customer/src/pages/products/wholesaleProductPage.dart';
 import 'package:needbox_customer/src/pages/shop/shopListPage.dart';
 import 'package:needbox_customer/src/pages/userAccount/myAccountPage.dart';
 import 'package:needbox_customer/src/widgets/button/customBackButton.dart';
@@ -120,6 +121,11 @@ class SidebarComponent extends StatelessWidget with BaseController {
                               onTap: (() => Get.to(CampaignListPage())),
                               icons: Ionicons.megaphone_outline,
                               title: 'Campaigns',
+                            ),
+                            _buttonWithOutArrow(
+                              onTap: (() => Get.to(WholesaleProductPage())),
+                              icons: Ionicons.bar_chart_outline,
+                              title: 'Wholesale Product',
                             ),
                             _buttonWithOutArrow(
                               onTap: (() => Get.to(AllCategoryPage())),

@@ -24,8 +24,7 @@ class HomeProductComponent extends StatelessWidget with BaseController {
               fontSize: 16,
             ),
             GestureDetector(
-              onTap: () {
-              },
+              onTap: () {},
               child: Padding(
                 padding: EdgeInsets.all(8),
                 child: KText(
@@ -47,7 +46,7 @@ class HomeProductComponent extends StatelessWidget with BaseController {
                   primary: false,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    childAspectRatio: 0.65,
+                    childAspectRatio: 0.70,
                   ),
                   itemCount: allProductListC.allProductList.length,
                   itemBuilder: (context, index) {

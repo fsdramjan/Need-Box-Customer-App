@@ -7,6 +7,7 @@ import 'pages/splash/splashPage.dart';
 class App extends StatelessWidget with BaseController {
   @override
   Widget build(BuildContext context) {
+    wholesaleProductC.getWholesaleProduct();
     appLogoC.getAppLogo();
     sliderListC.getSliderList();
     allProductListC.getAllProduct();

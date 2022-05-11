@@ -4,15 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:needbox_customer/src/animations/emptyAnimation.dart';
+import 'package:needbox_customer/src/animations/loadingAnimation.dart';
 import 'package:needbox_customer/src/configs/appColors.dart';
 import 'package:needbox_customer/src/configs/appUtils.dart';
 import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
+import 'package:needbox_customer/src/pages/orders/orderCheckoutPage.dart';
 import 'package:needbox_customer/src/pages/products/productDetailsPage.dart';
 import 'package:needbox_customer/src/widgets/button/customPrimaryButton.dart';
 import 'package:needbox_customer/src/widgets/cachedNetworkImage/cachedNetworkImageWidget.dart';
 import 'package:needbox_customer/src/widgets/cardWidget/customCardWidget.dart';
 import 'package:needbox_customer/src/widgets/textWidget/kText.dart';
 import '../../models/cart/cartModels.dart';
+import '../../models/userAccount/userProfileDetailsModel.dart';
 
 class CartPage extends StatefulWidget {
   final bool? isBackEnable;
@@ -182,22 +185,22 @@ class _CartPageState extends State<CartPage> with BaseController {
                           ),
                           sizeW10,
                           GestureDetector(
-                            onTap: () =>cartC.quantityAdd(item),
+                            onTap: () => cartC.quantityAdd(item),
                             child: Obx(
                               () => item.quantity.value == item.stock
                                   ? Container()
                                   : Container(
-                                height: 25,
-                                width: 25,
-                                decoration: BoxDecoration(
-                                  color: grey.shade300,
-                                  borderRadius: borderRadiusC5,
-                                ),
-                                child: Icon(
-                                  Icons.add,
-                                  size: 20,
-                                ),
-                              ),
+                                      height: 25,
+                                      width: 25,
+                                      decoration: BoxDecoration(
+                                        color: grey.shade300,
+                                        borderRadius: borderRadiusC5,
+                                      ),
+                                      child: Icon(
+                                        Icons.add,
+                                        size: 20,
+                                      ),
+                                    ),
                             ),
                           ),
                         ],
@@ -310,15 +313,32 @@ class _CartPageState extends State<CartPage> with BaseController {
                 ),
               ),
               sizeH20,
-              Padding(
-                padding: paddingH10,
-                child: customPrimaryButton(
-                  color: orangeO50,
-                  height: 40,
-                  title: 'Place Order',
-                  fontWeight: FontWeight.w600,
-                  child: KText(text: ''),
-                ),
+              FutureBuilder<UserProfileDetailsModel>(
+                future: userProfileDetailsC.getProfileDetails(),
+                builder: ((context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return LoadingAnimation(
+                      height: 50,
+                      width: 50,
+                    );
+                  }
+
+                  final item = snapshot.data!;
+
+                  return GestureDetector(
+                    onTap: () => Get.to(OrderCheckOutPage(userInfo: item,)),
+                    child: Padding(
+                      padding: paddingH10,
+                      child: customPrimaryButton(
+                        color: orangeO50,
+                        height: 40,
+                        title: 'Place Order',
+                        fontWeight: FontWeight.w600,
+                        child: KText(text: ''),
+                      ),
+                    ),
+                  );
+                }),
               ),
               sizeH20,
             ],

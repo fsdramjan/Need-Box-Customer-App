@@ -114,7 +114,7 @@ class _RegisterPageState extends State<RegisterPage> with BaseController {
                       ),
                       SizedBox(height: 30),
                       GestureDetector(
-                        onTap: () {
+                        onTap: () async {
                           setState(() {
                             isFormEmpty = true;
                           });
@@ -128,7 +128,7 @@ class _RegisterPageState extends State<RegisterPage> with BaseController {
                               isRed: true,
                             );
                           } else {
-                            userRegisterC.userRegistration();
+                            await userRegisterC.userRegistration();
                           }
                         },
                         child: Container(

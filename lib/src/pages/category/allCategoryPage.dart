@@ -41,53 +41,56 @@ class AllCategoryPage extends StatelessWidget with BaseController {
             ? LoadingAnimation()
             : RefreshIndicator(
                 onRefresh: _refresh,
-                child: GridView.builder(
-                  shrinkWrap: true,
-                  primary: false,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 1.2,
-                  ),
-                  itemCount: allCategoryC.allCategoryList.length,
-                  itemBuilder: (context, index) {
-                    final item = allCategoryC.allCategoryList[index];
+                child: Padding(
+                  padding: paddingH10V10,
+                  child: GridView.builder(
+                    shrinkWrap: true,
+                    primary: false,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 1.2,
+                    ),
+                    itemCount: allCategoryC.allCategoryList.length,
+                    itemBuilder: (context, index) {
+                      final item = allCategoryC.allCategoryList[index];
 
-                    return GestureDetector(
-                      onTap: (() => categoryProductC.getAllCategoryProduct(
-                            id: item.id,
-                            categoryName: item.catname,
-                          )),
-                      child: CustomCardWidget(
-                        child: Container(
-                          width: 140,
-                          decoration: BoxDecoration(),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              CachedNetworkImageWidget(
-                                imageUrl: item.image.toString(),
-                                width: 110,
-                                height: 90,
-                                fit: BoxFit.cover,
-                              ),
-                              sizeH10,
-                              Text(
-                                item.catname.toString(),
-                                softWrap: true,
-                                // "TV & Home Appliances$index",
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.openSans(
-                                    textStyle: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                )),
-                              ),
-                            ],
+                      return GestureDetector(
+                        onTap: (() => categoryProductC.getAllCategoryProduct(
+                              id: item.id,
+                              categoryName: item.catname,
+                            )),
+                        child: CustomCardWidget(
+                          child: Container(
+                            width: 140,
+                            decoration: BoxDecoration(),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                CachedNetworkImageWidget(
+                                  imageUrl: item.image.toString(),
+                                  width: 110,
+                                  height: 90,
+                                  fit: BoxFit.cover,
+                                ),
+                                sizeH10,
+                                Text(
+                                  item.catname.toString(),
+                                  softWrap: true,
+                                  // "TV & Home Appliances$index",
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.openSans(
+                                      textStyle: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                  )),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
               ),
       ),

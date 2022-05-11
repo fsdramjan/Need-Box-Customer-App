@@ -62,7 +62,7 @@
 			"request": {
 				"method": "POST",
 				"header": [],
-				"body": {
+				"body": { 
 					"mode": "formdata",
 					"formdata": [
 						{

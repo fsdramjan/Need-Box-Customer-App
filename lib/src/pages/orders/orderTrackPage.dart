@@ -50,10 +50,7 @@ class _OrderTrackPageState extends State<OrderTrackPage> with BaseController {
                       customPrimaryButton(
                         onTap: () {
                           setState(() {
-                            orderTrackC.orderTrack.clear();
                             orderTrackC.getTrackingOrder(orderTrackTextC.text);
-
-                            print('tedsts');
                           });
                         },
                         color: orangeO50,

@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:needbox_customer/src/controllers/appLogo/appLogoController.dart';
 import 'package:needbox_customer/src/controllers/auth/loginController.dart';
 import 'package:needbox_customer/src/controllers/auth/registerController.dart';
+import 'package:needbox_customer/src/controllers/auth/verifyAccountController.dart';
 import 'package:needbox_customer/src/controllers/brand/brandProductListController.dart';
 import 'package:needbox_customer/src/controllers/brand/brandsListController.dart';
 import 'package:needbox_customer/src/controllers/campaign/campaignListController.dart';
@@ -12,6 +13,7 @@ import 'package:needbox_customer/src/controllers/category/serviceCategoryControl
 import 'package:needbox_customer/src/controllers/category/serviceCategoryDataController.dart';
 import 'package:needbox_customer/src/controllers/favoirteProduct/favoriteProductController.dart';
 import 'package:needbox_customer/src/controllers/orders/orderListController.dart';
+import 'package:needbox_customer/src/controllers/orders/orderSaveController.dart';
 import 'package:needbox_customer/src/controllers/orders/orderTrackController.dart';
 import 'package:needbox_customer/src/controllers/products/allProductsController.dart';
 import 'package:needbox_customer/src/controllers/products/productDetailsController.dart';
@@ -24,11 +26,13 @@ import 'package:needbox_customer/src/controllers/userAccount/editProfileControll
 import 'package:needbox_customer/src/controllers/userAccount/userProfileDetailsController.dart';
 
 import '../category/serviceDetailsDataController.dart';
+import '../products/wholesaleProductController.dart';
 
 class BaseController {
   final appLogoC = Get.put(AppLogoController());
   final sliderListC = Get.put(SliderController());
   final allProductListC = Get.put(AllProductsController());
+  final wholesaleProductC = Get.put(WholesaleProductController());
   final productDetailsC = Get.put(ProductDetailsController());
   final allCategoryC = Get.put(CategoryListController());
   final serviceCategoryC = Get.put(ServiceCategoryController());
@@ -44,10 +48,12 @@ class BaseController {
   final shopProductC = Get.put(ShopProductController());
   final userRegisterC = Get.put(RegisterController());
   final userLoginC = Get.put(LoginController());
+  final verifyAccountC = Get.put(VerifyAccountController());
   final userProfileDetailsC = Get.put(UserProfileDetailsController());
   final userProfileUpdateC = Get.put(EditProfileController());
   final favoriteProductC = Get.put(FavoriteProductController());
   final allOrderListC = Get.put(OrderListController());
   final orderTrackC = Get.put(OrderTrackController());
+  final orderSaveC = Get.put(OrderSaveController());
   final cartC = Get.put(CartController());
 }

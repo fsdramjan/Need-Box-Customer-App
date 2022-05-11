@@ -32,7 +32,7 @@ class ServiceCategoryDataPage extends StatelessWidget with BaseController {
                     child: GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          childAspectRatio: .8,
+                          childAspectRatio: .7,
                         ),
                         shrinkWrap: true,
                         primary: false,

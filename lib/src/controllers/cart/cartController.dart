@@ -15,8 +15,7 @@ class CartController extends GetxController {
 
   int? get cartCount => cartItem.length;
   void removeCartItem(
-      {required int? id,
-      required CartModels cartProducts}) async {
+      {required int? id, required CartModels cartProducts}) async {
     cartItem.removeWhere((item) => item.id == id);
 
     quantityItems.value = quantityItems.value - cartProducts.quantity.toInt();
@@ -66,18 +65,20 @@ class CartController extends GetxController {
     } else {
       cartItem.add(CartModels(
         id: cartProducts.id,
-        productname: cartProducts.productname,
-        proNewprice: cartProducts.proNewprice,
-        image: cartProducts.image,
-        discount: cartProducts.discount,
-        shippingfee: cartProducts.shippingfee,
-        proOldprice: cartProducts.proOldprice,
+        productname:
+            cartProducts.productname == null ? null : cartProducts.productname,
+        proNewprice:
+            cartProducts.proNewprice == null ? null : cartProducts.proNewprice,
+        image: cartProducts.image == null ? null : cartProducts.image,
+        discount: cartProducts.discount == null ? null : cartProducts.discount,
+        shippingfee:
+            cartProducts.shippingfee == null ? null : cartProducts.shippingfee,
+        proOldprice:
+            cartProducts.proOldprice == null ? null : cartProducts.proOldprice,
         quantity: quantityItems.value,
         productColor: cartProducts.productColor,
         stock: cartProducts.stock,
       ));
-    
-
     }
     totalQuantity.value = totalQuantity.value + quantityItems.value;
     subTotalAmount.value = subTotalAmount.value +

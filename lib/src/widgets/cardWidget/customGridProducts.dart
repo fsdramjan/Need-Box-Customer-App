@@ -121,21 +121,21 @@ class CustomGridCardWidget extends StatelessWidget {
                   fontSize: 11,
                   color: Colors.grey.shade700,
                 ),
-                Spacer(),
-                IconButton(
-                  onPressed: () {
-                    snackBarWidget(
-                      title: 'Success!',
-                      message: 'Cart added to bag',
-                      isRed: false,
-                    );
-                  },
-                  icon: Icon(
-                    Icons.shopping_cart,
-                    color: orangeO50,
-                    size: 20,
-                  ),
-                ),
+                // Spacer(),
+                // IconButton(
+                //   onPressed: () {
+                //     snackBarWidget(
+                //       title: 'Success!',
+                //       message: 'Cart added to bag',
+                //       isRed: false,
+                //     );
+                //   },
+                //   icon: Icon(
+                //     Icons.shopping_cart,
+                //     color: orangeO50,
+                //     size: 20,
+                //   ),
+                // ),
               ],
             ),
             sizeH10,

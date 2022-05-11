@@ -12,10 +12,10 @@ class SliderController extends GetxController {
           .map((json) => SliderModel.fromJson(json))
           .toList()
           .cast<SliderModel>();
-      print('------------------>');
+      // print('------------------>');
 
-      print(sliderList.length.toString());
-      print('------------------>${res.data['sliders']}');
+      // print(sliderList.length.toString());
+      // print('------------------>${res.data['sliders']}');
       sliderList.clear();
       return sliderList.addAll(data);
     } catch (e) {

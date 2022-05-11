@@ -99,58 +99,58 @@ class _LoginPageState extends State<LoginPage> with BaseController {
                           ),
                         ),
                       ),
-                      SizedBox(height: 20),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: customPrimaryButton(
-                              color: darkBlue,
-                              height: 40,
-                              isChildEnable: true,
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.facebook,
-                                    size: 20,
-                                    color: white,
-                                  ),
-                                  SizedBox(width: 5),
-                                  KText(
-                                    text: 'Facebook',
-                                    color: white,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 10),
-                          Expanded(
-                            child: customPrimaryButton(
-                              color: orangeO50,
-                              height: 50,
-                              isChildEnable: true,
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.email,
-                                    size: 20,
-                                    color: white,
-                                  ),
-                                  SizedBox(width: 5),
-                                  KText(
-                                    text: 'Gmail',
-                                    color: white,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                      // SizedBox(height: 20),
+                      // Row(
+                      //   children: [
+                      //     Expanded(
+                      //       child: customPrimaryButton(
+                      //         color: darkBlue,
+                      //         height: 40,
+                      //         isChildEnable: true,
+                      //         child: Row(
+                      //           crossAxisAlignment: CrossAxisAlignment.center,
+                      //           mainAxisAlignment: MainAxisAlignment.center,
+                      //           children: [
+                      //             Icon(
+                      //               Icons.facebook,
+                      //               size: 20,
+                      //               color: white,
+                      //             ),
+                      //             SizedBox(width: 5),
+                      //             KText(
+                      //               text: 'Facebook',
+                      //               color: white,
+                      //             ),
+                      //           ],
+                      //         ),
+                      //       ),
+                      //     ),
+                      //     SizedBox(width: 10),
+                      //     Expanded(
+                      //       child: customPrimaryButton(
+                      //         color: orangeO50,
+                      //         height: 50,
+                      //         isChildEnable: true,
+                      //         child: Row(
+                      //           crossAxisAlignment: CrossAxisAlignment.center,
+                      //           mainAxisAlignment: MainAxisAlignment.center,
+                      //           children: [
+                      //             Icon(
+                      //               Icons.email,
+                      //               size: 20,
+                      //               color: white,
+                      //             ),
+                      //             SizedBox(width: 5),
+                      //             KText(
+                      //               text: 'Gmail',
+                      //               color: white,
+                      //             ),
+                      //           ],
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
                       SizedBox(height: 20),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:needbox_customer/src/pages/home/bottomAppBar.dart';
 import '../../configs/appColors.dart';
 
 customBackButton({IconData? iconData, void Function()? onTap}) =>
     GestureDetector(
-      onLongPress:
-          onTap == null ? (() => Get.offAll(CustomBottomAppBar())) : () {},
+      // onLongPress:
+      //     onTap == null ? (() => Get.offAll(CustomBottomAppBar())) : () {},
       onTap: onTap != null ? onTap : () => Get.back(),
       child: Padding(
         padding: EdgeInsets.all(10),

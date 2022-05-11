@@ -5,8 +5,8 @@ import 'package:needbox_customer/src/configs/appUtils.dart';
 import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
 import 'package:needbox_customer/src/pages/imageView/imageViewPage.dart';
 import 'package:needbox_customer/src/widgets/appBar/customTitleAppBar.dart';
+import 'package:needbox_customer/src/widgets/button/customPrimaryButton.dart';
 import 'package:needbox_customer/src/widgets/textWidget/kText.dart';
-
 import '../../animations/loadingAnimation.dart';
 import '../../models/category/ServiceDetailsDataModel.dart';
 import '../../widgets/cachedNetworkImage/cachedNetworkImageWidget.dart';
@@ -90,6 +90,63 @@ class ServiceDetailsDataPage extends StatelessWidget with BaseController {
                         sizeH10,
                         Divider(color: orangeO50),
                         sizeH10,
+                        KText(
+                          text: 'TK ' + '${item.price}',
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18,
+                          color: orangeO50,
+                        ),
+                        Obx(
+                          () => Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              GestureDetector(
+                                onTap: cartC.decrementQnty,
+                                child: Container(
+                                  height: 30,
+                                  width: 30,
+                                  decoration: BoxDecoration(
+                                    color: grey.shade300,
+                                    borderRadius: borderRadiusC5,
+                                  ),
+                                  child: Icon(
+                                    Icons.remove,
+                                    size: 25,
+                                  ),
+                                ),
+                              ),
+                              sizeW10,
+                              KText(
+                                text: cartC.quantityItems.toString(),
+                                fontWeight: FontWeight.w600,
+                              ),
+                              sizeW10,
+                              GestureDetector(
+                                onTap: cartC.incrementQnty,
+                                child: Container(
+                                  height: 30,
+                                  width: 30,
+                                  decoration: BoxDecoration(
+                                    color: grey.shade300,
+                                    borderRadius: borderRadiusC5,
+                                  ),
+                                  child: Icon(
+                                    Icons.add,
+                                    size: 25,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        sizeH20,
+                        customPrimaryButton(
+                          color: orangeO50,
+                          height: 45,
+                          title: 'Book Now',
+                          child: Container(),
+                        ),
                       ],
                     ),
                   ),

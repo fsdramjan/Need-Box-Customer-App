@@ -51,7 +51,7 @@ class SpecialOfferProductPage extends StatelessWidget with BaseController {
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
-                            childAspectRatio: 0.55,
+                            childAspectRatio: 0.8,
                           ),
                           itemCount: specialOfferProductC
                               .specialOfferProductList.length,
@@ -64,7 +64,8 @@ class SpecialOfferProductPage extends StatelessWidget with BaseController {
                                     ProductDetailsPage(
                                       id: item.id,
                                       proName: item.productname,
-                                      image: 'public/uploads/category/1598528183-womenfashion.png',
+                                      image:
+                                          'public/uploads/category/1598528183-womenfashion.png',
                                     ),
                                   )),
                               imageUrl:

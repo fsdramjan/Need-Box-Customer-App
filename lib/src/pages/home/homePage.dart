@@ -19,8 +19,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with BaseController {
-  var scaffoldKey = GlobalKey<ScaffoldState>();
-
   Future<void> _refresh() {
     _resetList();
     return _getList();
@@ -96,6 +94,8 @@ class _HomePageState extends State<HomePage> with BaseController {
                   key: keyRefresh,
                   onRefresh: _refresh,
                   child: ListView(
+                    shrinkWrap: true,
+                    primary: false,
                     physics: bounchephysics,
                     children: [
                       sizeH10,

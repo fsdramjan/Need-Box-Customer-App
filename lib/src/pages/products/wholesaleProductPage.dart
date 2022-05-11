@@ -5,54 +5,46 @@ import 'package:needbox_customer/src/animations/loadingAnimation.dart';
 import 'package:needbox_customer/src/configs/appColors.dart';
 import 'package:needbox_customer/src/configs/appUtils.dart';
 import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
-import 'package:needbox_customer/src/pages/products/productDetailsPage.dart';
+import 'package:needbox_customer/src/pages/products/wholesaleProductDetailsPage.dart';
 import 'package:needbox_customer/src/widgets/cardWidget/customGridProducts.dart';
 
 import '../../Widgets/button/customBackButton.dart';
 import '../../widgets/textWidget/kText.dart';
 
-class CategoryProductPage extends StatelessWidget with BaseController {
-  final int? id;
-  final String? categoryName;
-
-  CategoryProductPage({
-    required this.id,
-    required this.categoryName,
-  });
-
+class WholesaleProductPage extends StatelessWidget with BaseController {
   Future<void> _refresh() {
     _resetList();
     return _getList();
   }
 
   void _resetList() {
-    categoryProductC.categoryProductList.clear();
+    wholesaleProductC.wholeSaleProductList.clear();
   }
 
   Future _getList() {
-    categoryProductC.getAllCategoryProduct(id: id, categoryName: categoryName);
+    wholesaleProductC.getWholesaleProduct();
     return appLogoC.getAppLogo();
   }
 
   @override
   Widget build(BuildContext context) {
-    categoryProductC.getAllCategoryProduct(categoryName: categoryName, id: id);
-    print(id);
+    wholesaleProductC.getWholesaleProduct();
+
     return Scaffold(
       appBar: AppBar(
         leading: customBackButton(),
         title: KText(
-          text: categoryName.toString(),
+          text: 'Wholesale Products',
           fontSize: 16,
         ),
       ),
       body: Obx(
-        () => categoryProductC.isLoading.value == true
+        () => wholesaleProductC.isLoading.value == true
             ? Center(child: LoadingAnimation())
-            : categoryProductC.categoryProductList.length == 0
+            : wholesaleProductC.wholeSaleProductList.length == 0
                 ? Center(child: EmptyAnimation())
                 : Padding(
-                    padding: paddingH10V20,
+                    padding: paddingH10V10,
                     child: RefreshIndicator(
                       onRefresh: _refresh,
                       triggerMode: RefreshIndicatorTriggerMode.anywhere,
@@ -64,27 +56,28 @@ class CategoryProductPage extends StatelessWidget with BaseController {
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
-                            childAspectRatio: 0.70,
+                            childAspectRatio: 0.75,
                           ),
                           itemCount:
-                              categoryProductC.categoryProductList.length,
+                              wholesaleProductC.wholeSaleProductList.length,
                           itemBuilder: (c, i) {
                             final item =
-                                categoryProductC.categoryProductList[i];
+                                wholesaleProductC.wholeSaleProductList[i];
 
                             return CustomGridCardWidget(
                               onTap: (() => Get.to(
-                                    ProductDetailsPage(
+                                    WholesaleProductDetailsPage(
                                       id: item.id,
                                       proName: item.productname,
                                       image: item.proImage!.image.toString(),
+                                      productPricing: item.productprices,
                                     ),
                                   )),
                               imageUrl: item.proImage!.image,
                               productname: item.productname.toString(),
-                              discount: item.productdiscount,
-                              disprice: item.productnewprice,
-                              oldprice: item.productoldprice,
+                              discount: null,
+                              disprice: null,
+                              oldprice: null,
                             );
                           }),
                     ),

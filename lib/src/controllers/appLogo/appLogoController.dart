@@ -13,7 +13,7 @@ class AppLogoController extends GetxController {
           .toList()
           .cast<AppLogoModel>();
 
-      print(imageBaseUrl + '${res.data['mainlogo'][0]['logo']}');
+      // print(imageBaseUrl + '${res.data['mainlogo'][0]['logo']}');
 
       appLogo.clear();
 

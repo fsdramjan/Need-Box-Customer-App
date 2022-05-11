@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:needbox_customer/src/configs/appConfigs.dart';
-import 'package:needbox_customer/src/pages/home/bottomAppBar.dart';
+import 'package:needbox_customer/src/pages/loginSignup/verifyAccountPage.dart';
 import 'package:needbox_customer/src/widgets/snackBar/customSnackbarWidget.dart';
 
 class RegisterController extends GetxController {
@@ -13,7 +13,6 @@ class RegisterController extends GetxController {
 
   var isLoading = RxBool(false);
 
-
   userRegistration() async {
     try {
       final res = await dio.post(
@@ -22,6 +21,7 @@ class RegisterController extends GetxController {
           'fullName': registerFullName.value,
           'phoneNumber': registerMobileNumber.value,
           'email': registerEmail.value,
+          'referralId': referralId.value,
           'password': registerPassword.value,
         },
       );
@@ -42,11 +42,17 @@ class RegisterController extends GetxController {
         );
       }
       if (res.data['status'] == 'success') {
-        Get.offAll(CustomBottomAppBar());
+        Get.to(
+          VerifyAccountPage(
+            phoneNumber: registerMobileNumber.value,
+            referralId: referralId.value,
+            verifyPin: res.data['registerinfo']['verifyToken'],
+          ),
+        );
 
         snackBarWidget(
           title: 'Success!',
-          message: 'User Registration Successfull',
+          message: 'Registration Successfull,Please verify your account.',
           isRed: false,
         );
       }
