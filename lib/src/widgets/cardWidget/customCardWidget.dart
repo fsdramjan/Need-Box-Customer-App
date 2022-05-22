@@ -8,8 +8,11 @@ class CustomCardWidget extends StatelessWidget {
   final double? elevation;
   final void Function()? onTap;
 
+  final double? width;
+
   CustomCardWidget({
     required this.child,
+    this.width,
     this.onTap,
     this.padding,
     this.elevation,

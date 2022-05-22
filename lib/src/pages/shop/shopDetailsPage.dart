@@ -11,7 +11,7 @@ import '../../pages/products/productDetailsPage.dart';
 import '../../widgets/cardWidget/customGridProducts.dart';
 import '../../widgets/textWidget/kText.dart';
 
-class ShopDetailsPage extends StatelessWidget with BaseController {
+class ShopDetailsPage extends StatefulWidget with BaseController {
   final int? id;
   final String? shopName;
   ShopDetailsPage({
@@ -20,13 +20,24 @@ class ShopDetailsPage extends StatelessWidget with BaseController {
   });
 
   @override
+  State<ShopDetailsPage> createState() => _ShopDetailsPageState();
+}
+
+class _ShopDetailsPageState extends State<ShopDetailsPage> with BaseController {
+  @override
+  void initState() {
+    shopDetailsC.getShopDetails(widget.id);
+    shopProductC.getAllShopProduct(shopId: widget.id);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    shopDetailsC.getShopDetails(id);
     return Scaffold(
       appBar: AppBar(
         leading: customBackButton(),
         title: KText(
-          text: shopName.toString(),
+          text: widget.shopName.toString(),
           fontSize: 16,
         ),
       ),
@@ -35,25 +46,27 @@ class ShopDetailsPage extends StatelessWidget with BaseController {
         child: ListView(
           children: [
             FutureBuilder<ShopDetailsModel>(
-              future: shopDetailsC.getShopDetails(id),
-              builder: ((context, snapshot) {
-                if (!snapshot.hasData) {
-                  return Center(
-                    child: EmptyAnimation(),
-                  );
-                }
-
-                final item = snapshot.data!;
-
-                return Container(
-                  height: 200,
-                  width: Get.width,
-                  child: CachedNetworkImageWidget(
-                    imageUrl: item.shopbanner.toString(),
-                  ),
-                );
-              }),
-            ),
+                future: shopDetailsC.getShopDetails(widget.id),
+                builder: (context, snapShots) {
+                  switch (snapShots.connectionState) {
+                    case ConnectionState.none:
+                      break;
+                    case ConnectionState.waiting:
+                      return LoadingAnimation();
+                    case ConnectionState.active:
+                      break;
+                    case ConnectionState.done:
+                      final item = snapShots.data!;
+                      return Container(
+                        height: 200,
+                        width: Get.width,
+                        child: CachedNetworkImageWidget(
+                          imageUrl: item.shoplogo.toString(),
+                        ),
+                      );
+                  }
+                  return Container();
+                }),
             sizeH10,
             Divider(),
             sizeH10,
@@ -62,7 +75,6 @@ class ShopDetailsPage extends StatelessWidget with BaseController {
               fontWeight: FontWeight.w600,
               fontSize: 16,
             ),
-          
             sizeH10,
             Obx(
               () => shopProductC.isLoading.value == true
@@ -89,7 +101,7 @@ class ShopDetailsPage extends StatelessWidget with BaseController {
                                 ProductDetailsPage(
                                   id: item.id,
                                   proName: item.productname,
-                                   image: item.proImage!.image.toString(),
+                                  image: item.proImage!.image.toString(),
                                 ),
                               ),
                               productname: item.productname.toString(),

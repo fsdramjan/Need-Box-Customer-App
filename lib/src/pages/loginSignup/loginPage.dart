@@ -4,17 +4,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:needbox_customer/src/components/appLogo/appLogoComponent.dart';
 import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
+import 'package:needbox_customer/src/pages/home/bottomAppBar.dart';
 import 'package:needbox_customer/src/pages/loginSignup/registerPage.dart';
+import 'package:needbox_customer/src/widgets/appBar/customTitleAppBar.dart';
 import 'package:needbox_customer/src/widgets/formField/passwordFormField.dart';
 
 import '../../configs/appColors.dart';
-import '../../widgets/button/customPrimaryButton.dart';
 import '../../widgets/formField/customFormField.dart';
 import '../../widgets/snackBar/customSnackbarWidget.dart';
 import '../../widgets/textWidget/kText.dart';
 import 'forgetPasswordPage.dart';
 
 class LoginPage extends StatefulWidget {
+  final bool? isBackEnable;
+
+  LoginPage({
+    this.isBackEnable,
+  });
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -27,13 +33,18 @@ class _LoginPageState extends State<LoginPage> with BaseController {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: white,
+      appBar: backAndTitleAppBar(
+        title: '',
+        onTap: () => Get.offAll(
+          CustomBottomAppBar(),
+        ),
+      ),
       body: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10),
           child: Obx(
             () => userLoginC.isLoading.value != false
-                ? Container()
+                ? Container() 
                 : ListView(
                     children: [
                       AppLogoComponent(),

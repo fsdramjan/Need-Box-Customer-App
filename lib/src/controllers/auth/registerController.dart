@@ -34,10 +34,10 @@ class RegisterController extends GetxController {
       print(res.realUri);
       print(res.requestOptions);
       print('------------------------------>');
-      if (res.data['error'] == 'validation_error') {
+      if (res.data['status'] == 'error') {
         snackBarWidget(
-          title: 'Opps!',
-          message: 'Validation Error ${res.statusCode}',
+          title: res.data['status'],
+          message: res.data['message'],
           isRed: true,
         );
       }
@@ -65,6 +65,11 @@ class RegisterController extends GetxController {
         );
       }
     } catch (e) {
+      snackBarWidget(
+        title: 'Opps!',
+        message: 'Something went wrong!',
+        isRed: true,
+      );
       print(e);
     }
   }

@@ -14,6 +14,8 @@ import '../../components/slider/sliderComponent.dart';
 import '../../configs/appColors.dart';
 
 class HomePage extends StatefulWidget {
+  final searchTextC = TextEditingController();
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -26,24 +28,22 @@ class _HomePageState extends State<HomePage> with BaseController {
 
   void _resetList() {
     BaseController().allProductListC.allProductList.clear();
+    BaseController().sliderListC.sliderList.clear();
     BaseController().allCategoryC.allCategoryList.clear();
   }
 
   Future _getList() {
     BaseController().allCategoryC.getAllCategory();
     BaseController().allProductListC.getAllProduct();
+    BaseController().sliderListC.getSliderList();
 
     return BaseController().appLogoC.getAppLogo();
   }
 
-  final keyRefresh = GlobalKey<RefreshIndicatorState>();
   //
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size / 100;
-    allCategoryC.getAllCategory();
-
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(
@@ -55,17 +55,6 @@ class _HomePageState extends State<HomePage> with BaseController {
             child: Center(
               child: Row(
                 children: [
-                  // Padding(
-                  //   padding: EdgeInsets.only(left: 5),
-                  //   child: GestureDetector(
-                  //     onTap: _iconTapped,
-                  //     child: AnimatedIcon(
-                  //       icon: AnimatedIcons.menu_close,
-                  //       progress: _animationController,
-                  //       size: 30,
-                  //     ),
-                  //   ),
-                  // ),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 6),
                     child: Image.asset(
@@ -73,9 +62,12 @@ class _HomePageState extends State<HomePage> with BaseController {
                     ),
                   ),
                   Expanded(
-                    child: searchFormField(onTap: () {
-                      Get.to(ProductSearchPage());
-                    }),
+                    child: searchFormField(
+                      onTap: () {
+                        Get.to(ProductSearchPage());
+                      },
+                      controller: widget.searchTextC,
+                    ),
                   ),
                 ],
               ),
@@ -88,35 +80,32 @@ class _HomePageState extends State<HomePage> with BaseController {
             ? Center(
                 child: LoadingAnimation(),
               )
-            : SafeArea(
-                child: RefreshIndicator(
-                  color: orangeO50,
-                  key: keyRefresh,
-                  onRefresh: _refresh,
-                  child: ListView(
-                    shrinkWrap: true,
-                    primary: false,
-                    physics: bounchephysics,
-                    children: [
-                      sizeH10,
-                      CarosolSliderComponent(),
-                      sizeH20,
-                      ServiceComponent(),
-                      Padding(
-                        padding: paddingH10,
-                        child: Column(
-                          children: [
-                            sizeH10,
-                            CategoryComponent(),
-                            sizeH10,
-                            HomeProductComponent(),
-                            sizeH40,
-                            sizeH40,
-                          ],
-                        ),
+            : RefreshIndicator(
+                color: orangeO50,
+                onRefresh: _refresh,
+                child: ListView(
+                  shrinkWrap: true,
+                  primary: false,
+                  // physics: bounchephysics,
+                  children: [
+                    sizeH10,
+                    CarosolSliderComponent(),
+                    sizeH20,
+                    ServiceComponent(),
+                    Padding(
+                      padding: paddingH10,
+                      child: Column(
+                        children: [
+                          sizeH10,
+                          CategoryComponent(),
+                          sizeH10,
+                          HomeProductComponent(),
+                          sizeH40,
+                          sizeH40,
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
       ),

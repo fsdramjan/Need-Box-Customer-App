@@ -53,7 +53,7 @@ backAndTitleAppBar({
   IconData? icons,
 }) =>
     AppBar(
-      leading: customBackButton(),
+      leading: customBackButton(onTap: onTap),
       title: KText(
         text: '$title',
         fontSize: 17,

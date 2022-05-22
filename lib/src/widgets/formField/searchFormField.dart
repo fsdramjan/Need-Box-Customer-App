@@ -5,7 +5,9 @@ import '../textWidget/kText.dart';
 
 searchFormField({
   bool? isFormEnable,
+  required TextEditingController controller,
   void Function()? onTap,
+  void Function(String)? onChanged,
 }) =>
     Padding(
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -13,6 +15,8 @@ searchFormField({
         height: 40,
         child: TextFormField(
           onTap: onTap,
+          onChanged: onChanged,
+          controller: controller,
           readOnly: isFormEnable == true ? false : true,
           decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(

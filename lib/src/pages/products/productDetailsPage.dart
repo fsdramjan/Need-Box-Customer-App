@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_statements
+// ignore_for_file: unnecessary_statements, must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -11,6 +11,7 @@ import 'package:needbox_customer/src/controllers/MainController/baseController.d
 import 'package:needbox_customer/src/models/cart/cartModels.dart';
 import 'package:needbox_customer/src/pages/cart/cartPage.dart';
 import 'package:needbox_customer/src/pages/imageView/imageViewPage.dart';
+import 'package:needbox_customer/src/pages/shop/shopDetailsPage.dart';
 import 'package:needbox_customer/src/widgets/cardWidget/customGridProducts.dart';
 import 'package:needbox_customer/src/widgets/snackBar/customSnackbarWidget.dart';
 import '../../Widgets/cardWidget/customCardWidget.dart';
@@ -39,6 +40,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>
   var selectedColor = '';
   var selectedColorName = '';
   bool? isWishListed;
+
   @override
   Widget build(BuildContext context) {
     productDetailsC.getProductDetails(widget.id);
@@ -59,7 +61,6 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>
         child: ListView(
           shrinkWrap: true,
           primary: false,
-          physics: bounchephysics,
           children: [
             sizeH10,
             FutureBuilder<ProductDetailsModel>(
@@ -136,38 +137,69 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>
                                 products.productnewprice == null
                                     ? sizeW10
                                     : sizeH10,
-                                Row(
-                                  children: [
-                                    KText(
-                                      text: 'Brand:',
-                                      fontSize: 12,
-                                      color: black54,
-                                    ),
-                                    sizeW5,
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: borderRadiusC10,
-                                        border: Border.all(
-                                          color: grey.shade300,
-                                        ),
+                                products.productnewprice == null
+                                    ? Row(
+                                        children: [
+                                          KText(
+                                            text: 'Brand:',
+                                            fontSize: 12,
+                                            color: black54,
+                                          ),
+                                          sizeW5,
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: borderRadiusC10,
+                                              border: Border.all(
+                                                color: grey.shade300,
+                                              ),
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal: 5,
+                                                vertical: 2,
+                                              ),
+                                              child: KText(
+                                                text: 'No Brand',
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 12,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    : Row(
+                                        children: [
+                                          KText(
+                                            text: 'Brand:',
+                                            fontSize: 12,
+                                            color: black54,
+                                          ),
+                                          sizeW5,
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: borderRadiusC10,
+                                              border: Border.all(
+                                                color: grey.shade300,
+                                              ),
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal: 5,
+                                                vertical: 2,
+                                              ),
+                                              child: KText(
+                                                text: productbrand!.brandName ==
+                                                        null
+                                                    ? 'No Brand'
+                                                    : productbrand.brandName
+                                                        .toString(),
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 12,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: 5,
-                                          vertical: 2,
-                                        ),
-                                        child: KText(
-                                          text: productbrand!.brandName == null
-                                              ? 'No Brand'
-                                              : productbrand.brandName
-                                                  .toString(),
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
                                 sizeH10,
                                 Row(
                                   children: [
@@ -255,82 +287,103 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>
                                     ),
                                   ],
                                 ),
-                                sizeH10,
-                                KText(
-                                  text: 'Select Color:',
-                                  fontSize: 12,
-                                ),
-                                sizeH10,
-                                Container(
-                                  height: 50,
-                                  // color: orangeO50,
-                                  child: ListView.builder(
-                                      shrinkWrap: true,
-                                      primary: false,
-                                      itemCount: products.colors!.length,
-                                      scrollDirection: Axis.horizontal,
-                                      itemBuilder: ((context, index) {
-                                        final color = products.colors![index];
-                                        return GestureDetector(
-                                          onTap: (() {
-                                            setState(() {
-                                              selectedColor =
-                                                  color.color.toString();
-                                              selectedColorName =
-                                                  color.colorName.toString();
-                                            });
-                                          }),
-                                          child: Padding(
-                                            padding: paddingH10,
-                                            child: Column(
-                                              children: [
-                                                CircleAvatar(
-                                                  radius: 15.2,
-                                                  backgroundColor: orangeO50,
-                                                  child: CircleAvatar(
-                                                    radius: 15,
-                                                    // height: 30,
-                                                    // width: 30,
-                                                    // decoration: BoxDecoration(
-                                                    // color: HexColor(
-                                                    //     color.color.toString()),
-                                                    //   border: Border.all(
-                                                    //     color: grey.shade300,
-                                                    //   ),
-                                                    //   borderRadius:
-                                                    //       borderRadiusC10,
-                                                    // ),
-                                                    backgroundColor: HexColor(
-                                                        color.color.toString()),
-                                                    child: selectedColor ==
-                                                            color.color
-                                                        ? Icon(
-                                                            Icons.check,
-                                                            color:
-                                                                color.colorName ==
-                                                                        'white'
-                                                                    ? black
-                                                                    : white,
-                                                          )
-                                                        : Container(),
+                                products.colors!.isEmpty
+                                    ? Container()
+                                    : sizeH10,
+                                products.colors!.isEmpty
+                                    ? Container()
+                                    : KText(
+                                        text: 'Select Color:',
+                                        fontSize: 12,
+                                      ),
+                                products.colors!.isEmpty
+                                    ? Container()
+                                    : sizeH10,
+                                products.colors!.isEmpty
+                                    ? Container()
+                                    : Container(
+                                        height: 50,
+                                        // color: orangeO50,
+                                        child: ListView.builder(
+                                            shrinkWrap: true,
+                                            primary: false,
+                                            itemCount: products.colors!.length,
+                                            scrollDirection: Axis.horizontal,
+                                            itemBuilder: ((context, index) {
+                                              final color =
+                                                  products.colors![index];
+                                              return GestureDetector(
+                                                onTap: (() {
+                                                  setState(() {
+                                                    selectedColor =
+                                                        color.color.toString();
+                                                    selectedColorName = color
+                                                        .colorName
+                                                        .toString();
+                                                  });
+                                                }),
+                                                child: Padding(
+                                                  padding: paddingH10,
+                                                  child: Column(
+                                                    children: [
+                                                      CircleAvatar(
+                                                        radius: 15.2,
+                                                        backgroundColor:
+                                                            orangeO50,
+                                                        child: CircleAvatar(
+                                                          radius: 15,
+                                                          // height: 30,
+                                                          // width: 30,
+                                                          // decoration: BoxDecoration(
+                                                          // color: HexColor(
+                                                          //     color.color.toString()),
+                                                          //   border: Border.all(
+                                                          //     color: grey.shade300,
+                                                          //   ),
+                                                          //   borderRadius:
+                                                          //       borderRadiusC10,
+                                                          // ),
+                                                          backgroundColor:
+                                                              HexColor(color
+                                                                  .color
+                                                                  .toString()),
+                                                          child:
+                                                              selectedColor ==
+                                                                      color
+                                                                          .color
+                                                                  ? Icon(
+                                                                      Icons
+                                                                          .check,
+                                                                      color: color.colorName ==
+                                                                              'white'
+                                                                          ? black
+                                                                          : white,
+                                                                    )
+                                                                  : Container(),
+                                                        ),
+                                                      ),
+                                                      KText(
+                                                        text: color.colorName
+                                                            .toString(),
+                                                        fontSize: 10,
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
-                                                KText(
-                                                  text: color.colorName
-                                                      .toString(),
-                                                  fontSize: 10,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        );
-                                      })),
-                                ),
+                                              );
+                                            })),
+                                      ),
                               ],
                             ),
                           ),
                           Divider(),
                           ListTile(
+                            onTap: () => Get.to(
+                              ShopDetailsPage(
+                                id: sellerInfo!.id,
+                                shopName: sellerInfo.shopname,
+                              ),
+                            ),
                             // leading: CachedNetworkImageWidget(
                             //     imageUrl:
                             //         products.sellerinfo!.shoplogo.toString()),
@@ -510,7 +563,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>
                                   proNewprice: item.productnewprice,
                                   proOldprice: item.productoldprice,
                                   discount: 20,
-                                  shippingfee: cartC.shippingFee.toString(),
+                                  shippingfee: '' ,
                                   productColor: selectedColorName,
                                   quantity: cartC.quantityItems.toInt(),
                                   stock: item.productquantity,

@@ -6,7 +6,9 @@ import 'package:needbox_customer/src/controllers/MainController/baseController.d
 import 'package:needbox_customer/src/widgets/appBar/customTitleAppBar.dart';
 import 'package:needbox_customer/src/widgets/cardWidget/customCardWidget.dart';
 import 'package:needbox_customer/src/widgets/formField/customFormField.dart';
+import 'package:needbox_customer/src/widgets/snackBar/customSnackbarWidget.dart';
 import '../../models/userAccount/userProfileDetailsModel.dart';
+import '../../widgets/bottomSheet/customBottomSheet.dart';
 import '../../widgets/button/customPrimaryButton.dart';
 import '../../widgets/textWidget/kText.dart';
 
@@ -49,6 +51,12 @@ class _OrderCheckOutPageState extends State<OrderCheckOutPage>
         : widget.userInfo.address.toString();
     super.initState();
   }
+
+  String? selectedDistricts = '';
+  String? selectedDistrictsName = '';
+  String? selectedArea = '';
+  String? selectedAreaName = '';
+  var shippingCharge = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -110,6 +118,8 @@ class _OrderCheckOutPageState extends State<OrderCheckOutPage>
                               controller: phoneTextC,
                             ),
                             sizeH10,
+                            districts(),
+                            areas(),
                             customFormField(
                               height: 40,
                               isStarEnable: false,
@@ -191,7 +201,7 @@ class _OrderCheckOutPageState extends State<OrderCheckOutPage>
                         ),
                         sizeW10,
                         KText(
-                          text: 'Cash On Delivery',
+                          text: 'Cash On De livery',
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                         ),
@@ -239,7 +249,7 @@ class _OrderCheckOutPageState extends State<OrderCheckOutPage>
             ),
             _cardSummaryButton(
               title: 'Shipping Fee',
-              content: cartC.shippingFee.toString(),
+              content: shippingCharge == 0 ? '-' : shippingCharge.toString(),
             ),
             _cardSummaryButton(
               title: 'Additional Shipping',
@@ -266,12 +276,35 @@ class _OrderCheckOutPageState extends State<OrderCheckOutPage>
                 final item = cartC.cartItem[index];
                 return GestureDetector(
                   onTap: () {
-                    orderSaveC.createNewOrder(
-                      item: item,
-                      paymentType: selectedPayment == 1 ? 'COD' : null,
-                      userInfo: widget.userInfo,
-                      totalPrice: cartC.totalsAmount.toString(),
-                    );
+                    if (selectedPayment == null) {
+                      snackBarWidget(
+                        title: 'Opps!',
+                        message: 'Payment option is empty',
+                        isRed: true,
+                      );
+                    } else {
+                      if (selectedArea == '' ||
+                          selectedDistricts == '' ||
+                          shippingCharge == 0) {
+                        snackBarWidget(
+                          title: 'Opps!',
+                          message: 'Districts option is empty',
+                          isRed: true,
+                        );
+                      } else {
+                        orderSaveC.createNewOrder(
+                          item: item,
+                          paymentType: selectedPayment == 1 ? 'COD' : null,
+                          userInfo: widget.userInfo,
+                          totalPrice: cartC.totalsAmount.toString(),
+                          areaId: selectedArea,
+                          districsId: selectedDistricts,
+                          shippingCharge: shippingCharge,
+                        );
+
+                        cartC.cartItem.clear();
+                      }
+                    }
                   },
                   child: Padding(
                     padding: paddingH10,
@@ -319,5 +352,250 @@ class _OrderCheckOutPageState extends State<OrderCheckOutPage>
             ),
           ),
         ),
+      );
+
+  Widget districts() => ListView(
+        shrinkWrap: true,
+        primary: false,
+        children: [
+          Row(
+            children: [
+              KText(
+                text: 'Districts',
+                fontWeight: FontWeight.w600,
+                fontSize: 15,
+              ),
+              KText(
+                text: ' *',
+                fontWeight: FontWeight.w600,
+                fontSize: 15,
+              ),
+            ],
+          ),
+          sizeH10,
+          GestureDetector(
+            onTap: () => customBottomSheetWidget(
+              context: context,
+              height: 500,
+              child: FittedBox(
+                child: Container(
+                  height: 500 / 1.05,
+                  width: Get.width,
+                  child: Obx(
+                    () => ListView.builder(
+                        shrinkWrap: true,
+                        primary: false,
+                        itemCount: districtsListC.allDistricts.length,
+                        itemBuilder: (context, i) {
+                          final items = districtsListC.allDistricts[i];
+                          return GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                selectedArea = null;
+                                selectedAreaName = null;
+                                selectedDistrictsName = items.name;
+                                selectedDistricts = items.id.toString();
+
+                                areaListC.getAllArea(districtsId: items.id);
+                                Get.back();
+                              });
+                              print(selectedDistrictsName);
+                              print(selectedDistricts);
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(vertical: 3),
+                              child: Container(
+                                height: 40,
+                                width: Get.width,
+                                alignment: Alignment.centerLeft,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: selectedDistrictsName ==
+                                          items.name.toString()
+                                      ? orangeO50
+                                      : white,
+                                ),
+                                child: Padding(
+                                  padding: paddingH10,
+                                  child: KText(
+                                    text: items.name.toString(),
+                                    fontSize: 16,
+                                    color: selectedDistrictsName ==
+                                            items.name.toString()
+                                        ? white
+                                        : black,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        }),
+                  ),
+                ),
+              ),
+            ),
+            child: Container(
+              height: 45,
+              width: Get.width,
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              alignment: Alignment.centerLeft,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: grey.shade300,
+                ),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  KText(
+                    text:
+                        selectedDistrictsName == null || selectedAreaName == ''
+                            ? 'Select Districts'
+                            : selectedDistrictsName.toString(),
+                    fontSize: selectedDistrictsName != null ? 14 : 12,
+                    color: selectedDistrictsName != null ? black : black54,
+                  ),
+                  Icon(
+                    Icons.expand_more,
+                    color: black54,
+                    size: 20,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          sizeH30,
+        ],
+      );
+
+  Widget areas() => ListView(
+        shrinkWrap: true,
+        primary: false,
+        children: [
+          Row(
+            children: [
+              KText(
+                text: 'Areas',
+                fontWeight: FontWeight.w600,
+                fontSize: 15,
+              ),
+              KText(
+                text: ' *',
+                fontWeight: FontWeight.w600,
+                fontSize: 15,
+              ),
+            ],
+          ),
+          sizeH10,
+          GestureDetector(
+            onTap: () => selectedDistricts == ''
+                ? snackBarWidget(
+                    title: 'Opps!',
+                    message: 'select districts',
+                    isRed: true,
+                  )
+                : customBottomSheetWidget(
+                    context: context,
+                    height: 500,
+                    child: FittedBox(
+                      child: Container(
+                        height: 500 / 1.05,
+                        width: Get.width,
+                        child: Obx(
+                          () => areaListC.allArea.length == 0
+                              ? Center(
+                                  child: KText(
+                                    text: 'No Areas',
+                                    color: black54,
+                                  ),
+                                )
+                              : ListView.builder(
+                                  shrinkWrap: true,
+                                  primary: false,
+                                  itemCount: areaListC.allArea.length,
+                                  itemBuilder: (context, i) {
+                                    final items = areaListC.allArea[i];
+                                    return GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          selectedAreaName = items.area;
+                                          selectedArea = items.id.toString();
+                                          shippingCharge =
+                                              items.shippingfee as int;
+                                          cartC.detailsPageTotalAmount(
+                                              shippingFee: shippingCharge);
+                                          Get.back();
+                                        });
+                                        print(selectedAreaName);
+                                        print(selectedArea);
+                                        print(shippingCharge);
+                                      },
+                                      child: Padding(
+                                        padding:
+                                            EdgeInsets.symmetric(vertical: 3),
+                                        child: Container(
+                                          height: 40,
+                                          width: Get.width,
+                                          alignment: Alignment.centerLeft,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            color: selectedAreaName ==
+                                                    items.area.toString()
+                                                ? orangeO50
+                                                : white,
+                                          ),
+                                          child: Padding(
+                                            padding: paddingH10,
+                                            child: KText(
+                                              text: items.area.toString(),
+                                              fontSize: 16,
+                                              color: selectedAreaName ==
+                                                      items.area.toString()
+                                                  ? white
+                                                  : black,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }),
+                        ),
+                      ),
+                    ),
+                  ),
+            child: Container(
+              height: 45,
+              width: Get.width,
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              alignment: Alignment.centerLeft,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: grey.shade300,
+                ),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  KText(
+                    text: selectedAreaName == null || selectedAreaName == ''
+                        ? 'Select Area'
+                        : selectedAreaName.toString(),
+                    fontSize: selectedAreaName != null ? 14 : 12,
+                    color: selectedAreaName != null ? black : black54,
+                  ),
+                  Icon(
+                    Icons.expand_more,
+                    color: black54,
+                    size: 20,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          sizeH30,
+        ],
       );
 }

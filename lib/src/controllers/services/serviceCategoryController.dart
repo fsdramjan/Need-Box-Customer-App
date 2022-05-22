@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:needbox_customer/src/configs/appConfigs.dart';
 import 'package:needbox_customer/src/models/category/serviceCategoryModel.dart';
 
-import '../../components/category/serviceSubCategoryModel.dart';
+import '../../models/category/serviceSubCategoryModel.dart';
 import '../../pages/category/serviceSubCategoryPage.dart';
 
 class ServiceCategoryController extends GetxController {

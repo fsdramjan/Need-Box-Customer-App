@@ -1,13 +1,20 @@
+// ignore_for_file: unnecessary_statements
+
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:needbox_customer/src/components/drawer/sidebarComponent.dart';
 import 'package:needbox_customer/src/configs/appColors.dart';
 import 'package:needbox_customer/src/pages/cart/cartPage.dart';
 import 'package:needbox_customer/src/pages/home/homePage.dart';
+import 'package:needbox_customer/src/pages/loginSignup/loginPage.dart';
 import 'package:needbox_customer/src/pages/products/favoriteProductPage.dart';
 import 'package:needbox_customer/src/pages/userAccount/profilePage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+// ignore: must_be_immutable
 class CustomBottomAppBar extends StatefulWidget {
+  String? userAccessToken;
+
   @override
   _CustomBottomAppBarState createState() => _CustomBottomAppBarState();
 }
@@ -18,10 +25,30 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
   Widget _currentScreens = HomePage();
 
   var scaffoldKey = GlobalKey<ScaffoldState>();
+  @override
+  void initState() {
+    getValidationData();
+
+    print(widget.userAccessToken);
+
+    super.initState();
+  }
+
+  Future getValidationData() async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+    var obtainedToken = sharedPreferences.getString('accessToken');
+
+    setState(() {
+      widget.userAccessToken = obtainedToken;
+
+      print('User Access Token: ${widget.userAccessToken}');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       key: scaffoldKey, endDrawer: SidebarComponent(),
       body: Stack(
         children: [
@@ -222,10 +249,14 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
                     icon: Icon(Ionicons.person),
                     color: currentTab == 2 ? orangeO50 : grey.shade300,
                     onPressed: () {
-                      setState(() {
-                        _currentScreens = ProfilePage();
-                        currentTab = 2;
-                      });
+                      currentTab == 2
+                          ? null
+                          : setState(() {
+                              _currentScreens = widget.userAccessToken == null
+                                  ? LoginPage()
+                                  : ProfilePage();
+                              currentTab = 2;
+                            });
                     },
                   ),
                   IconButton(

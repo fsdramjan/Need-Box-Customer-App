@@ -51,7 +51,6 @@ class _OrderListPageState extends State<OrderListPage> with BaseController {
           color: orangeO50,
           onRefresh: _refresh,
           child: ListView(
-            physics: bounchephysics,
             children: [
               sizeH10,
               Obx(
@@ -100,13 +99,13 @@ class _OrderListPageState extends State<OrderListPage> with BaseController {
                                               colorText: white,
                                               fontWeight: FontWeight.normal,
                                             ),
-                                            _expandedText(
-                                              title: 'Invoice',
-                                              textSize: 12,
-                                              colorText: white,
-                                              fontWeight: FontWeight.normal,
-                                              isDividerShow: false,
-                                            ),
+                                            // _expandedText(
+                                            //   title: 'Invoice',
+                                            //   textSize: 12,
+                                            //   colorText: white,
+                                            //   fontWeight: FontWeight.normal,
+                                            //   isDividerShow: false,
+                                            // ),
                                           ],
                                         ),
                                       ),
@@ -138,12 +137,13 @@ class _OrderListPageState extends State<OrderListPage> with BaseController {
                                               textSize: 16,
                                               colorText: black,
                                             ),
-                                            _expandedText(
-                                              title: 'View',
-                                              textSize: 16,
-                                              colorText: black,
-                                              isDividerShow: false,
-                                            ),
+                                            // _expandedText(
+                                            //   title: 'View',
+                                            //   textSize: 16,
+                                            //   colorText: black,
+                                            //   isDividerShow: false,
+                                            // ),
+                                            
                                           ],
                                         ),
                                       ),

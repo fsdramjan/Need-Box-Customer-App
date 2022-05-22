@@ -15,6 +15,10 @@ class OrderSaveController extends GetxController {
     required CartModels item,
     required paymentType,
     required totalPrice,
+    required districsId,
+    required areaId,
+    required shippingCharge,
+    
     required UserProfileDetailsModel userInfo,
   }) async {
     try {
@@ -56,14 +60,14 @@ class OrderSaveController extends GetxController {
           ],
           "name": userInfo.fullName,
           "phone": userInfo.phoneNumber,
-          "district": "1",
-          "area": "5",
+          "district": districsId,
+          "area":areaId,
           "stateaddress": "Road, 4/a",
           "houseaddress": "Mirpur, Dhaka",
           "fulladdress": userInfo.address,
           "zipcode": "1212",
           "totalprice": totalPrice,
-          "shippingfee": "${CartController().shippingFee}",
+          "shippingfee": shippingCharge,
           "discount": "",
           "additionalshipping": "",
           "couponcode": "",

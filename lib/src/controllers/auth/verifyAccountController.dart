@@ -11,8 +11,7 @@ class VerifyAccountController extends GetxController {
     required phoneNumber,
     required referralId,
   }) async {
-    try { 
-
+    try {
       final res = await dio.post(
         baseUrl + 'customer/verify',
         data: {
@@ -30,15 +29,8 @@ class VerifyAccountController extends GetxController {
       print(res.realUri);
       print(res.requestOptions);
       print('------------------------------>');
-      if (res.data['status'] == 'faild') {
-        snackBarWidget(
-          title: 'Opps!',
-          message: res.data['message'],
-          isRed: true,
-        );
-      }
 
-      if (res.statusCode == 200) {
+      if (res.data['status'] == 'success') {
         Get.offAll(LoginPage());
         snackBarWidget(
           title: 'Success!',
@@ -46,7 +38,13 @@ class VerifyAccountController extends GetxController {
           isRed: false,
         );
       }
-
+      if (res.data['status'] == 'faild') {
+        snackBarWidget(
+          title: 'Opps!',
+          message: res.data['message'],
+          isRed: true,
+        );
+      }
       if (res.statusCode == 500) {
         snackBarWidget(
           title: 'Opps!',
@@ -56,6 +54,11 @@ class VerifyAccountController extends GetxController {
       }
     } catch (e) {
       print(e);
+               snackBarWidget(
+        title: 'Opps!',
+        message: 'Something went wrong!',
+        isRed: true,
+      );
     }
   }
 }

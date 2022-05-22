@@ -6,6 +6,7 @@ import 'package:needbox_customer/src/configs/appColors.dart';
 import 'package:needbox_customer/src/configs/appUtils.dart';
 import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
 import 'package:needbox_customer/src/pages/products/productDetailsPage.dart';
+import 'package:needbox_customer/src/pages/products/wholesaleProductPage.dart';
 import 'package:needbox_customer/src/widgets/cardWidget/customGridProducts.dart';
 
 import '../../Widgets/button/customBackButton.dart';
@@ -58,7 +59,6 @@ class CategoryProductPage extends StatelessWidget with BaseController {
                       triggerMode: RefreshIndicatorTriggerMode.anywhere,
                       color: orangeO50,
                       child: GridView.builder(
-                          physics: bounchephysics,
                           shrinkWrap: true,
                           primary: false,
                           gridDelegate:
@@ -73,13 +73,15 @@ class CategoryProductPage extends StatelessWidget with BaseController {
                                 categoryProductC.categoryProductList[i];
 
                             return CustomGridCardWidget(
-                              onTap: (() => Get.to(
-                                    ProductDetailsPage(
-                                      id: item.id,
-                                      proName: item.productname,
-                                      image: item.proImage!.image.toString(),
-                                    ),
-                                  )),
+                              onTap: (() => item.productnewprice == null
+                                  ? Get.to(WholesaleProductPage())
+                                  : Get.to(
+                                      ProductDetailsPage(
+                                        id: item.id,
+                                        proName: item.productname,
+                                        image: item.proImage!.image.toString(),
+                                      ),
+                                    )),
                               imageUrl: item.proImage!.image,
                               productname: item.productname.toString(),
                               discount: item.productdiscount,

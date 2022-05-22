@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,26 +9,28 @@ import 'package:needbox_customer/src/configs/appConfigs.dart';
 import 'package:needbox_customer/src/configs/appUtils.dart';
 import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
 import 'package:needbox_customer/src/models/userAccount/userProfileDetailsModel.dart';
+import 'package:needbox_customer/src/pages/customerPost/customerPostPage.dart';
 import 'package:needbox_customer/src/pages/orders/orderListPage.dart';
 import 'package:needbox_customer/src/pages/orders/orderTrackPage.dart';
 import 'package:needbox_customer/src/pages/userAccount/editProflePage.dart';
 import 'package:needbox_customer/src/pages/userAccount/myAccountPage.dart';
+import 'package:needbox_customer/src/pages/userAccount/shippingAddressPage.dart';
 import 'package:needbox_customer/src/widgets/textWidget/kText.dart';
 import '../../configs/appColors.dart';
 
 class ProfilePage extends StatefulWidget {
+  String? userAccessToken;
+
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> with BaseController {
-  var scaffoldKey = GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size / 100;
+
     return Scaffold(
-      key: scaffoldKey,
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: SafeArea(
@@ -111,13 +115,6 @@ class _ProfilePageState extends State<ProfilePage> with BaseController {
                       );
                   }
                   return Container();
-
-                  //  return      profilebuttons(
-                  //       size,
-                  //       Ionicons.create_outline,
-                  //       "Edit Profile",
-                  //       () => Get.to(EditProfilePage(userInfo: ,)),
-                  //     );
                 }),
               ),
               profilebuttons(
@@ -134,7 +131,7 @@ class _ProfilePageState extends State<ProfilePage> with BaseController {
                 size,
                 Icons.local_shipping_outlined,
                 "Shipping Address",
-                () {},
+                () => Get.to(ShippingAddressPage()),
               ),
               profilebuttons(
                 size,
@@ -147,7 +144,7 @@ class _ProfilePageState extends State<ProfilePage> with BaseController {
                 size,
                 Ionicons.create,
                 "Customer Post",
-                () {},
+                () => Get.to(CustomerPostPage()),
                 isDivider: false,
               ),
               sizeH40,

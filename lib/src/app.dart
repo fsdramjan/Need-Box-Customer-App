@@ -19,6 +19,9 @@ class App extends StatelessWidget with BaseController {
     userProfileDetailsC.getProfileDetails();
     allOrderListC.getAllOrders();
     serviceCategoryC.getAllServiceCategory();
+    customerPostListC.getAllCustomerPost();
+    districtsListC.getAllDistricts();
+    
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       smartManagement: SmartManagement.onlyBuilder,

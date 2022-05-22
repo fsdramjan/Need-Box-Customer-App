@@ -15,15 +15,11 @@ class CategoryProductsController extends GetxController {
     try {
       isLoading.value = true;
       final res = await dio.get(baseUrl + 'category-products/$id');
-      print(res.data);
       final List<CategoryProductModel> data = res.data['products']['data']
           .map((json) => CategoryProductModel.fromJson(json))
           .toList()
           .cast<CategoryProductModel>();
       if (res.statusCode == 200) {
-        print(data.length);
-        categoryProductList.clear();
-
         Get.to(CategoryProductPage(
           categoryName: categoryName,
           id: id,

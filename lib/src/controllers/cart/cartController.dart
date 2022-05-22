@@ -11,7 +11,7 @@ class CartController extends GetxController {
 
   var subTotalAmount = RxInt(0);
   var totalsAmount = RxInt(0);
-  var shippingFee = RxInt(0);
+  // var shippingFee = RxInt(0);
 
   int? get cartCount => cartItem.length;
   void removeCartItem(
@@ -22,9 +22,8 @@ class CartController extends GetxController {
 
     subTotalAmount.value = subTotalAmount.value -
         ((cartProducts.proNewprice!.toInt()) * cartProducts.quantity.toInt());
-    shippingsFee();
 
-    totalsAmount.value = subTotalAmount.value + shippingFee.value;
+    totalsAmount.value = subTotalAmount.value;
     // CartHiveDBController().manageCart(item: cartProducts);
     snackBarWidget(
       title: 'Succeed',
@@ -51,7 +50,7 @@ class CartController extends GetxController {
         productColor: cartProducts.productColor,
         stock: cartProducts.stock,
       );
-      totalsAmount.value = subTotalAmount.value + shippingFee.value;
+      totalsAmount.value = subTotalAmount.value;
       // updateQty(cartProducts.id, cartProducts.quantity);
       // CartHiveDBController().manageCart(item: cartProducts);
 
@@ -83,8 +82,8 @@ class CartController extends GetxController {
     totalQuantity.value = totalQuantity.value + quantityItems.value;
     subTotalAmount.value = subTotalAmount.value +
         ((cartProducts.proNewprice!.toInt()) * quantityItems.value);
-    shippingsFee();
-    totalsAmount.value = subTotalAmount.value + shippingFee.value;
+
+    totalsAmount.value = subTotalAmount.value;
     // totalAmountInt = totalAmountInt + totalsAmount.value;
     // CartHiveDBController().manageCart(item: cartProducts);
     print('Total Amount : $totalsAmount');
@@ -113,7 +112,6 @@ class CartController extends GetxController {
     // totalsAmount.value = subTotalAmount.value + 25;
     // addItemInCart(productResponse);
     _subTotalAmount();
-    shippingsFee();
 
     _totalAmountGet();
     // CartHiveDBController().manageCart(item: productResponse);
@@ -125,7 +123,6 @@ class CartController extends GetxController {
       print(productResponse);
       // addItemInCart(productResponse);
       _subTotalAmount();
-      shippingsFee();
 
       _totalAmountGet();
       // CartHiveDBController().manageCart(item: productResponse);
@@ -141,16 +138,16 @@ class CartController extends GetxController {
             previous + current.proNewprice!.toInt() * current.quantity.value);
   }
 
-  shippingsFee() {
-    shippingFee.value = subTotalAmount.value < 700
-        ? 25
-        : subTotalAmount.value < 1400
-            ? 15
-            : subTotalAmount.value < 500000
-                ? 0
-                : 0;
-    print('shipping Fee : ${shippingFee.value}');
-  }
+  // shippingsFee() {
+  //   shippingFee.value = subTotalAmount.value < 700
+  //       ? 25
+  //       : subTotalAmount.value < 1400
+  //           ? 15
+  //           : subTotalAmount.value < 500000
+  //               ? 0
+  //               : 0;
+  //   print('shipping Fee : ${shippingFee.value}');
+  // }
 
   bool checkCartExist({required int? id}) {
     final cart = cartItem.singleWhereOrNull(
@@ -166,19 +163,18 @@ class CartController extends GetxController {
     // var _totalAmount = RxDouble(0);
     for (var i = 0; i < cartItem.length; i++) {
       //
-      totalsAmount.value = subTotalAmount.value + shippingFee.value;
+      totalsAmount.value = subTotalAmount.value;
     }
   }
 
-  detailsPageTotalAmount() {
+  detailsPageTotalAmount({required shippingFee}) {
     // var _totalAmount = RxDouble(0);
 
     totalsAmount.value = cartItem.fold(
         0,
-        (previous, current) =>
-            previous +
+        (previous, current) => previous +
             current.proNewprice!.toInt() * current.quantity.value +
-            shippingFee.value);
+            shippingFee as int);
   }
 
   void initQuantity() {

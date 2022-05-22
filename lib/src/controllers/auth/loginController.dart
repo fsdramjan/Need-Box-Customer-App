@@ -62,12 +62,18 @@ class LoginController extends GetxController {
       }
     } catch (e) {
       print(e);
+      snackBarWidget(
+        title: 'Opps!',
+        message: 'Something went wrong!',
+        isRed: true,
+      );
     }
   }
-    userSignOut() async {
+
+  userSignOut() async {
     final sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.remove('accessToken');
-  
+
     Get.offAll(LoginPage());
   }
 }

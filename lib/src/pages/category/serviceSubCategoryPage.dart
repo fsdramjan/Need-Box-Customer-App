@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:needbox_customer/src/animations/emptyAnimation.dart';
 import 'package:needbox_customer/src/animations/loadingAnimation.dart';
 import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
-import 'package:needbox_customer/src/controllers/category/serviceCategoryController.dart';
+import 'package:needbox_customer/src/controllers/services/serviceCategoryController.dart';
 import '../../Widgets/button/customBackButton.dart';
 import '../../Widgets/cardWidget/customCardWidget.dart';
 import '../../configs/appUtils.dart';

@@ -27,7 +27,7 @@ class DetailsApiService {
     if (response.statusCode == 200) {
       var dataResponse = jsonDecode(response.body);
 
-      var shop = ShopDetailsModel.fromJson(dataResponse);
+      var shop = ShopDetailsModel.fromJson(dataResponse['vandorshop']);
 
       return shop;
     } else {

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:needbox_customer/src/Widgets/cardWidget/customCardWidget.dart';
-import 'package:needbox_customer/src/widgets/snackBar/customSnackbarWidget.dart';
 import 'package:needbox_customer/src/widgets/textWidget/kText.dart';
 import '../../configs/appColors.dart';
 import '../../configs/appUtils.dart';

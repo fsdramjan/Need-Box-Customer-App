@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_statements
+// ignore_for_file: unnecessary_statements, must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,18 +8,21 @@ import 'package:needbox_customer/src/animations/loadingAnimation.dart';
 import 'package:needbox_customer/src/configs/appColors.dart';
 import 'package:needbox_customer/src/configs/appUtils.dart';
 import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
+import 'package:needbox_customer/src/pages/loginSignup/loginPage.dart';
 import 'package:needbox_customer/src/pages/orders/orderCheckoutPage.dart';
 import 'package:needbox_customer/src/pages/products/productDetailsPage.dart';
+import 'package:needbox_customer/src/widgets/appBar/customTitleAppBar.dart';
 import 'package:needbox_customer/src/widgets/button/customPrimaryButton.dart';
 import 'package:needbox_customer/src/widgets/cachedNetworkImage/cachedNetworkImageWidget.dart';
 import 'package:needbox_customer/src/widgets/cardWidget/customCardWidget.dart';
 import 'package:needbox_customer/src/widgets/textWidget/kText.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../models/cart/cartModels.dart';
 import '../../models/userAccount/userProfileDetailsModel.dart';
 
 class CartPage extends StatefulWidget {
   final bool? isBackEnable;
-
+  String? userAccessToken;
   CartPage({
     required this.isBackEnable,
   });
@@ -29,8 +32,30 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> with BaseController {
   @override
+  void initState() {
+    getValidationData();
+
+    print(widget.userAccessToken);
+
+    super.initState();
+  }
+
+  Future getValidationData() async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+    var obtainedToken = sharedPreferences.getString('accessToken');
+
+    setState(() {
+      widget.userAccessToken = obtainedToken;
+
+      print('User Access Token: ${widget.userAccessToken}');
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar:
+          widget.isBackEnable == true ? backAndTitleAppBar(title: '') : null,
       body: SafeArea(
         child: Obx(
           () => cartC.cartItem.length == 0
@@ -262,31 +287,31 @@ class _CartPageState extends State<CartPage> with BaseController {
                   ),
                 ),
               ),
-              Padding(
-                padding: paddingH20,
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: grey.shade300),
-                  ),
-                  child: Padding(
-                    padding: paddingH10V10,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        KText(
-                          text: 'Shipping Fee',
-                          fontSize: 12,
-                        ),
-                        KText(
-                          text: cartC.shippingFee.toString(),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: paddingH20,
+              //   child: Container(
+              //     decoration: BoxDecoration(
+              //       border: Border.all(color: grey.shade300),
+              //     ),
+              //     child: Padding(
+              //       padding: paddingH10V10,
+              //       child: Row(
+              //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //         children: [
+              //           KText(
+              //             text: 'Shipping Fee',
+              //             fontSize: 12,
+              //           ),
+              //           KText(
+              //             text: cartC.shippingFee.toString(),
+              //             fontWeight: FontWeight.bold,
+              //             fontSize: 14,
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
               Padding(
                 padding: paddingH20,
                 child: Container(
@@ -313,33 +338,51 @@ class _CartPageState extends State<CartPage> with BaseController {
                 ),
               ),
               sizeH20,
-              FutureBuilder<UserProfileDetailsModel>(
-                future: userProfileDetailsC.getProfileDetails(),
-                builder: ((context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return LoadingAnimation(
-                      height: 50,
-                      width: 50,
-                    );
-                  }
-
-                  final item = snapshot.data!;
-
-                  return GestureDetector(
-                    onTap: () => Get.to(OrderCheckOutPage(userInfo: item,)),
-                    child: Padding(
-                      padding: paddingH10,
-                      child: customPrimaryButton(
-                        color: orangeO50,
-                        height: 40,
-                        title: 'Place Order',
-                        fontWeight: FontWeight.w600,
-                        child: KText(text: ''),
+              widget.userAccessToken == null
+                  ? GestureDetector(
+                      onTap: () => Get.to(LoginPage(
+                        isBackEnable: true,
+                      )),
+                      child: Padding(
+                        padding: paddingH10,
+                        child: customPrimaryButton(
+                          color: orangeO50,
+                          height: 40,
+                          title: 'Place Order',
+                          fontWeight: FontWeight.w600,
+                          child: KText(text: ''),
+                        ),
                       ),
+                    )
+                  : FutureBuilder<UserProfileDetailsModel>(
+                      future: userProfileDetailsC.getProfileDetails(),
+                      builder: ((context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return LoadingAnimation(
+                            height: 50,
+                            width: 50,
+                          );
+                        }
+
+                        final item = snapshot.data!;
+
+                        return GestureDetector(
+                          onTap: () => Get.to(OrderCheckOutPage(
+                            userInfo: item,
+                          )),
+                          child: Padding(
+                            padding: paddingH10,
+                            child: customPrimaryButton(
+                              color: orangeO50,
+                              height: 40,
+                              title: 'Place Order',
+                              fontWeight: FontWeight.w600,
+                              child: KText(text: ''),
+                            ),
+                          ),
+                        );
+                      }),
                     ),
-                  );
-                }),
-              ),
               sizeH20,
             ],
           ),

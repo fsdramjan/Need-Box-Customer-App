@@ -13,6 +13,8 @@ import '../../dummyData/allProductAndCategory.dart';
 import '../../widgets/formField/searchFormField.dart';
 
 class CampaignProductPage extends StatelessWidget {
+  final searchTextC = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     // Size size = MediaQuery.of(context).size / 100;
@@ -30,7 +32,7 @@ class CampaignProductPage extends StatelessWidget {
               children: [
                 customBackButton(),
                 Expanded(
-                  child: searchFormField(),
+                  child: searchFormField(controller: searchTextC),
                 ),
               ],
             ),

@@ -7,6 +7,3 @@ final imageBaseUrl = 'https://needboxbd.xyz/';
 final dio = Dio();
 
  
-// SharedPreferences Object
-
- var   accessToken ='';

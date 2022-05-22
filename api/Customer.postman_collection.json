@@ -62,7 +62,7 @@
 			"request": {
 				"method": "POST",
 				"header": [],
-				"body": { 
+				"body": {
 					"mode": "formdata",
 					"formdata": [
 						{
@@ -636,6 +636,89 @@
 						"customer",
 						"order",
 						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Shipping Address",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvY3VzdG9tZXJcL2xvZ2luIiwiaWF0IjoxNjUyMzMyNjY3LCJleHAiOjE3MzExNzI2NjcsIm5iZiI6MTY1MjMzMjY2NywianRpIjoiVTA4WHlmMEZ5ZWVwNUZVRyIsInN1YiI6OTAsInBydiI6IjhiNDIyZTZmNjU3OTMyYjhhZWJjYjFiZjFlMzU2ZGQ3NmEzNjViZjIifQ.dXZdN5sT5IxG18zj6a3aY4NPAhw9V2QC5fTyozI9Jwg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Rasel Islam Zadu",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "01742892725",
+							"type": "text"
+						},
+						{
+							"key": "district",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "area",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "stateaddress",
+							"value": "4/B",
+							"type": "text"
+						},
+						{
+							"key": "houseaddress",
+							"value": "33/B",
+							"type": "text"
+						},
+						{
+							"key": "fulladdress",
+							"value": "Zigatola, Dhanmondi",
+							"type": "text"
+						},
+						{
+							"key": "zipcode",
+							"value": "1215",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/customer/shipping-address",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"shipping-address"
 					]
 				}
 			},

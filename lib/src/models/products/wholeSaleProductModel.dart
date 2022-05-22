@@ -121,7 +121,7 @@ class Productprice {
   int? productId;
   int? minQty;
   int? maxQty;
-  String? price;
+  var price;
   String? createdAt;
   String? updatedAt;
 

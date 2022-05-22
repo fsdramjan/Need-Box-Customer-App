@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
@@ -9,7 +11,9 @@ import 'package:needbox_customer/src/pages/brands/brandListPage.dart';
 import 'package:needbox_customer/src/pages/campaign/campaignListPage.dart';
 import 'package:needbox_customer/src/pages/category/allCategoryPage.dart';
 import 'package:needbox_customer/src/pages/category/allServicecategoryPage.dart';
+import 'package:needbox_customer/src/pages/customerPost/customerPostPage.dart';
 import 'package:needbox_customer/src/pages/home/bottomAppBar.dart';
+import 'package:needbox_customer/src/pages/loginSignup/loginPage.dart';
 import 'package:needbox_customer/src/pages/products/specialOfferProductPage.dart';
 import 'package:needbox_customer/src/pages/products/wholesaleProductPage.dart';
 import 'package:needbox_customer/src/pages/shop/shopListPage.dart';
@@ -17,12 +21,40 @@ import 'package:needbox_customer/src/pages/userAccount/myAccountPage.dart';
 import 'package:needbox_customer/src/widgets/button/customBackButton.dart';
 import 'package:needbox_customer/src/widgets/cardWidget/customCardWidget.dart';
 import 'package:needbox_customer/src/widgets/textWidget/kText.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../animations/loadingAnimation.dart';
 import '../../models/userAccount/userProfileDetailsModel.dart';
 
-class SidebarComponent extends StatelessWidget with BaseController {
+class SidebarComponent extends StatefulWidget with BaseController {
+  String? userAccessToken;
+  @override
+  State<SidebarComponent> createState() => _SidebarComponentState();
+}
+
+class _SidebarComponentState extends State<SidebarComponent>
+    with BaseController {
+  @override
+  void initState() {
+    getValidationData();
+
+    print(widget.userAccessToken);
+
+    super.initState();
+  }
+
+  Future getValidationData() async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+    var obtainedToken = sharedPreferences.getString('accessToken');
+
+    setState(() {
+      widget.userAccessToken = obtainedToken;
+
+      print('User Access Token: ${widget.userAccessToken}');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -36,68 +68,118 @@ class SidebarComponent extends StatelessWidget with BaseController {
                   padding: paddingH10,
                   child: Column(
                     children: [
-                      FutureBuilder<UserProfileDetailsModel>(
-                          future: userProfileDetailsC.getProfileDetails(),
-                          builder: (context, snapshot) {
-                            switch (snapshot.connectionState) {
-                              case ConnectionState.none:
-                                break;
-                              case ConnectionState.waiting:
-                                return Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: LoadingAnimation(
-                                    height: 50,
-                                  ),
-                                );
-                              case ConnectionState.active:
-                                break;
-                              case ConnectionState.done:
-                                final item = snapshot.data!;
-                                return CustomCardWidget(
-                                  child: Padding(
-                                    padding: paddingH10V10,
-                                    child: Row(
-                                      children: [
-                                        CircleAvatar(
-                                          radius: 20,
-                                          backgroundColor: white,
-                                          backgroundImage: NetworkImage(
-                                            imageBaseUrl +
-                                                item.image.toString(),
-                                          ),
-                                        ),
-                                        sizeW10,
-                                        GestureDetector(
-                                          onTap: () => Get.to(MyAccountPage()),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              KText(
-                                                text: item.fullName.toString(),
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                              KText(
-                                                text: 'View Profile',
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w600,
-                                                color: black54,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Spacer(),
-                                        customBackButton(iconData: Icons.close),
-                                      ],
+                      widget.userAccessToken == null
+                          ? CustomCardWidget(
+                              child: Padding(
+                                padding: paddingH10V10,
+                                child: Row(
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 20,
+                                      backgroundColor: white,
+                                      backgroundImage: AssetImage(
+                                        'assets/images/avatar.png',
+                                      ),
                                     ),
-                                  ),
-                                );
-                            }
-                            return Container();
-                          }),
+                                    sizeW10,
+                                    GestureDetector(
+                                      onTap: () =>
+                                          widget.userAccessToken == null
+                                              ? Get.to(LoginPage(
+                                                  isBackEnable: true,
+                                                ))
+                                              : Get.to(MyAccountPage()),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          KText(
+                                            text: 'Login',
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                          KText(
+                                            text: 'Login to get access',
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w600,
+                                            color: black54,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Spacer(),
+                                    customBackButton(iconData: Icons.close),
+                                  ],
+                                ),
+                              ),
+                            )
+                          : FutureBuilder<UserProfileDetailsModel>(
+                              future: userProfileDetailsC.getProfileDetails(),
+                              builder: (context, snapshot) {
+                                switch (snapshot.connectionState) {
+                                  case ConnectionState.none:
+                                    break;
+                                  case ConnectionState.waiting:
+                                    return Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: LoadingAnimation(
+                                        height: 50,
+                                      ),
+                                    );
+                                  case ConnectionState.active:
+                                    break;
+                                  case ConnectionState.done:
+                                    final item = snapshot.data!;
+                                    return CustomCardWidget(
+                                      child: Padding(
+                                        padding: paddingH10V10,
+                                        child: Row(
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 20,
+                                              backgroundColor: white,
+                                              backgroundImage: NetworkImage(
+                                                imageBaseUrl +
+                                                    item.image.toString(),
+                                              ),
+                                            ),
+                                            sizeW10,
+                                            GestureDetector(
+                                              onTap: () =>
+                                                  Get.to(MyAccountPage()),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  KText(
+                                                    text: item.fullName
+                                                        .toString(),
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                  KText(
+                                                    text: 'View Profile',
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: black54,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Spacer(),
+                                            customBackButton(
+                                                iconData: Icons.close),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                }
+                                return Container();
+                              }),
 
                       // sizeH20,
                       Container(
@@ -148,23 +230,31 @@ class SidebarComponent extends StatelessWidget with BaseController {
                               title: 'Brands',
                             ),
                             _buttonWithOutArrow(
-                              onTap: (() => Get.offAll(CustomBottomAppBar())),
+                              onTap: (() => Get.to(CustomerPostPage())),
                               icons: Ionicons.create_outline,
                               title: 'Customer Post',
                             ),
-                            _buttonWithOutArrow(
-                              onTap: (() => Get.offAll(CustomBottomAppBar())),
-                              icons: Ionicons.paper_plane_outline,
-                              title: 'Contact Us',
-                            ),
-                            sizeH10,
-                            Divider(),
-                            sizeH10,
-                            _buttonWithOutArrow(
-                              onTap: () => userLoginC.userSignOut(),
-                              icons: Ionicons.log_out_outline,
-                              title: 'Logout',
-                            ),
+                            // _buttonWithOutArrow(
+                            //   onTap: (() => Get.offAll(CustomBottomAppBar())),
+                            //   icons: Ionicons.paper_plane_outline,
+                            //   title: 'Contact Us',
+                            // ),
+                            widget.userAccessToken == null
+                                ? Container()
+                                : sizeH10,
+                            widget.userAccessToken == null
+                                ? Container()
+                                : Divider(),
+                            widget.userAccessToken == null
+                                ? Container()
+                                : sizeH10,
+                            widget.userAccessToken == null
+                                ? Container()
+                                : _buttonWithOutArrow(
+                                    onTap: () => userLoginC.userSignOut(),
+                                    icons: Ionicons.log_out_outline,
+                                    title: 'Logout',
+                                  ),
                           ],
                         ),
                       ),

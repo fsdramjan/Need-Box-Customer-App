@@ -9,7 +9,7 @@ customFormField({
   required String hintText,
   required String titleText,
   Color? errorBorderColor,
-  TextInputType? keyboardType,
+  TextInputType? keyboardType, 
   required TextEditingController controller,
   void Function(String)? onChanged,
   bool? isStarEnable,

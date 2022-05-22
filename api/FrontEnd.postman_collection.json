@@ -617,6 +617,168 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Service Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Md. Zadu Mia",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "01766950986",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "zadumia441@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "Dhaka",
+							"type": "text"
+						},
+						{
+							"key": "service_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/customer/service/request",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"service",
+						"request"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customer Post Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Md. Zadu Mia",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "01766950986",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "zadumia441@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "Dhaka",
+							"type": "text"
+						},
+						{
+							"key": "post_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/customer/post/request",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"post",
+						"request"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Districts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/districts",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"districts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Area-Shipping Charge",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "district_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/area/1",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"area",
+						"1"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

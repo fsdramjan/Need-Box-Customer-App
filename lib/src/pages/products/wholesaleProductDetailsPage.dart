@@ -551,7 +551,7 @@ class _WholesaleProductDetailsPageState
                                       ? null
                                       : item.productoldprice,
                                   discount: 0,
-                                  shippingfee: cartC.shippingFee.toString(),
+                                  shippingfee: '',
                                   productColor: selectedColorName.isEmpty
                                       ? ''
                                       : selectedColorName,

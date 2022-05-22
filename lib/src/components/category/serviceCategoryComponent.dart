@@ -10,58 +10,54 @@ import '../../widgets/textWidget/kText.dart';
 class ServiceComponent extends StatelessWidget with BaseController {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      shrinkWrap: true,
-      primary: false,
-      children: [
-        FittedBox(
-          child: Container(
-            height: 35,
-            // color: red,
-            child: ListView.builder(
-              shrinkWrap: true,
-              primary: false,
-              itemCount: serviceCategoryC.serviceCategoryList.length,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: ((context, index) {
-                final item = serviceCategoryC.serviceCategoryList[index];
-                return serviceCategoryC.isLoading.value == true
-                    ? LoadingAnimation()
-                    : GestureDetector(
-                        onTap: () {
-                          serviceCategoryC.serviceSubCategoryList.clear();
-                          serviceCategoryC.getAllServiceSubCategory(item.slug);
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 5),
-                          child: Column(
-                            children: [
-                              CircleAvatar(
-                                radius: 11,
-                                backgroundColor: white,
-                                foregroundColor: grey,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(50),
-                                  child: CachedNetworkImageWidget(
-                                    imageUrl: item.image.toString(),
-                                  ),
-                                ),
+    return FittedBox(
+       
+      child: Container(
+        height: 35,
+           
+        // color: red,
+        child: ListView.builder(
+          shrinkWrap: true,
+          primary: false,
+          itemCount: serviceCategoryC.serviceCategoryList.length,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: ((context, index) {
+            final item = serviceCategoryC.serviceCategoryList[index];
+            return serviceCategoryC.isLoading.value == true
+                ? LoadingAnimation()
+                : GestureDetector(
+                    onTap: () {
+                      serviceCategoryC.serviceSubCategoryList.clear();
+                      serviceCategoryC.getAllServiceSubCategory(item.slug);
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 5),
+                      child: Column(
+                        children: [
+                          CircleAvatar(
+                            radius: 11,
+                            backgroundColor: white,
+                            foregroundColor: grey,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(50),
+                              child: CachedNetworkImageWidget(
+                                imageUrl: item.image.toString(),
                               ),
-                              sizeH5,
-                              KText(
-                                text: item.scatename.toString(),
-                                fontWeight: FontWeight.w600,
-                                fontSize: 5,
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
-                      );
-              }),
-            ),
-          ),
+                          sizeH5,
+                          KText(
+                            text: item.scatename.toString(),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 5,
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+          }),
         ),
-      ],
+      ),
     );
   }
 

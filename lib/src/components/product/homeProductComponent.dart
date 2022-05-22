@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
+import 'package:needbox_customer/src/pages/products/wholesaleProductPage.dart';
 
 import '../../animations/loadingAnimation.dart';
 import '../../configs/appColors.dart';
@@ -56,13 +57,17 @@ class HomeProductComponent extends StatelessWidget with BaseController {
                       discount: item.productdiscount,
                       disprice: item.productnewprice,
                       oldprice: item.productoldprice,
-                      onTap: () => Get.to(
-                        ProductDetailsPage(
-                          id: item.id,
-                          proName: item.productname,
-                          image: item.proImage!.image.toString(),
-                        ),
-                      ),
+                      onTap: () => item.productnewprice == null
+                          ? Get.to(
+                              WholesaleProductPage(),
+                            )
+                          : Get.to(
+                              ProductDetailsPage(
+                                id: item.id,
+                                proName: item.productname,
+                                image: item.proImage!.image.toString(),
+                              ),
+                            ),
                       productname: item.productname.toString(),
                       imageUrl: item.proImage == null
                           ? 'public/uploads/logo/1641972847-270257733_895471181169475_2932116256903854071_n.png'

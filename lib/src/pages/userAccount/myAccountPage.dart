@@ -91,6 +91,13 @@ class MyAccountPage extends StatelessWidget with BaseController {
                               title: 'My Point',
                               contentTitle: item.mypoint.toString(),
                             ),
+                            customListTile(
+                              height: 50,
+                              title: 'Referral Id',
+                              contentTitle: item.referralId == null
+                                  ? '-'
+                                  : item.referralId.toString(),
+                            ),
                           ],
                         ),
                       ),

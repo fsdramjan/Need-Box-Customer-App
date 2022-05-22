@@ -1,5 +1,8 @@
 import 'package:get/get.dart';
 import 'package:needbox_customer/src/controllers/appLogo/appLogoController.dart';
+import 'package:needbox_customer/src/controllers/area/areaController.dart';
+import 'package:needbox_customer/src/controllers/area/districtsController.dart';
+import 'package:needbox_customer/src/controllers/area/shippingAddressControrller.dart';
 import 'package:needbox_customer/src/controllers/auth/loginController.dart';
 import 'package:needbox_customer/src/controllers/auth/registerController.dart';
 import 'package:needbox_customer/src/controllers/auth/verifyAccountController.dart';
@@ -9,8 +12,10 @@ import 'package:needbox_customer/src/controllers/campaign/campaignListController
 import 'package:needbox_customer/src/controllers/cart/cartController.dart';
 import 'package:needbox_customer/src/controllers/category/categoryListController.dart';
 import 'package:needbox_customer/src/controllers/category/categoryProductController.dart';
-import 'package:needbox_customer/src/controllers/category/serviceCategoryController.dart';
-import 'package:needbox_customer/src/controllers/category/serviceCategoryDataController.dart';
+import 'package:needbox_customer/src/controllers/customerPost/applyNowController.dart';
+import 'package:needbox_customer/src/controllers/services/bookNowServiceController.dart';
+import 'package:needbox_customer/src/controllers/services/serviceCategoryController.dart';
+import 'package:needbox_customer/src/controllers/services/serviceCategoryDataController.dart';
 import 'package:needbox_customer/src/controllers/favoirteProduct/favoriteProductController.dart';
 import 'package:needbox_customer/src/controllers/orders/orderListController.dart';
 import 'package:needbox_customer/src/controllers/orders/orderSaveController.dart';
@@ -18,6 +23,7 @@ import 'package:needbox_customer/src/controllers/orders/orderTrackController.dar
 import 'package:needbox_customer/src/controllers/products/allProductsController.dart';
 import 'package:needbox_customer/src/controllers/products/productDetailsController.dart';
 import 'package:needbox_customer/src/controllers/products/specialOfferProductController.dart';
+import 'package:needbox_customer/src/controllers/search/searchProductController.dart';
 import 'package:needbox_customer/src/controllers/shop/shopDetailsController.dart';
 import 'package:needbox_customer/src/controllers/shop/shopListController.dart';
 import 'package:needbox_customer/src/controllers/shop/shopProductController.dart';
@@ -25,13 +31,16 @@ import 'package:needbox_customer/src/controllers/slider/sliderController.dart';
 import 'package:needbox_customer/src/controllers/userAccount/editProfileController.dart';
 import 'package:needbox_customer/src/controllers/userAccount/userProfileDetailsController.dart';
 
-import '../category/serviceDetailsDataController.dart';
+import '../services/serviceDetailsDataController.dart';
+import '../customerPost/customerPostDetailsController.dart';
+import '../customerPost/customerPostListController.dart';
 import '../products/wholesaleProductController.dart';
 
 class BaseController {
   final appLogoC = Get.put(AppLogoController());
   final sliderListC = Get.put(SliderController());
   final allProductListC = Get.put(AllProductsController());
+  final searchProductListC = Get.put(SearchProductController());
   final wholesaleProductC = Get.put(WholesaleProductController());
   final productDetailsC = Get.put(ProductDetailsController());
   final allCategoryC = Get.put(CategoryListController());
@@ -56,4 +65,12 @@ class BaseController {
   final orderTrackC = Get.put(OrderTrackController());
   final orderSaveC = Get.put(OrderSaveController());
   final cartC = Get.put(CartController());
+  final customerPostListC = Get.put(CustomerPostListController());
+  final customerPostDetailsC = Get.put(CustomerPostDetailsController());
+  final districtsListC = Get.put(DistrictsListController());
+  final areaListC = Get.put(AreaListController());
+  final bookServiceC = Get.put(BookNowServiceController());
+  final applyNowC = Get.put(ApplyNowController());
+  final shippingAddressC = Get.put(ShippingAddressController());
+  
 }

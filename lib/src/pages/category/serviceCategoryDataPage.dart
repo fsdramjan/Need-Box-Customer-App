@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:needbox_customer/src/animations/emptyAnimation.dart';
@@ -9,8 +11,13 @@ import 'package:needbox_customer/src/widgets/appBar/customTitleAppBar.dart';
 import 'package:needbox_customer/src/widgets/cachedNetworkImage/cachedNetworkImageWidget.dart';
 import 'package:needbox_customer/src/widgets/cardWidget/customCardWidget.dart';
 import 'package:needbox_customer/src/widgets/textWidget/kText.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ServiceCategoryDataPage extends StatelessWidget with BaseController {
+import '../../animations/loadingAnimation.dart';
+import '../../models/userAccount/userProfileDetailsModel.dart';
+
+class ServiceCategoryDataPage extends StatefulWidget with BaseController {
+  String? userAccessToken;
   final String title;
   final String slug;
 
@@ -18,10 +25,36 @@ class ServiceCategoryDataPage extends StatelessWidget with BaseController {
     required this.title,
     required this.slug,
   });
+
+  @override
+  State<ServiceCategoryDataPage> createState() =>
+      _ServiceCategoryDataPageState();
+}
+
+class _ServiceCategoryDataPageState extends State<ServiceCategoryDataPage>
+    with BaseController {
+  @override 
+  void initState() {
+    getValidationData();
+
+    super.initState();
+  }
+
+  Future getValidationData() async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+    var obtainedToken = sharedPreferences.getString('accessToken');
+
+    setState(() {
+      widget.userAccessToken = obtainedToken;
+
+      print('User Access Token: ${widget.userAccessToken}');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: backAndTitleAppBar(title: title),
+      appBar: backAndTitleAppBar(title: widget.title),
       body: Obx(
         () => serviceCategoryDataC.serviceCategoryData.length == 0
             ? EmptyAnimation()
@@ -78,41 +111,94 @@ class ServiceCategoryDataPage extends StatelessWidget with BaseController {
                                   ),
                                 ),
                                 Spacer(),
-                                GestureDetector(
-                                  onTap: () => Get.to(
-                                    ServiceDetailsDataPage(
-                                      title: item.title,
-                                      slug: item.slug,
-                                      id: item.id,
-                                    ),
-                                  ),
-                                  child: Padding(
-                                    padding: paddingH10,
-                                    child: Container(
-                                      height: 30,
-                                      decoration: BoxDecoration(
-                                        borderRadius: borderRadiusC10,
-                                        color: orangeO50,
-                                      ),
-                                      child: Center(
-                                        child: Padding(
-                                          padding: paddingH10,
-                                          child: KText(
-                                            text: 'View Details',
-                                            color: white,
-                                            fontSize: 12,
+                                widget.userAccessToken == null
+                                    ? GestureDetector(
+                                        onTap: () => Get.to(
+                                          ServiceDetailsDataPage(
+                                            title: item.title,
+                                            slug: item.slug,
+                                            id: item.id, userToken: widget.userAccessToken,
                                           ),
                                         ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                        child: Padding(
+                                          padding: paddingH10,
+                                          child: Container(
+                                            height: 30,
+                                            decoration: BoxDecoration(
+                                              borderRadius: borderRadiusC10,
+                                              color: orangeO50,
+                                            ),
+                                            child: Center(
+                                              child: Padding(
+                                                padding: paddingH10,
+                                                child: KText(
+                                                  text: 'View Details',
+                                                  color: white,
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    : FutureBuilder<UserProfileDetailsModel>(
+                                        future: userProfileDetailsC
+                                            .getProfileDetails(),
+                                        builder: (context, snapshot) {
+                                          switch (snapshot.connectionState) {
+                                            case ConnectionState.none:
+                                              break;
+                                            case ConnectionState.waiting:
+                                              return Padding(
+                                                padding: EdgeInsets.all(8.0),
+                                                child: LoadingAnimation(
+                                                  height: 50,
+                                                ),
+                                              );
+                                            case ConnectionState.active:
+                                              break;
+                                            case ConnectionState.done:
+                                              final items = snapshot.data!;
+                                              return GestureDetector(
+                                                onTap: () => Get.to(
+                                                  ServiceDetailsDataPage(
+                                                    title: item.title,
+                                                    slug: item.slug,
+                                                    id: item.id,
+                                                    profileInfo: items, userToken: widget.userAccessToken,
+                                                  ),
+                                                ),
+                                                child: Padding(
+                                                  padding: paddingH10,
+                                                  child: Container(
+                                                    height: 30,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          borderRadiusC10,
+                                                      color: orangeO50,
+                                                    ),
+                                                    child: Center(
+                                                      child: Padding(
+                                                        padding: paddingH10,
+                                                        child: KText(
+                                                          text: 'View Details',
+                                                          color: white,
+                                                          fontSize: 12,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                          }
+                                          return Container();
+                                        }),
                                 sizeH10,
                               ],
                             ),
                           );
                         }),
-                  )
+                  ),
                 ],
               ),
       ),

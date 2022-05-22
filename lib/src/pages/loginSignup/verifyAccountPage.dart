@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:needbox_customer/src/configs/appUtils.dart';
 import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
 import '../../Widgets/button/customBackButton.dart';
 import '../../components/appLogo/appLogoComponent.dart';
@@ -29,12 +30,12 @@ class _VerifyAccountPageState extends State<VerifyAccountPage>
     with BaseController {
   final otpVerification = TextEditingController();
 
-  @override
-  void initState() {
-    otpVerification.text =
-        widget.verifyPin == null ? '' : '${widget.verifyPin}'.toString();
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   otpVerification.text =
+  //       widget.verifyPin == null ? '' : '${widget.verifyPin}'.toString();
+  //   super.initState();
+  // }
 
   var isFormEmpty = false;
 
@@ -65,9 +66,23 @@ class _VerifyAccountPageState extends State<VerifyAccountPage>
                 onChanged: verifyAccountC.verifyPin,
                 titleText: 'Enter Pin Number',
               ),
+              SizedBox(height: 10),
 
+              Row(
+                children: [
+                  KText(
+                    text: 'This is your PIN Number',
+                  ),
+                  sizeW10,
+                  KText(
+                    text: widget.verifyPin.toString(),
+                    fontSize: 16,
+                    color: orangeO50,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ],
+              ),
               SizedBox(height: 30),
-
               GestureDetector(
                 onTap: () async {
                   setState(() {
