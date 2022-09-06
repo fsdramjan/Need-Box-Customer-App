@@ -1,7 +1,9 @@
 // ignore_for_file: unused_field, unused_element, unused_local_variable, unnecessary_null_comparison, unnecessary_statements, must_be_immutable
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:needbox_customer/src/animations/emptyAnimation.dart';
 import 'package:needbox_customer/src/animations/loadingAnimation.dart';
 import 'package:needbox_customer/src/components/home/brands/brandsComponents.dart';
 import 'package:needbox_customer/src/components/home/campaign/campaignComponents.dart';
@@ -16,10 +18,12 @@ import 'package:needbox_customer/src/components/home/slider/wholesaleSliderCompo
 import 'package:needbox_customer/src/configs/appUtils.dart';
 import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
 import 'package:needbox_customer/src/pages/search/productSearchPage.dart';
+import 'package:needbox_customer/src/widgets/dialog/homePopupDialog.dart';
 import 'package:needbox_customer/src/widgets/formField/searchFormField.dart';
 import '../../components/home/product/homeProductComponent.dart';
 import '../../components/home/slider/sliderComponent.dart';
 import '../../configs/appColors.dart';
+import '../../widgets/cachedNetworkImage/cachedNetworkImageWidget.dart';
 
 class HomePage extends StatefulWidget {
   final searchTextC = TextEditingController();
@@ -51,52 +55,6 @@ class _HomePageState extends State<HomePage> with BaseController {
     return BaseController().appLogoC.getAppLogo();
   }
 
-  Future<void> showPopupBanner() async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          content: Container(
-            height: 340,
-            width: Get.width,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                PopUpSliderComponent(),
-                IconButton(
-                  onPressed: () {
-                    setState(() {
-                      widget.isHidePopUps = true;
-
-                      print(widget.isHidePopUps);
-                      Get.back();
-                    });
-                  },
-                  icon: CircleAvatar(
-                    backgroundColor: red,
-                    child: Icon(
-                      Icons.close,
-                      color: white,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          // actions: <Widget>[
-          //   TextButton(
-          //     child: Text('Close'),
-          //     onPressed: () {
-          //       Navigator.of(context).pop();
-          //     },
-          //   ),
-          // ],
-        );
-      },
-    );
-  }
-
   @override
   void initState() {
     sliderListC.popUpBanner();
@@ -108,7 +66,18 @@ class _HomePageState extends State<HomePage> with BaseController {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         print(widget.isHidePopUps);
 
-        showPopupBanner();
+        Future.delayed(Duration(seconds: 1)).whenComplete(() {
+          if (sliderListC.popUpSliderList.isEmpty) {
+          } else {
+            showDialog<void>(
+              context: context,
+              // barrierDismissible: false,
+              builder: (BuildContext context) {
+                return homePopupDialog(context, widget.isHidePopUps);
+              },
+            );
+          }
+        });
       });
     }
 

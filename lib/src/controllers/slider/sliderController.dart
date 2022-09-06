@@ -91,7 +91,10 @@ class SliderController extends GetxController {
       if (res.statusCode == 200) {
         popUpSliderList.clear();
         popUpSliderList.addAll(data);
-        isLoading.value = false;
+        print(res.data);
+        Future.delayed(Duration(seconds: 1)).whenComplete(
+          () => isLoading.value = false,
+        );
       }
     } catch (e) {
       isLoading.value = false;
