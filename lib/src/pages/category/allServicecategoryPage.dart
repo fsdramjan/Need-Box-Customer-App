@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:needbox_customer/src/animations/emptyAnimation.dart';
 import 'package:needbox_customer/src/animations/loadingAnimation.dart';
@@ -9,6 +10,7 @@ import '../../Widgets/cardWidget/customCardWidget.dart';
 import '../../configs/appUtils.dart';
 import '../../widgets/cachedNetworkImage/cachedNetworkImageWidget.dart';
 import '../../widgets/textWidget/kText.dart';
+import 'serviceSubCategoryPage.dart';
 
 class AllServiceCategoryPage extends StatelessWidget with BaseController {
   @override
@@ -42,8 +44,12 @@ class AllServiceCategoryPage extends StatelessWidget with BaseController {
                       : GestureDetector(
                           onTap: () {
                             serviceCategoryC.serviceSubCategoryList.clear();
-                            serviceCategoryC
-                                .getAllServiceSubCategory(item.slug);
+
+                            Get.to(ServiceSubCategoryPage(
+                              categorySlug: item.slug,
+                            ));
+                            // serviceCategoryC
+                            //     .getAllServiceSubCategory(item.slug);
                           },
                           child: CustomCardWidget(
                             child: Container(

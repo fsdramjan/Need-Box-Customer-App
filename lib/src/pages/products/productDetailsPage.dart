@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:needbox_customer/src/animations/loadingAnimation.dart';
 import 'package:needbox_customer/src/configs/appColors.dart';
 import 'package:needbox_customer/src/configs/appUtils.dart';
 import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
 import 'package:needbox_customer/src/models/cart/cartModels.dart';
 import 'package:needbox_customer/src/pages/cart/cartPage.dart';
+import 'package:needbox_customer/src/pages/chats/chatDetailsPage.dart';
 import 'package:needbox_customer/src/pages/imageView/imageViewPage.dart';
 import 'package:needbox_customer/src/pages/shop/shopDetailsPage.dart';
 import 'package:needbox_customer/src/widgets/cardWidget/customGridProducts.dart';
@@ -188,8 +190,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>
                                                 vertical: 2,
                                               ),
                                               child: KText(
-                                                text: productbrand!.brandName ==
-                                                        null
+                                                text: productbrand == null
                                                     ? 'No Brand'
                                                     : productbrand.brandName
                                                         .toString(),
@@ -400,6 +401,22 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>
                               text: sellerInfo!.shopname.toString(),
                               fontWeight: FontWeight.w600,
                             ),
+
+                            trailing: TextButton.icon(
+                              onPressed: () => Get.to(
+                                ChatDetailsPage(
+                                  chatId: sellerInfo.id,
+                                  shopName: sellerInfo.shopname,
+                                  shopLogo: sellerInfo.shoplogo,
+                                ),
+                              ),
+                              icon: Icon(
+                                Ionicons.chatbox_ellipses_outline,
+                              ),
+                              label: KText(
+                                text: 'Chat with seller',
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -472,7 +489,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Container(
-                        height: 270,
+                        height: 230,
                         child: ListView.builder(
                             shrinkWrap: true,
                             primary: false,
@@ -563,7 +580,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>
                                   proNewprice: item.productnewprice,
                                   proOldprice: item.productoldprice,
                                   discount: 20,
-                                  shippingfee: '' ,
+                                  shippingfee: '',
                                   productColor: selectedColorName,
                                   quantity: cartC.quantityItems.toInt(),
                                   stock: item.productquantity,

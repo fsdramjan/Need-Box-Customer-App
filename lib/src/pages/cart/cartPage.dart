@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:needbox_customer/src/animations/emptyAnimation.dart';
-import 'package:needbox_customer/src/animations/loadingAnimation.dart';
 import 'package:needbox_customer/src/configs/appColors.dart';
 import 'package:needbox_customer/src/configs/appUtils.dart';
 import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
@@ -18,7 +17,6 @@ import 'package:needbox_customer/src/widgets/cardWidget/customCardWidget.dart';
 import 'package:needbox_customer/src/widgets/textWidget/kText.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../models/cart/cartModels.dart';
-import '../../models/userAccount/userProfileDetailsModel.dart';
 
 class CartPage extends StatefulWidget {
   final bool? isBackEnable;
@@ -354,21 +352,9 @@ class _CartPageState extends State<CartPage> with BaseController {
                         ),
                       ),
                     )
-                  : FutureBuilder<UserProfileDetailsModel>(
-                      future: userProfileDetailsC.getProfileDetails(),
-                      builder: ((context, snapshot) {
-                        if (!snapshot.hasData) {
-                          return LoadingAnimation(
-                            height: 50,
-                            width: 50,
-                          );
-                        }
-
-                        final item = snapshot.data!;
-
-                        return GestureDetector(
+                  :GestureDetector(
                           onTap: () => Get.to(OrderCheckOutPage(
-                            userInfo: item,
+                      
                           )),
                           child: Padding(
                             padding: paddingH10,
@@ -380,9 +366,7 @@ class _CartPageState extends State<CartPage> with BaseController {
                               child: KText(text: ''),
                             ),
                           ),
-                        );
-                      }),
-                    ),
+                        ),
               sizeH20,
             ],
           ),

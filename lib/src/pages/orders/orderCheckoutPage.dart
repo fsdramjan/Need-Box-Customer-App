@@ -1,54 +1,88 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:needbox_customer/src/animations/loadingAnimation.dart';
 import 'package:needbox_customer/src/configs/appColors.dart';
 import 'package:needbox_customer/src/configs/appUtils.dart';
 import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
+import 'package:needbox_customer/src/models/area/shippingAddressModel.dart';
 import 'package:needbox_customer/src/widgets/appBar/customTitleAppBar.dart';
 import 'package:needbox_customer/src/widgets/cardWidget/customCardWidget.dart';
 import 'package:needbox_customer/src/widgets/formField/customFormField.dart';
 import 'package:needbox_customer/src/widgets/snackBar/customSnackbarWidget.dart';
-import '../../models/userAccount/userProfileDetailsModel.dart';
 import '../../widgets/bottomSheet/customBottomSheet.dart';
 import '../../widgets/button/customPrimaryButton.dart';
 import '../../widgets/textWidget/kText.dart';
 
 class OrderCheckOutPage extends StatefulWidget {
-  final UserProfileDetailsModel userInfo;
+  late Rx<ShippingAddressModel> data;
 
-  OrderCheckOutPage({
-    required this.userInfo,
-  });
   @override
   State<OrderCheckOutPage> createState() => _OrderCheckOutPageState();
 }
 
 class _OrderCheckOutPageState extends State<OrderCheckOutPage>
     with BaseController {
-  final nameTextC = TextEditingController();
+  final name = TextEditingController();
 
-  final phoneTextC = TextEditingController();
+  final phone = TextEditingController();
 
-  final stateTextC = TextEditingController();
+  final stateAddress = TextEditingController();
 
-  final houseTextC = TextEditingController();
+  final houseAddress = TextEditingController();
 
   final zipTextC = TextEditingController();
 
-  final fullAddressTextC = TextEditingController();
+  final fullAddress = TextEditingController();
+  final zipCode = TextEditingController();
 
   var selectedPayment;
+
   @override
   void initState() {
-    nameTextC.text = widget.userInfo.fullName == null
-        ? ''
-        : widget.userInfo.fullName.toString();
-    phoneTextC.text = widget.userInfo.phoneNumber == null
-        ? ''
-        : widget.userInfo.phoneNumber.toString();
+    shippingAddressC.shipAddressData.refresh();
 
-    fullAddressTextC.text = widget.userInfo.address == null
+    shippingAddressC.getShipAddress();
+
+    widget.data = shippingAddressC.shipAddressData;
+
+    name.text = (widget.data.value.name == null ? '' : widget.data.value.name)!;
+    phone.text =
+        (widget.data.value.phone == null ? '' : widget.data.value.phone)!;
+    stateAddress.text = (widget.data.value.stateaddress == null
         ? ''
-        : widget.userInfo.address.toString();
+        : widget.data.value.stateaddress)!;
+    houseAddress.text = (widget.data.value.houseaddress == null
+        ? ''
+        : widget.data.value.houseaddress)!;
+    fullAddress.text = (widget.data.value.fulladdress == null
+        ? ''
+        : widget.data.value.fulladdress)!;
+    zipCode.text =
+        (widget.data.value.zipcode == null ? '' : widget.data.value.zipcode)!;
+
+    selectedDistricts = widget.data.value.district!.id == null
+        ? null
+        : widget.data.value.district!.id.toString();
+    selectedDistrictsName = widget.data.value.district!.name == null
+        ? null
+        : widget.data.value.district!.name.toString();
+    selectedArea = widget.data.value.area!.id == null
+        ? null
+        : widget.data.value.area!.id.toString();
+    selectedAreaName = widget.data.value.area!.area == null
+        ? null
+        : widget.data.value.area!.area.toString();
+    areaListC.getAllArea(districtsId: widget.data.value.district!.id);
+    shippingCharge = widget.data.value.area!.shippingfee == null
+        ? shippingCharge
+        : widget.data.value.area!.shippingfee!.toInt();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      cartC.detailsPageTotalAmount(shippingFee: shippingCharge);
+    });
+
     super.initState();
   }
 
@@ -107,7 +141,7 @@ class _OrderCheckOutPageState extends State<OrderCheckOutPage>
                               isStarEnable: true,
                               titleText: 'Full Name',
                               hintText: 'Enter full name',
-                              controller: nameTextC,
+                              controller: name,
                             ),
                             sizeH10,
                             customFormField(
@@ -115,7 +149,7 @@ class _OrderCheckOutPageState extends State<OrderCheckOutPage>
                               isStarEnable: true,
                               titleText: 'Phone Number',
                               hintText: 'Enter phone number',
-                              controller: phoneTextC,
+                              controller: phone,
                             ),
                             sizeH10,
                             districts(),
@@ -125,7 +159,7 @@ class _OrderCheckOutPageState extends State<OrderCheckOutPage>
                               isStarEnable: false,
                               titleText: 'State Address',
                               hintText: 'Enter state address',
-                              controller: stateTextC,
+                              controller: stateAddress,
                             ),
                             sizeH10,
                             customFormField(
@@ -133,7 +167,7 @@ class _OrderCheckOutPageState extends State<OrderCheckOutPage>
                               isStarEnable: false,
                               titleText: 'House Address',
                               hintText: 'Enter house address',
-                              controller: houseTextC,
+                              controller: houseAddress,
                             ),
                             sizeH10,
                             customFormField(
@@ -149,7 +183,7 @@ class _OrderCheckOutPageState extends State<OrderCheckOutPage>
                               isStarEnable: true,
                               titleText: 'Full Address',
                               hintText: 'Enter full address',
-                              controller: fullAddressTextC,
+                              controller: fullAddress,
                             ),
                           ],
                         ),
@@ -201,7 +235,7 @@ class _OrderCheckOutPageState extends State<OrderCheckOutPage>
                         ),
                         sizeW10,
                         KText(
-                          text: 'Cash On De livery',
+                          text: 'Cash On Delivery',
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                         ),
@@ -268,56 +302,48 @@ class _OrderCheckOutPageState extends State<OrderCheckOutPage>
               content: cartC.totalsAmount.toString(),
             ),
             sizeH20,
-            ListView.builder(
-              shrinkWrap: true,
-              primary: false,
-              itemCount: 1,
-              itemBuilder: ((context, index) {
-                final item = cartC.cartItem[index];
-                return GestureDetector(
-                  onTap: () {
-                    if (selectedPayment == null) {
-                      snackBarWidget(
-                        title: 'Opps!',
-                        message: 'Payment option is empty',
-                        isRed: true,
-                      );
-                    } else {
-                      if (selectedArea == '' ||
-                          selectedDistricts == '' ||
-                          shippingCharge == 0) {
-                        snackBarWidget(
-                          title: 'Opps!',
-                          message: 'Districts option is empty',
-                          isRed: true,
-                        );
-                      } else {
-                        orderSaveC.createNewOrder(
-                          item: item,
-                          paymentType: selectedPayment == 1 ? 'COD' : null,
-                          userInfo: widget.userInfo,
-                          totalPrice: cartC.totalsAmount.toString(),
-                          areaId: selectedArea,
-                          districsId: selectedDistricts,
-                          shippingCharge: shippingCharge,
-                        );
+            GestureDetector(
+              onTap: () {
+                if (selectedPayment == null) {
+                  snackBarWidget(
+                    title: 'Opps!',
+                    message: 'Payment option is empty',
+                    isRed: true,
+                  );
+                } else {
+                  if (selectedArea == '' ||
+                      selectedDistricts == '' ||
+                      shippingCharge == 0) {
+                    snackBarWidget(
+                      title: 'Opps!',
+                      message: 'Districts option is empty',
+                      isRed: true,
+                    );
+                  } else {
+                    orderSaveC.createNewOrder(
+                      item: cartC.cartItem,
+                      paymentType: selectedPayment == 1 ? 'COD' : null,
+                      userInfo: widget.data,
+                      totalPrice: cartC.totalsAmount.toString(),
+                      areaId: selectedArea,
+                      districsId: selectedDistricts,
+                      shippingCharge: shippingCharge,
+                    );
 
-                        cartC.cartItem.clear();
-                      }
-                    }
-                  },
-                  child: Padding(
-                    padding: paddingH10,
-                    child: customPrimaryButton(
-                      color: orangeO50,
-                      height: 40,
-                      title: 'Place Order',
-                      fontWeight: FontWeight.w600,
-                      child: KText(text: ''),
-                    ),
-                  ),
-                );
-              }),
+                    cartC.cartItem.clear();
+                  }
+                }
+              },
+              child: Padding(
+                padding: paddingH10,
+                child: customPrimaryButton(
+                  color: orangeO50,
+                  height: 40,
+                  title: 'Place Order',
+                  fontWeight: FontWeight.w600,
+                  child: KText(text: ''),
+                ),
+              ),
             ),
             sizeH20,
           ],
@@ -503,64 +529,67 @@ class _OrderCheckOutPageState extends State<OrderCheckOutPage>
                         height: 500 / 1.05,
                         width: Get.width,
                         child: Obx(
-                          () => areaListC.allArea.length == 0
-                              ? Center(
-                                  child: KText(
-                                    text: 'No Areas',
-                                    color: black54,
-                                  ),
-                                )
-                              : ListView.builder(
-                                  shrinkWrap: true,
-                                  primary: false,
-                                  itemCount: areaListC.allArea.length,
-                                  itemBuilder: (context, i) {
-                                    final items = areaListC.allArea[i];
-                                    return GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          selectedAreaName = items.area;
-                                          selectedArea = items.id.toString();
-                                          shippingCharge =
-                                              items.shippingfee as int;
-                                          cartC.detailsPageTotalAmount(
-                                              shippingFee: shippingCharge);
-                                          Get.back();
-                                        });
-                                        print(selectedAreaName);
-                                        print(selectedArea);
-                                        print(shippingCharge);
-                                      },
-                                      child: Padding(
-                                        padding:
-                                            EdgeInsets.symmetric(vertical: 3),
-                                        child: Container(
-                                          height: 40,
-                                          width: Get.width,
-                                          alignment: Alignment.centerLeft,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                            color: selectedAreaName ==
-                                                    items.area.toString()
-                                                ? orangeO50
-                                                : white,
-                                          ),
+                          () => areaListC.isLoading.value == true
+                              ? LoadingAnimation()
+                              : areaListC.allArea.isEmpty
+                                  ? Center(
+                                      child: KText(
+                                        text: 'No Areas',
+                                        color: black54,
+                                      ),
+                                    )
+                                  : ListView.builder(
+                                      shrinkWrap: true,
+                                      primary: false,
+                                      itemCount: areaListC.allArea.length,
+                                      itemBuilder: (context, i) {
+                                        final items = areaListC.allArea[i];
+                                        return GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              selectedAreaName = items.area;
+                                              selectedArea =
+                                                  items.id.toString();
+                                              shippingCharge =
+                                                  items.shippingfee as int;
+                                              cartC.detailsPageTotalAmount(
+                                                  shippingFee: shippingCharge);
+                                              Get.back();
+                                            });
+                                            print(selectedAreaName);
+                                            print(selectedArea);
+                                            print(shippingCharge);
+                                          },
                                           child: Padding(
-                                            padding: paddingH10,
-                                            child: KText(
-                                              text: items.area.toString(),
-                                              fontSize: 16,
-                                              color: selectedAreaName ==
-                                                      items.area.toString()
-                                                  ? white
-                                                  : black,
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 3),
+                                            child: Container(
+                                              height: 40,
+                                              width: Get.width,
+                                              alignment: Alignment.centerLeft,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                color: selectedAreaName ==
+                                                        items.area.toString()
+                                                    ? orangeO50
+                                                    : white,
+                                              ),
+                                              child: Padding(
+                                                padding: paddingH10,
+                                                child: KText(
+                                                  text: items.area.toString(),
+                                                  fontSize: 16,
+                                                  color: selectedAreaName ==
+                                                          items.area.toString()
+                                                      ? white
+                                                      : black,
+                                                ),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ),
-                                    );
-                                  }),
+                                        );
+                                      }),
                         ),
                       ),
                     ),

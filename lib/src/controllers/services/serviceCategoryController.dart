@@ -3,13 +3,13 @@ import 'package:needbox_customer/src/configs/appConfigs.dart';
 import 'package:needbox_customer/src/models/category/serviceCategoryModel.dart';
 
 import '../../models/category/serviceSubCategoryModel.dart';
-import '../../pages/category/serviceSubCategoryPage.dart';
 
 class ServiceCategoryController extends GetxController {
   final serviceCategoryList = RxList<ServiceCategoryModel>();
   final serviceSubCategoryList = RxList<ServiceSubCategoryModel>();
   //
   final isLoading = RxBool(false);
+  final isSubLoading = RxBool(false);
   getAllServiceCategory() async {
     try {
       isLoading.value = true;
@@ -31,7 +31,7 @@ class ServiceCategoryController extends GetxController {
 
   getAllServiceSubCategory(categorySlug) async {
     try {
-      // isLoading.value = true;
+      isSubLoading.value = true;
       final res = await dio.get(baseUrl + 'service/subcategory/$categorySlug');
 
       final List<ServiceSubCategoryModel> data = res
@@ -41,13 +41,11 @@ class ServiceCategoryController extends GetxController {
           .cast<ServiceSubCategoryModel>();
       if (res.statusCode == 200) {
         serviceSubCategoryList.clear();
-        // isLoading.value = false;
 
         serviceSubCategoryList.addAll(data);
 
-        Get.to(
-          ServiceSubCategoryPage(categorySlug: categorySlug),
-        );
+        isSubLoading.value = false;
+        //
       }
     } on Exception catch (e) {
       print(e);

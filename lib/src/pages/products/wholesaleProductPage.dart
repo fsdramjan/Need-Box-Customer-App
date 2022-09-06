@@ -76,7 +76,7 @@ class WholesaleProductPage extends StatelessWidget with BaseController {
                               imageUrl: item.proImage!.image,
                               productname: item.productname.toString(),
                               discount: null,
-                              disprice: null,
+                              disprice: item.productprice!.price,
                               oldprice: null,
                             );
                           }),

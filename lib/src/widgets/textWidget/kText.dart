@@ -7,7 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../configs/appColors.dart';
 
 class KText extends StatelessWidget {
-  final String text;
+  final String? text;
   final Color? color;
   final double? fontSize;
 

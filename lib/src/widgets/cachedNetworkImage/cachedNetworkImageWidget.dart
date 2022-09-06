@@ -28,15 +28,15 @@ class CachedNetworkImageWidget extends StatelessWidget {
           ? BorderRadius.circular(10)
           : BorderRadius.circular(0),
       child: CachedNetworkImage(
-        imageUrl: imageBaseUrl + imageUrl,
-        height: height == null ? 50 : height,
-        width: width == null ? 50 : width,
-        fit: fit,
-        progressIndicatorBuilder: (context, url, downloadProgress) => Center(
-          child: LoadingAnimation(),
-        ),
-        errorWidget: (context, url, error) => Icon(Icons.error),
-      ),
+          imageUrl: imageBaseUrl + imageUrl,
+          height: height == null ? 50 : height,
+          width: width == null ? 50 : width,
+          fit: fit,
+          progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                child: LoadingAnimation(),
+              ),
+          errorWidget: (context, url, error) =>
+              Image.asset('assets/images/applogo.png',),),
     );
   }
 }

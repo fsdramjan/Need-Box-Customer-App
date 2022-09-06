@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:needbox_customer/src/configs/appConfigs.dart';
 import 'package:needbox_customer/src/models/products/wholeSaleProductModel.dart';
+ 
 
 class WholesaleProductController extends GetxController {
   final wholeSaleProductList = RxList<WholeSaleProductModel>();
@@ -23,6 +24,10 @@ class WholesaleProductController extends GetxController {
       }
     } on Exception catch (e) {
       print(e);
+        isLoading.value = false;
+
     }
   }
+
+  
 }

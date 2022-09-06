@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
+import 'package:needbox_customer/src/pages/category/categoryProductPage.dart';
 import 'package:needbox_customer/src/widgets/button/customBackButton.dart';
 import 'package:needbox_customer/src/widgets/textWidget/kText.dart';
 
@@ -55,9 +56,11 @@ class AllCategoryPage extends StatelessWidget with BaseController {
                       final item = allCategoryC.allCategoryList[index];
 
                       return GestureDetector(
-                        onTap: (() => categoryProductC.getAllCategoryProduct(
-                              id: item.id,
-                              categoryName: item.catname,
+                        onTap: (() => Get.to(
+                              CategoryProductPage(
+                                id: item.id,
+                                categoryName: item.catname.toString(),
+                              ),
                             )),
                         child: CustomCardWidget(
                           child: Container(

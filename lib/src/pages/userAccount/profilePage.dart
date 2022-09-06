@@ -12,6 +12,7 @@ import 'package:needbox_customer/src/models/userAccount/userProfileDetailsModel.
 import 'package:needbox_customer/src/pages/customerPost/customerPostPage.dart';
 import 'package:needbox_customer/src/pages/orders/orderListPage.dart';
 import 'package:needbox_customer/src/pages/orders/orderTrackPage.dart';
+import 'package:needbox_customer/src/pages/chats/chatListPage.dart';
 import 'package:needbox_customer/src/pages/userAccount/editProflePage.dart';
 import 'package:needbox_customer/src/pages/userAccount/myAccountPage.dart';
 import 'package:needbox_customer/src/pages/userAccount/shippingAddressPage.dart';
@@ -116,6 +117,14 @@ class _ProfilePageState extends State<ProfilePage> with BaseController {
                   }
                   return Container();
                 }),
+              ),
+              profilebuttons(
+                size,
+                Ionicons.chatbox_outline,
+                "Message",
+                () => Get.to(
+                  ChatListPage(),
+                ),
               ),
               profilebuttons(
                 size,

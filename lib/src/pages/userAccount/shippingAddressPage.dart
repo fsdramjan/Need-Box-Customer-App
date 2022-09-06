@@ -1,7 +1,10 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:needbox_customer/src/configs/appUtils.dart';
 import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
+import 'package:needbox_customer/src/models/area/shippingAddressModel.dart';
 import 'package:needbox_customer/src/widgets/button/customPrimaryButton.dart';
 import 'package:needbox_customer/src/widgets/formField/customFormField.dart';
 
@@ -11,8 +14,8 @@ import '../../widgets/bottomSheet/customBottomSheet.dart';
 import '../../widgets/snackBar/customSnackbarWidget.dart';
 import '../../widgets/textWidget/kText.dart';
 
-class ShippingAddressPage extends StatefulWidget {
-  const ShippingAddressPage({Key? key}) : super(key: key);
+class ShippingAddressPage extends StatefulWidget { 
+  late Rx<ShippingAddressModel> data;
 
   @override
   State<ShippingAddressPage> createState() => _ShippingAddressPageState();
@@ -21,6 +24,44 @@ class ShippingAddressPage extends StatefulWidget {
 class _ShippingAddressPageState extends State<ShippingAddressPage>
     with BaseController {
   //
+
+  @override
+  void initState() {
+    shippingAddressC.shipAddressData.refresh();
+
+    shippingAddressC.getShipAddress();
+    widget.data = shippingAddressC.shipAddressData;
+
+    name.text = (widget.data.value.name == null ? '' : widget.data.value.name)!;
+    phone.text =
+        (widget.data.value.phone == null ? '' : widget.data.value.phone)!;
+    stateAddress.text = (widget.data.value.stateaddress == null
+        ? ''
+        : widget.data.value.stateaddress)!;
+    houseAddress.text = (widget.data.value.houseaddress == null
+        ? ''
+        : widget.data.value.houseaddress)!;
+    fullAddress.text = (widget.data.value.fulladdress == null
+        ? ''
+        : widget.data.value.fulladdress)!;
+    zipCode.text =
+        (widget.data.value.zipcode == null ? '' : widget.data.value.zipcode)!;
+
+    selectedDistricts = widget.data.value.district!.id == null
+        ? null
+        : widget.data.value.district!.id.toString();
+    selectedDistrictsName = widget.data.value.district!.name == null
+        ? null
+        : widget.data.value.district!.name.toString();
+    selectedArea = widget.data.value.area!.id == null
+        ? null
+        : widget.data.value.area!.id.toString();
+    selectedAreaName = widget.data.value.area!.area == null
+        ? null
+        : widget.data.value.area!.area.toString();
+    areaListC.getAllArea(districtsId: widget.data.value.district!.id);
+    super.initState();
+  }
 
   final name = TextEditingController();
   final phone = TextEditingController();

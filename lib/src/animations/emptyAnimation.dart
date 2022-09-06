@@ -9,11 +9,14 @@ class EmptyAnimation extends StatelessWidget {
   final String? title;
   final String? twoTitle;
 
+  final Widget? child;
+
   EmptyAnimation({
     this.height,
     this.width,
     this.title,
     this.twoTitle,
+    this.child,
   });
   @override
   Widget build(BuildContext context) {
@@ -22,11 +25,13 @@ class EmptyAnimation extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Lottie.asset(
-            'assets/animations/empty.json',
-            height: height != null ? height : 300,
-            width: width,
-          ),
+          child == null
+              ? Lottie.asset(
+                  'assets/animations/empty.json',
+                  height: height != null ? height : 300,
+                  width: width,
+                )
+              : child as Widget,
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,

@@ -4,15 +4,20 @@ import 'package:needbox_customer/src/configs/appUtils.dart';
 import 'package:needbox_customer/src/widgets/textWidget/kText.dart';
 import '../../configs/appColors.dart';
 
-customFormField({
-  required double height,
+Widget customFormField({
+  required double? height,
   required String hintText,
   required String titleText,
   Color? errorBorderColor,
-  TextInputType? keyboardType, 
+  TextInputType? keyboardType,
   required TextEditingController controller,
   void Function(String)? onChanged,
   bool? isStarEnable,
+  bool? isRemoveTitle,
+  bool? isFilled,
+  Color? filledColor,
+  double? borderRadius,
+  Widget? endIcons,
 }) =>
     Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -22,12 +27,14 @@ customFormField({
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            KText(
-              text: titleText,
-              color: black,
-              fontSize: 15,
-              fontWeight: FontWeight.w600,
-            ),
+            isRemoveTitle == true
+                ? Container()
+                : KText(
+                    text: titleText,
+                    color: black,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                  ),
             isStarEnable == true
                 ? KText(
                     text: ' *',
@@ -38,7 +45,7 @@ customFormField({
                 : Container(),
           ],
         ),
-        sizeH10,
+        isRemoveTitle == true ? sizeW10 : sizeH10,
         SizedBox(
           height: height,
           child: TextFormField(
@@ -47,7 +54,8 @@ customFormField({
             controller: controller,
             decoration: InputDecoration(
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(
+                    borderRadius == null ? 5 : borderRadius),
                 borderSide: BorderSide(
                   color: errorBorderColor != null
                       ? errorBorderColor
@@ -56,7 +64,8 @@ customFormField({
                 ),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(
+                    borderRadius == null ? 5 : borderRadius),
                 borderSide: BorderSide(
                   color: errorBorderColor != null
                       ? errorBorderColor
@@ -64,6 +73,9 @@ customFormField({
                   width: .9,
                 ),
               ),
+              suffixIcon: endIcons,
+              filled: isFilled,
+              fillColor: filledColor,
               contentPadding: EdgeInsets.symmetric(horizontal: 20),
               hintText: hintText,
               hintStyle: GoogleFonts.openSans(

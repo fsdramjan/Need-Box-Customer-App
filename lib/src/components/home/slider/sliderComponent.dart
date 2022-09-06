@@ -2,9 +2,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:needbox_customer/src/configs/appUtils.dart';
+import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
+import 'package:needbox_customer/src/widgets/cachedNetworkImage/cachedNetworkImageWidget.dart';
 
-import '../../controllers/MainController/baseController.dart';
-import '../../widgets/cachedNetworkImage/cachedNetworkImageWidget.dart';
 
 class CarosolSliderComponent extends StatelessWidget with BaseController {
   @override
@@ -40,7 +40,6 @@ class CarosolSliderComponent extends StatelessWidget with BaseController {
               options: CarouselOptions(
                 height: 150,
 
-              
                 viewportFraction: 1.5,
                 initialPage: 0,
                 enableInfiniteScroll: true,

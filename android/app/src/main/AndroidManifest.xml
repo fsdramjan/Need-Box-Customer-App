@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.needbox_customer">
+    package="com.mart.needbox_customer">
    <application
-        android:label="needbox_customer"
+        android:label="NeedBox BD - Online Shop"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -32,5 +32,4 @@
             android:value="2" />
     </application>
   <uses-permission android:name="android.permission.INTERNET"/>
-
 </manifest>

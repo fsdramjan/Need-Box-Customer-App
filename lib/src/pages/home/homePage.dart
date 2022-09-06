@@ -1,20 +1,31 @@
-// ignore_for_file: unused_field, unused_element, unused_local_variable, unnecessary_null_comparison
+// ignore_for_file: unused_field, unused_element, unused_local_variable, unnecessary_null_comparison, unnecessary_statements, must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:needbox_customer/src/animations/loadingAnimation.dart';
+import 'package:needbox_customer/src/components/home/brands/brandsComponents.dart';
+import 'package:needbox_customer/src/components/home/campaign/campaignComponents.dart';
+import 'package:needbox_customer/src/components/home/customerPost/customerPostComponent.dart';
+import 'package:needbox_customer/src/components/home/product/recomandedProductComponent.dart';
+import 'package:needbox_customer/src/components/home/product/wholesaleProductComponent.dart';
+import 'package:needbox_customer/src/components/home/service/serviceComponent.dart';
+import 'package:needbox_customer/src/components/home/slider/customerPostSliderComponent.dart';
+import 'package:needbox_customer/src/components/home/slider/popUpSliderComponent.dart';
+import 'package:needbox_customer/src/components/home/slider/serviceSliderComponent.dart';
+import 'package:needbox_customer/src/components/home/slider/wholesaleSliderComponent.dart';
 import 'package:needbox_customer/src/configs/appUtils.dart';
 import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
 import 'package:needbox_customer/src/pages/search/productSearchPage.dart';
 import 'package:needbox_customer/src/widgets/formField/searchFormField.dart';
-import '../../components/category/categoryComponent.dart';
-import '../../components/category/serviceCategoryComponent.dart';
-import '../../components/product/homeProductComponent.dart';
-import '../../components/slider/sliderComponent.dart';
+import '../../components/home/product/homeProductComponent.dart';
+import '../../components/home/slider/sliderComponent.dart';
 import '../../configs/appColors.dart';
 
 class HomePage extends StatefulWidget {
   final searchTextC = TextEditingController();
+  bool? isHidePopUps;
+
+  HomePage({super.key, required this.isHidePopUps});
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -40,7 +51,105 @@ class _HomePageState extends State<HomePage> with BaseController {
     return BaseController().appLogoC.getAppLogo();
   }
 
+  Future<void> showPopupBanner() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Container(
+            height: 340,
+            width: Get.width,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                PopUpSliderComponent(),
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      widget.isHidePopUps = true;
+
+                      print(widget.isHidePopUps);
+                      Get.back();
+                    });
+                  },
+                  icon: CircleAvatar(
+                    backgroundColor: red,
+                    child: Icon(
+                      Icons.close,
+                      color: white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // actions: <Widget>[
+          //   TextButton(
+          //     child: Text('Close'),
+          //     onPressed: () {
+          //       Navigator.of(context).pop();
+          //     },
+          //   ),
+          // ],
+        );
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    sliderListC.popUpBanner();
+    if (widget.isHidePopUps == true) {
+      print(widget.isHidePopUps);
+    }
+    print(sliderListC.popUpSliderList.length);
+    if (widget.isHidePopUps == false) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        print(widget.isHidePopUps);
+
+        showPopupBanner();
+      });
+    }
+
+    super.initState();
+  }
   //
+
+  // ScrollController _scrollController1 = ScrollController();
+  // ScrollController _scrollController2 = ScrollController();
+  // ScrollController _scrollController3 = ScrollController();
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+  //     double minScrollExtent1 = _scrollController1.position.minScrollExtent;
+  //     double maxScrollExtent1 = _scrollController1.position.maxScrollExtent;
+  //     double minScrollExtent2 = _scrollController2.position.minScrollExtent;
+  //     double maxScrollExtent2 = _scrollController2.position.maxScrollExtent;
+  //     double minScrollExtent3 = _scrollController3.position.minScrollExtent;
+  //     double maxScrollExtent3 = _scrollController3.position.maxScrollExtent;
+  //     //
+  //     animateToMaxMin(maxScrollExtent1, minScrollExtent1, maxScrollExtent1, 35,
+  //         _scrollController1);
+  //     animateToMaxMin(maxScrollExtent2, minScrollExtent2, maxScrollExtent2, 30,
+  //         _scrollController2);
+  //     animateToMaxMin(maxScrollExtent3, minScrollExtent3, maxScrollExtent3, 20,
+  //         _scrollController3);
+  //   });
+  // }
+
+  // animateToMaxMin(double max, double min, double direction, int seconds,
+  //     ScrollController scrollController) {
+  //   scrollController
+  //       .animateTo(direction,
+  //           duration: Duration(seconds: seconds), curve: Curves.linear)
+  //       .then((value) {
+  //     direction = direction == max ? min : max;
+  //     animateToMaxMin(max, min, direction, seconds, scrollController);
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -86,20 +195,38 @@ class _HomePageState extends State<HomePage> with BaseController {
                 child: ListView(
                   shrinkWrap: true,
                   primary: false,
-                  // physics: bounchephysics,
+                  physics: bounchephysics,
                   children: [
                     sizeH10,
                     CarosolSliderComponent(),
-                    sizeH20,
-                    ServiceComponent(),
+                    // sizeH20,
+                    // ServiceComponent(),
                     Padding(
                       padding: paddingH10,
                       child: Column(
                         children: [
                           sizeH10,
-                          CategoryComponent(),
-                          sizeH10,
+                          // CategoryComponent(),
+                          // sizeH10,
                           HomeProductComponent(),
+                          sizeH10,
+                          ServiceSliderComponent(),
+                          sizeH10,
+                          ServicesComponent(),
+                          sizeH10,
+                          WholesaleSliderComponent(),
+                          sizeH10,
+                          WholesaleComponent(),
+                          sizeH10,
+                          CustomerPostSliderComponent(),
+                          sizeH10,
+                          CustomerPostComponent(),
+                          sizeH10,
+                          CampaignComponents(),
+                          sizeH10,
+                          BrandsComponents(),
+                          sizeH10,
+                          RecomandedProductComponent(),
                           sizeH40,
                           sizeH40,
                         ],

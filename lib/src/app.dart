@@ -10,6 +10,9 @@ class App extends StatelessWidget with BaseController {
     wholesaleProductC.getWholesaleProduct();
     appLogoC.getAppLogo();
     sliderListC.getSliderList();
+    sliderListC.wholesaleBanner();
+    sliderListC.popUpBanner();
+    sliderListC.customerPostBanner();
     allProductListC.getAllProduct();
     allCategoryC.getAllCategory();
     specialOfferProductC.getAllSpecialOfferProduct();
@@ -21,7 +24,8 @@ class App extends StatelessWidget with BaseController {
     serviceCategoryC.getAllServiceCategory();
     customerPostListC.getAllCustomerPost();
     districtsListC.getAllDistricts();
-    
+    shippingAddressC.getShipAddress();
+    chatC.getChatList();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       smartManagement: SmartManagement.onlyBuilder,

@@ -22,7 +22,7 @@ void main() async {
 }
 
 Future<void> initAppConfig() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  
 
   await Get.put(HiveController(), permanent: true).initDatabase();
 }

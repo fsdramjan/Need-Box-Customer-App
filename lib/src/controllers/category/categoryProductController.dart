@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:needbox_customer/src/configs/appConfigs.dart';
 import 'package:needbox_customer/src/models/category/categoryProductModel.dart';
 
-import '../../pages/category/categoryProductPage.dart';
 
 class CategoryProductsController extends GetxController {
   final categoryProductList = RxList<CategoryProductModel>();
@@ -20,10 +19,6 @@ class CategoryProductsController extends GetxController {
           .toList()
           .cast<CategoryProductModel>();
       if (res.statusCode == 200) {
-        Get.to(CategoryProductPage(
-          categoryName: categoryName,
-          id: id,
-        ));
         categoryProductList.clear();
         categoryProductList.addAll(data);
         isLoading.value = false;

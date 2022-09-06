@@ -16,13 +16,10 @@ class BrandProductListPage extends StatelessWidget with BaseController {
     required this.id,
     required this.brandName,
   });
- 
-
- 
 
   @override
   Widget build(BuildContext context) {
-    // brandProductListC.getAllBrandProductList(id: id);
+    brandProductListC.getAllBrandProductList(id: id, brandName: brandName);
     return Scaffold(
       appBar: AppBar(
         leading: customBackButton(),
@@ -63,11 +60,13 @@ class BrandProductListPage extends StatelessWidget with BaseController {
                                   ProductDetailsPage(
                                     id: item.id,
                                     proName: item.productname,
-                                     image: item.proImage!.image.toString(),
+                                    image: item.proImage!.image.toString(),
                                   ),
                                 ),
                                 productname: item.productname.toString(),
-                                imageUrl: item.proImage!.image.toString(),
+                                imageUrl: item.proImage == null
+                                    ? null
+                                    : item.proImage!.image.toString(),
                               );
                             },
                           ),

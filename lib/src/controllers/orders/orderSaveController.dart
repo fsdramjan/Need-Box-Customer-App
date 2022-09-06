@@ -8,20 +8,52 @@ import 'package:needbox_customer/src/pages/home/bottomAppBar.dart';
 import 'package:needbox_customer/src/widgets/snackBar/customSnackbarWidget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../models/userAccount/userProfileDetailsModel.dart';
+import '../../models/area/shippingAddressModel.dart';
 
 class OrderSaveController extends GetxController {
   createNewOrder({
-    required CartModels item,
+    required List<CartModels> item,
     required paymentType,
     required totalPrice,
     required districsId,
     required areaId,
     required shippingCharge,
-    
-    required UserProfileDetailsModel userInfo,
+    required Rx<ShippingAddressModel> userInfo,
   }) async {
     try {
+      var _data = {
+        "cart": item
+            .map(
+              (e) => {
+                "product_id": e.id,
+                "product_name": e.productname,
+                "sellerid": 1,
+                "product_price": e.proNewprice,
+                "quantity": e.quantity.toString(),
+                "product_size": "",
+                "product_color": e.productColor,
+              },
+            )
+            .toList(),
+        "name": userInfo.value.name,
+        "phone": userInfo.value.phone,
+        "district": districsId,
+        "area": areaId,
+        "stateaddress": userInfo.value.stateaddress,
+        "houseaddress": userInfo.value.houseaddress,
+        "fulladdress": userInfo.value.fulladdress,
+        "zipcode": userInfo.value.zipcode,
+        "totalprice": totalPrice,
+        "shippingfee": shippingCharge,
+        "discount": "",
+        "additionalshipping": "",
+        "couponcode": "",
+        "totalproductpoint": "",
+        "usemypoint": "",
+        "paymentType": paymentType,
+      };
+
+      print(_data);
       final sharedPreferences = await SharedPreferences.getInstance();
       var token = sharedPreferences.getString('accessToken');
       final res = await dio.post(
@@ -31,41 +63,28 @@ class OrderSaveController extends GetxController {
             'Authorization': 'Bearer $token',
           },
         ),
-
         data: {
-          "cart":
-
-              //  item
-              //     .map((product) => {
-              //              "product_id": product['id'],
-              //           "product_name": product['productname'],
-              //           "sellerid": 1,
-              //           "product_price": product['proNewprice'],
-              //           "quantity": product['quantity'],
-              //           "product_size": "",
-              //           "product_color": product['productColor'],
-              //         })
-              //     .toList()
-
-              [
-            {
-              "product_id": item.id,
-              "product_name": item.productname,
-              "sellerid": 1,
-              "product_price": item.proNewprice,
-              "quantity": item.quantity.toString(),
-              "product_size": "",
-              "product_color": item.productColor,
-            },
-          ],
-          "name": userInfo.fullName,
-          "phone": userInfo.phoneNumber,
+          "cart": item
+              .map(
+                (e) => {
+                  "product_id": e.id,
+                  "product_name": e.productname,
+                  "sellerid": 1,
+                  "product_price": e.proNewprice,
+                  "quantity": e.quantity.toString(),
+                  "product_size": "",
+                  "product_color": e.productColor,
+                },
+              )
+              .toList(),
+          "name": userInfo.value.name,
+          "phone": userInfo.value.phone,
           "district": districsId,
-          "area":areaId,
-          "stateaddress": "Road, 4/a",
-          "houseaddress": "Mirpur, Dhaka",
-          "fulladdress": userInfo.address,
-          "zipcode": "1212",
+          "area": areaId,
+          "stateaddress": userInfo.value.stateaddress,
+          "houseaddress": userInfo.value.houseaddress,
+          "fulladdress": userInfo.value.fulladdress,
+          "zipcode": userInfo.value.zipcode,
           "totalprice": totalPrice,
           "shippingfee": shippingCharge,
           "discount": "",
@@ -75,55 +94,28 @@ class OrderSaveController extends GetxController {
           "usemypoint": "",
           "paymentType": paymentType,
         },
-        //   data: OrderSaveModel(
-        //     cart: [
-        //       CartItem(
-        //         productId: item.id,
-        //         productName: item.productname,
-        //         sellerid: 1,
-        //         productPrice: item.proNewprice,
-        //         quantity: item.quantity.toInt(),
-        //         productSize: '',
-        //         productColor: item.productColor,
-        //       ),
-        //     ],
-        //     name: userInfo.fullName,
-        //     phone: userInfo.phoneNumber,
-        //     district: '',
-        //     area: '',
-        //     stateaddress: '',
-        //     houseaddress: '',
-        //     fulladdress: userInfo.address,
-        //     zipcode: '',
-        //     totalprice: '${CartController().totalsAmount}',
-        //     shippingfee: '${CartController().shippingFee}',
-        //     discount: '',
-        //     additionalshipping: '',
-        //     couponcode: '',
-        //     totalproductpoint: '',
-        //     usemypoint: '',
-        //     paymentType: paymentType,
-        //   ),
       );
 
-      if (res.statusCode == 200) {
+      if (res.data['status'] == 'success') {
         snackBarWidget(
           title: 'Success',
           message: 'Order Place Successfully!',
           isRed: false,
         );
-        print('Total Order:-');
-        print(totalPrice);
-        print('Order ID:-');
-        print(res.data['order']['ordertrack']);
 
         CartController().cartItem.clear();
         Get.offAll(CustomBottomAppBar());
         OrderListController().orderList.clear();
-        // return res;
+        
       }
     } on Exception catch (e) {
       print(e);
     }
   }
 }
+
+
+
+
+
+// {"cart": [{"product_id": "30", "product_name": "export quality men's fashionable cotton long sleeve shirts", "sellerid": "1", "product_price": "209", "quantity": "1", "product_size":"" , "product_color": "yelow"}], "name": "Rasel Islam Zadu", "phone": "01742892725", "district": "1", "area":" 1", "stateaddress": "4/B", "houseaddress": "33/B", "fulladdress": "Zigatola, Dhanmondi", "zipcode": "1215", "totalprice": "269", "shippingfee": "60", "discount": , "additionalshipping": , "couponcode": , "totalproductpoint": , "usemypoint":"" , "paymentType": "COD"}

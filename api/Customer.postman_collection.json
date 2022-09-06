@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "4eaeaff3-3436-4bae-8263-f09d89725ca3",
 		"name": "Customer",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10501191"
 	},
 	"item": [
 		{
@@ -642,7 +643,7 @@
 			"response": []
 		},
 		{
-			"name": "Shipping Address",
+			"name": "Shipping Address Set",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -719,6 +720,45 @@
 						"v1",
 						"customer",
 						"shipping-address"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Shipping Address",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbmVlZGJveGJkLnh5elwvYXBpXC92MVwvY3VzdG9tZXJcL2xvZ2luIiwiaWF0IjoxNjUzMjg1ODE1LCJleHAiOjE3MzIxMjU4MTUsIm5iZiI6MTY1MzI4NTgxNSwianRpIjoickR2MDUxeXUzMzZHT1FLRiIsInN1YiI6OTAsInBydiI6IjhiNDIyZTZmNjU3OTMyYjhhZWJjYjFiZjFlMzU2ZGQ3NmEzNjViZjIifQ.27SCbn1AoYxZWgMvwI1D4fzK1VPqu-lmEXBjlD1CmNQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/customer/shipping/address",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"shipping",
+						"address"
 					]
 				}
 			},

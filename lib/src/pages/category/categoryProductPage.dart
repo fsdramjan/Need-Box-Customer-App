@@ -12,7 +12,7 @@ import 'package:needbox_customer/src/widgets/cardWidget/customGridProducts.dart'
 import '../../Widgets/button/customBackButton.dart';
 import '../../widgets/textWidget/kText.dart';
 
-class CategoryProductPage extends StatelessWidget with BaseController {
+class CategoryProductPage extends StatefulWidget  {
   final int? id;
   final String? categoryName;
 
@@ -21,6 +21,12 @@ class CategoryProductPage extends StatelessWidget with BaseController {
     required this.categoryName,
   });
 
+  @override
+  State<CategoryProductPage> createState() => _CategoryProductPageState();
+}
+
+class _CategoryProductPageState extends State<CategoryProductPage>
+    with BaseController {
   Future<void> _refresh() {
     _resetList();
     return _getList();
@@ -31,19 +37,27 @@ class CategoryProductPage extends StatelessWidget with BaseController {
   }
 
   Future _getList() {
-    categoryProductC.getAllCategoryProduct(id: id, categoryName: categoryName);
+    categoryProductC.getAllCategoryProduct(id: widget.id, categoryName: widget.categoryName);
     return appLogoC.getAppLogo();
   }
 
   @override
+  void initState() { 
+       categoryProductC.getAllCategoryProduct(
+        categoryName: widget.categoryName, id: widget.id);
+    super.initState();
+    
+  }
+
+  @override
   Widget build(BuildContext context) {
-    categoryProductC.getAllCategoryProduct(categoryName: categoryName, id: id);
-    print(id);
+ 
+    print(widget.id);
     return Scaffold(
       appBar: AppBar(
         leading: customBackButton(),
         title: KText(
-          text: categoryName.toString(),
+          text: widget.categoryName.toString(),
           fontSize: 16,
         ),
       ),

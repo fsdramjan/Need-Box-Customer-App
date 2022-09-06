@@ -1,12 +1,18 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:needbox_customer/src/configs/appConfigs.dart';
+import 'package:needbox_customer/src/models/area/shippingAddressModel.dart';
 import 'package:needbox_customer/src/widgets/snackBar/customSnackbarWidget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class ShippingAddressController extends GetxController {
   //
   var isLoading = RxBool(false);
+
+  var shipAddressData = ShippingAddressModel().obs;
 
   shipAddress({
     required name,
@@ -76,6 +82,34 @@ class ShippingAddressController extends GetxController {
         message: 'Something went wrong!',
         isRed: true,
       );
+    }
+  }
+
+  Future<ShippingAddressModel>? getShipAddress() async {
+    var _shippingData = await DetailsApiService().fetchApi();
+
+    return shipAddressData.value = _shippingData;
+  }
+}
+
+class DetailsApiService {
+  Future<ShippingAddressModel> fetchApi() async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString('accessToken');
+    var url = baseUrl + 'customer/shipping/address';
+
+    var response = await http
+        .get(Uri.parse(url), headers: {'Authorization': 'Bearer $token'});
+
+    if (response.statusCode == 200) {
+      var dataResponse = jsonDecode(response.body);
+
+      var data =
+          ShippingAddressModel.fromJson(dataResponse['shipping_address']);
+      print(dataResponse);
+      return data;
+    } else {
+      throw Exception('Failed Get API');
     }
   }
 }

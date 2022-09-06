@@ -107,7 +107,7 @@ class _ProductSearchPageState extends State<ProductSearchPage>
                                       ),
                                     ),
                               productname: item.productname.toString(),
-                              imageUrl: item.proImage!.image.toString(),
+                              imageUrl:item.proImage==null? null: item.proImage!.image.toString(),
                             );
                           },
                         ),

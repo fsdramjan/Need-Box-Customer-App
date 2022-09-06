@@ -12,6 +12,7 @@ import 'package:needbox_customer/src/controllers/campaign/campaignListController
 import 'package:needbox_customer/src/controllers/cart/cartController.dart';
 import 'package:needbox_customer/src/controllers/category/categoryListController.dart';
 import 'package:needbox_customer/src/controllers/category/categoryProductController.dart';
+import 'package:needbox_customer/src/controllers/chats/chatsController.dart';
 import 'package:needbox_customer/src/controllers/customerPost/applyNowController.dart';
 import 'package:needbox_customer/src/controllers/services/bookNowServiceController.dart';
 import 'package:needbox_customer/src/controllers/services/serviceCategoryController.dart';
@@ -72,5 +73,6 @@ class BaseController {
   final bookServiceC = Get.put(BookNowServiceController());
   final applyNowC = Get.put(ApplyNowController());
   final shippingAddressC = Get.put(ShippingAddressController());
+  final chatC = Get.put(ChatsController());
   
 }

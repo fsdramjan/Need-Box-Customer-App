@@ -14,7 +14,7 @@ class CustomGridCardWidget extends StatelessWidget {
   final int? oldprice;
   final int? discount;
   final void Function()? onTap;
-
+  final double? imageHieght;
   final bool? isFavoritePage;
   final Widget? favoriteIcon;
 
@@ -27,6 +27,7 @@ class CustomGridCardWidget extends StatelessWidget {
     required this.oldprice,
     this.isFavoritePage,
     this.favoriteIcon,
+    this.imageHieght,
   });
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,7 @@ class CustomGridCardWidget extends StatelessWidget {
                     ),
                     child: CachedNetworkImageWidget(
                       imageUrl: imageUrl.toString(),
-                      height: 140,
+                      height: imageHieght == null ? 125 : imageHieght,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -89,6 +90,12 @@ class CustomGridCardWidget extends StatelessWidget {
             ),
             sizeH10,
             Spacer(),
+            // Container(
+            //   height: .7,
+            //   width: Get.width,
+            //   color: grey.shade200,
+            // ),
+            sizeH5,
             Padding(
               padding: paddingH10,
               child: Text(

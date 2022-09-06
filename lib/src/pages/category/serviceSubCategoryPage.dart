@@ -1,20 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:needbox_customer/src/animations/emptyAnimation.dart';
 import 'package:needbox_customer/src/animations/loadingAnimation.dart';
 import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
 import 'package:needbox_customer/src/controllers/services/serviceCategoryController.dart';
+import 'package:needbox_customer/src/pages/category/serviceCategoryDataPage.dart';
 import '../../Widgets/button/customBackButton.dart';
 import '../../Widgets/cardWidget/customCardWidget.dart';
 import '../../configs/appUtils.dart';
 import '../../widgets/cachedNetworkImage/cachedNetworkImageWidget.dart';
 import '../../widgets/textWidget/kText.dart';
 
-class ServiceSubCategoryPage extends StatelessWidget with BaseController {
+class ServiceSubCategoryPage extends StatefulWidget with BaseController {
   final categorySlug;
   ServiceSubCategoryPage({
     required this.categorySlug,
   });
+
+  @override
+  State<ServiceSubCategoryPage> createState() => _ServiceSubCategoryPageState();
+}
+
+class _ServiceSubCategoryPageState extends State<ServiceSubCategoryPage>
+    with BaseController {
+  @override
+  void initState() {
+    ServiceCategoryController().serviceSubCategoryList.clear();
+    serviceCategoryC.getAllServiceSubCategory(widget.categorySlug);
+    super.initState();
+  }
 
   Future<void> _refresh() {
     _resetList();
@@ -28,17 +43,15 @@ class ServiceSubCategoryPage extends StatelessWidget with BaseController {
 
   Future _getList() {
     ServiceCategoryController().getAllServiceCategory();
-    ServiceCategoryController().getAllServiceSubCategory(categorySlug);
+    ServiceCategoryController().getAllServiceSubCategory(widget.categorySlug);
 
     return BaseController().appLogoC.getAppLogo();
   }
 
   final keyRefresh = GlobalKey<RefreshIndicatorState>();
+
   @override
   Widget build(BuildContext context) {
-    serviceCategoryC.getAllServiceSubCategory(categorySlug);
-    ServiceCategoryController().serviceSubCategoryList.clear();
-
     return Scaffold(
       appBar: AppBar(
         leading: customBackButton(),
@@ -51,30 +64,38 @@ class ServiceSubCategoryPage extends StatelessWidget with BaseController {
         child: RefreshIndicator(
           onRefresh: _refresh,
           key: keyRefresh,
-          child: serviceCategoryC.serviceSubCategoryList.length == 0
-              ? EmptyAnimation()
-              : Padding(
-                  padding: paddingH10V10,
-                  child: GridView.builder(
-                    shrinkWrap: true,
-                    primary: false,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 1.2,
-                    ),
-                    itemCount: serviceCategoryC.serviceSubCategoryList.length,
-                    itemBuilder: (context, index) {
-                      final item =
-                          serviceCategoryC.serviceSubCategoryList[index];
+          child: Padding(
+            padding: paddingH10V10,
+            child: Obx(
+              () => serviceCategoryC.isSubLoading.value == true
+                  ? LoadingAnimation()
+                  : serviceCategoryC.serviceSubCategoryList.length == 0
+                      ? EmptyAnimation()
+                      : GridView.builder(
+                          shrinkWrap: true,
+                          primary: false,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 1.2,
+                          ),
+                          itemCount:
+                              serviceCategoryC.serviceSubCategoryList.length,
+                          itemBuilder: (context, index) {
+                            final item =
+                                serviceCategoryC.serviceSubCategoryList[index];
 
-                      return serviceCategoryC.isLoading.value == true
-                          ? LoadingAnimation()
-                          : GestureDetector(
-                              onTap: () =>
-                                  serviceCategoryDataC.getServiceCategoryData(
-                                item.ssubcatename,
-                                item.slug,
+                            return GestureDetector(
+                              onTap: () => Get.to(
+                                ServiceCategoryDataPage(
+                                  slug: item.slug.toString(),
+                                  title: item.ssubcatename.toString(),
+                                ),
                               ),
+                              //     serviceCategoryDataC.getServiceCategoryData(
+                              //   item.ssubcatename,
+                              //   item.slug,
+                              // ),
                               child: CustomCardWidget(
                                 child: Container(
                                   width: 140,
@@ -105,9 +126,10 @@ class ServiceSubCategoryPage extends StatelessWidget with BaseController {
                                 ),
                               ),
                             );
-                    },
-                  ),
-                ),
+                          },
+                        ),
+            ),
+          ),
         ),
       ),
     );

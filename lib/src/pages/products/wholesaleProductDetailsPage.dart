@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_statements
+// ignore_for_file: unnecessary_statements, import_of_legacy_library_into_null_safe
 
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -362,21 +362,31 @@ class _WholesaleProductDetailsPageState
                           ),
                           Divider(),
                           ListTile(
-                            // leading: CachedNetworkImageWidget(
-                            //     imageUrl:
-                            //         products.sellerinfo!.shoplogo.toString()),
                             leading: CircleAvatar(
                               backgroundColor: orangeO50,
+                              child: CachedNetworkImageWidget(
+                                  imageUrl: sellerInfo!.shoplogo.toString()),
                             ),
-
                             title: KText(
                               text: 'Seller',
                               fontSize: 12,
                               color: black54,
                             ),
                             subtitle: KText(
-                              text: sellerInfo!.shopname.toString(),
+                              text: sellerInfo.shopname.toString(),
                               fontWeight: FontWeight.w600,
+                            ),
+                            trailing: TextButton.icon(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.chat,
+                                size: 20,
+                              ),
+                              label: KText(
+                                text: 'Chat with seller',
+                                decoration: TextDecoration.underline,
+                                fontSize: 14,
+                              ),
                             ),
                           ),
                         ],
@@ -400,23 +410,23 @@ class _WholesaleProductDetailsPageState
                                   ),
                                   Html(
                                     data: products.productdetails.toString(),
-                                    style: {
-                                      'h1': Style(
-                                        color: black54,
-                                        fontSize: FontSize.xxLarge,
-                                        textAlign: TextAlign.justify,
-                                      ),
-                                      'br': Style(
-                                        color: black54,
-                                        fontSize: FontSize.xxLarge,
-                                        textAlign: TextAlign.justify,
-                                      ),
-                                      'p': Style(
-                                        color: black54,
-                                        fontSize: FontSize.larger,
-                                        textAlign: TextAlign.justify,
-                                      ),
-                                    },
+                                    // style: {
+                                    //   'h1': Style(
+                                    //     color: black54,
+                                    //     fontSize: FontSize.xxLarge,
+                                    //     textAlign: TextAlign.justify,
+                                    //   ),
+                                    //   'br': Style(
+                                    //     color: black54,
+                                    //     fontSize: FontSize.xxLarge,
+                                    //     textAlign: TextAlign.justify,
+                                    //   ),
+                                    //   'p': Style(
+                                    //     color: black54,
+                                    //     fontSize: FontSize.larger,
+                                    //     textAlign: TextAlign.justify,
+                                    //   ),
+                                    // },
                                   ),
                                 ],
                               ),

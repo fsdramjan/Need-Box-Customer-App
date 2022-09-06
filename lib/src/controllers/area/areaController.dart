@@ -20,6 +20,7 @@ class AreaListController extends GetxController {
         isLoading.value = false;
       }
     } on Exception catch (e) {
+        isLoading.value = false;
       print(e);
     }
   }

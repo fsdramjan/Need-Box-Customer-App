@@ -1,14 +1,17 @@
 // ignore_for_file: unnecessary_statements
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:needbox_customer/src/components/drawer/sidebarComponent.dart';
 import 'package:needbox_customer/src/configs/appColors.dart';
+import 'package:needbox_customer/src/controllers/MainController/baseController.dart';
 import 'package:needbox_customer/src/pages/cart/cartPage.dart';
 import 'package:needbox_customer/src/pages/home/homePage.dart';
 import 'package:needbox_customer/src/pages/loginSignup/loginPage.dart';
 import 'package:needbox_customer/src/pages/products/favoriteProductPage.dart';
 import 'package:needbox_customer/src/pages/userAccount/profilePage.dart';
+import 'package:needbox_customer/src/widgets/textWidget/kText.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // ignore: must_be_immutable
@@ -19,10 +22,11 @@ class CustomBottomAppBar extends StatefulWidget {
   _CustomBottomAppBarState createState() => _CustomBottomAppBarState();
 }
 
-class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
+class _CustomBottomAppBarState extends State<CustomBottomAppBar>
+    with BaseController {
   int currentTab = 0;
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget _currentScreens = HomePage();
+  Widget _currentScreens = HomePage(isHidePopUps: false, );
 
   var scaffoldKey = GlobalKey<ScaffoldState>();
   @override
@@ -49,7 +53,8 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      key: scaffoldKey, endDrawer: SidebarComponent(),
+      key: scaffoldKey,
+      endDrawer: SidebarComponent(),
       body: Stack(
         children: [
           PageStorage(
@@ -59,132 +64,6 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
           _bottomNavBar(),
         ],
       ),
-      // bottomSheet: SizedBox(
-      //   height: 65,
-      //   child: Stack(
-      //     clipBehavior: Clip.none,
-      //     children: [
-      //       Positioned(
-      //         bottom: 0,
-      //         left: 0,
-      //         child: Container(
-      //           width: size.width,
-      //           height: 70,
-      //           child: Stack(
-      //             clipBehavior: Clip.none,
-      //             // overflow: Overflow.visible,
-      //             children: [
-      //               CustomPaint(
-      //                 size: Size(size.width, 80),
-      //                 painter: BNBCustomPainter(),
-      //               ),
-      //               Center(
-      //                 heightFactor: 0.6,
-      //                 child: Stack(
-      //                   children: [
-      //                     FloatingActionButton(
-      //                       backgroundColor: orangeO50,
-      //                       child: Icon(
-      //                         Icons.shopping_basket,
-      //                         color: white,
-      //                       ),
-      //                       elevation: 0.1,
-      //                       onPressed: () {
-      // setState(() {
-      //   _currentScreens = CartPage(
-      //     isBackEnable: false,
-      //   );
-      //   currentTab = 5;
-      // });
-      //                       },
-      //                     ),
-      //                     Positioned(
-      //                       right: 8,
-      //                       top: 10,
-      //                       child: CircleAvatar(
-      //                         backgroundColor: white,
-      //                         radius: 7,
-      //                         child: KText(
-      //                           text: '2',
-      //                           fontSize: 11,
-      //                           color: orangeO50,
-      //                           fontWeight: FontWeight.bold,
-      //                         ),
-      //                       ),
-      //                     ),
-      //                   ],
-      //                 ),
-      //               ),
-      //               Container(
-      //                 width: size.width,
-      //                 height: 80,
-      //                 child: Row(
-      //                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //                   children: [
-      //                     IconButton(
-      //                       icon: Icon(
-      //                         Icons.home,
-      //                         color:
-      //                             currentTab == 0 ? orangeO50 : grey.shade400,
-      //                       ),
-      //                       onPressed: () {
-      //                         setState(() {
-      //                           _currentScreens = HomePage();
-      //                           currentTab = 0;
-      //                         });
-      //                       },
-      //                       splashColor: Colors.white,
-      //                     ),
-      //                     IconButton(
-      //                         icon: Icon(
-      //                           Ionicons.heart,
-      //                           color:
-      //                               currentTab == 1 ? orangeO50 : grey.shade400,
-      //                         ),
-      //                         onPressed: () {
-      //                           setState(() {
-      //                             snackBarWidget(
-      //                               title: 'Cooming soon!',
-      //                               message: 'This feature added soon.',
-      //                               isRed: false,
-      //                             );
-      //                             currentTab = 1;
-      //                           });
-      //                         }),
-      //                     Container(
-      //                       width: size.width * 0.20,
-      //                     ),
-      //                     IconButton(
-      //                         icon: Icon(
-      //                           Ionicons.person,
-      //                           color:
-      //                               currentTab == 2 ? orangeO50 : grey.shade400,
-      //                         ),
-      //                         onPressed: () {
-      //                           setState(() {
-      //                             _currentScreens = ProfilePage();
-      //                             currentTab = 2;
-      //                           });
-      //                         }),
-      //                     IconButton(
-      //                         icon: Icon(
-      //                           Ionicons.menu,
-      //                           color:
-      //                               currentTab == 3 ? orangeO50 : grey.shade400,
-      //                         ),
-      //                         onPressed: () {
-      //                           scaffoldKey.currentState!.openEndDrawer();
-      //                         }),
-      //                   ],
-      //                 ),
-      //               )
-      //             ],
-      //           ),
-      //         ),
-      //       )
-      //     ],
-      //   ),
-      // ),
     );
   }
 
@@ -204,19 +83,37 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
             ),
             Center(
               heightFactor: 0.6,
-              child: FloatingActionButton(
-                onPressed: () {
-                  setState(() {
-                    _currentScreens = CartPage(
-                      isBackEnable: false,
-                    );
-                    currentTab = 4;
-                  });
-                },
-                backgroundColor: orangeO50,
-                elevation: 8.0,
-                child: Icon(Icons.shopping_basket),
-              ),
+              child: Stack(children: [
+                FloatingActionButton(
+                  onPressed: () {
+                    setState(() {
+                      _currentScreens = CartPage(
+                        isBackEnable: false,
+                      );
+                      currentTab = 4;
+                    });
+                  },
+                  backgroundColor: orangeO50,
+                  elevation: 8.0,
+                  child: Icon(Icons.shopping_basket),
+                ),
+                Positioned(
+                  right: 8,
+                  top: 10,
+                  child: CircleAvatar(
+                    backgroundColor: white,
+                    radius: 7,
+                    child: Obx(
+                      () => KText(
+                        text: '${cartC.cartCount}',
+                        fontSize: 11,
+                        color: orangeO50,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ]),
             ),
             SizedBox(
               width: size.width,
@@ -229,7 +126,7 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
                     color: currentTab == 0 ? orangeO50 : grey.shade400,
                     onPressed: () {
                       setState(() {
-                        _currentScreens = HomePage();
+                        _currentScreens = HomePage(isHidePopUps: true,);
                         currentTab = 0;
                       });
                     },

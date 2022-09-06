@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "ecce6131-7e64-4f39-9bdc-00f51836b6bf",
 		"name": "FrontEnd",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10501191"
 	},
 	"item": [
 		{
@@ -746,7 +747,7 @@
 			"response": []
 		},
 		{
-			"name": "Area-Shipping Charge",
+			"name": "Areas",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -774,6 +775,28 @@
 						"api",
 						"v1",
 						"area",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Shipping Fee",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://needboxbd.xyz/api/v1/area-shipping/1",
+					"protocol": "https",
+					"host": [
+						"needboxbd",
+						"xyz"
+					],
+					"path": [
+						"api",
+						"v1",
+						"area-shipping",
 						"1"
 					]
 				}
